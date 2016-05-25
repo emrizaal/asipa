@@ -149,7 +149,7 @@
                                 </a>
                             </li>
                             <li class="list">
-                                <a href="index.html">
+                                <a href="<?=base_url()?>Usulan">
                                     <span class="icon fa fa-file-o"></span><span class="title">Usulan</span>
                                 </a>
                             </li>
