@@ -65,7 +65,7 @@ $this->load->view("info_header");
                         <form action="<?=base_url()?>Pagu/savePagu" method="POST">
                             <div class="sub-title">Pagu Alat Jurusan</div>
                             <div>
-                                <input type="text" name="pagu" class="form-control" placeholder="Masukan Nominal Pagu">
+                                <input type="text" name="pagu" class="form-control" placeholder="Masukan Nominal Pagu" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@ $this->load->view("info_header");
                             <div class="sub-title">Pagu Alat Jurusan</div>
                             <div>
                                  <input type="hidden" name="id" id="frmIdNamaPagu">
-                                <input type="text" name="pagu" id="frmEditNamaPagu" class="form-control" placeholder="Masukan Nominal Pagu">
+                                <input type="text" name="pagu" id="frmEditNamaPagu" class="form-control" placeholder="Masukan Nominal Pagu" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                             </div>
                         </div>
                     </div>
