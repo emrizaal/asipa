@@ -41,6 +41,17 @@
     box-shadow: 4px 4px 2px -3px rgba(0, 0, 0, 0.61);
     margin-right: 1.5%;
 }
+.table tbody tr td a.btn.btn-warning {
+    padding: 3px 10px;
+    margin: 0;
+}
+.table tbody tr td{
+    vertical-align: middle;
+}
+.card .card-body button.btn.btn-primary.btn-info {
+    margin-top: -1%;
+    margin-bottom: 1%;
+}
 </style>
 </head>
 <body class="flat-blue">
@@ -137,18 +148,19 @@
                             </button>
                         </div>
                         <ul class="nav navbar-nav" style="font-size: 20px;">
-                            <li class="active list">
-                                <a href="index.html">
-                                    <span class="icon fa fa-tachometer"></span><span class="title">Home</span>
+                            <li class="list <?= ($this->uri->segment(1)=='')?'active':''; ?>">
+                                <a href="<?=base_url()?>">
+                                    <span class="icon fa fa-tachometer"></span><span class="title">Home 
+                                    </span>
                                 </a>
                             </li>
 
-                            <li class="list">
+                            <li class="list <?= ($this->uri->segment(1)=='Pagu')?'active':''; ?>">
                                 <a href="<?=base_url()?>Pagu">
                                     <span class="icon fa fa-money"></span><span class="title">Pagu</span>
                                 </a>
                             </li>
-                            <li class="list">
+                            <li class="list <?= ($this->uri->segment(1)=='Usulan')?'active':''; ?>">
                                 <a href="<?=base_url()?>Usulan">
                                     <span class="icon fa fa-file-o"></span><span class="title">Usulan</span>
                                 </a>
