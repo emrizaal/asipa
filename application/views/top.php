@@ -165,6 +165,11 @@
                                     <span class="icon fa fa-file-o"></span><span class="title">Usulan</span>
                                 </a>
                             </li>
+                            <li class="list <?= ($this->uri->segment(1)=='Pengelompokan')?'active':''; ?>">
+                                <a href="<?=base_url()?>Pengelompokan">
+                                    <span class="icon fa fa-file-o"></span><span class="title">Pengelompokan</span>
+                                </a>
+                            </li>
                                                    
                           
                             <!-- Dropdown-->
@@ -185,11 +190,7 @@
                                 </div>
                             </li> -->
                             
-                            <li class="list">
-                                <a href="license.html">
-                                    <span class="icon fa fa-thumbs-o-up"></span><span class="title">License</span>
-                                </a>
-                            </li>
+                            
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->

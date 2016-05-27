@@ -8,7 +8,7 @@ class M_usulan extends CI_Model {
 
 
 	function getUsulanByIdJurusan($id){
-		$query = $this->db->query("SELECT * from paket where ID_JURUSAN = '$id' AND STATUS = 1 ")->result_array();
+		$query = $this->db->query("SELECT * from paket,jurusan where paket.ID_JURUSAN = '$id' AND paket.STATUS = 1 AND jurusan.ID_JURUSAN = paket.ID_JURUSAN")->result_array();
 		return $query;
 	}
 
