@@ -4,7 +4,7 @@ $this->load->view("info_header");
 ?>
 <div class="app-container-slide">
     <div class="container-fluid">
-        <div class="side-body" style="padding-top:45px ;margin-left: 90px;margin-right: 30px">
+        <div class="side-body padding-top"  style="padding-top:25px;">
 
             <div class="row  no-margin-bottom">
                 <div class="row">
@@ -15,9 +15,10 @@ $this->load->view("info_header");
                                     <span class="title">Pengelolaan Usulan</span>
                                 </div>
                             </div>
-                            <div class="card-body no-padding">
-                                <a href="<?=base_url()?>Usulan/addUsulan"><button>Add Usulan</button></a>
-                                <table border="1">
+                            <div class="card-body">
+                                <a href="<?=base_url()?>Usulan/addUsulan" class="btn btn-info"> <i class="fa fa-plus-square"></i>&nbsp; Tambah Usulan</a>
+                                <table class="table table-stripped table-bordered table-hover">
+                                <tr class="active">
                                     <th>No. Dokumen</th>
                                     <th>Tahun</th>
                                     <th>Nama Paket</th>
@@ -25,6 +26,7 @@ $this->load->view("info_header");
                                     <th>Tanggal Dibuat</th>
                                     <th>Last Update</th>
                                     <th>Aksi</th>
+                                    </tr>
                                     <?php 
                                     foreach($usulan as $p){
                                         ?>

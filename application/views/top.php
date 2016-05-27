@@ -52,6 +52,10 @@
     margin-top: -1%;
     margin-bottom: 1%;
 }
+.card .card-body a.btn.btn-info {
+    margin-top: -1%;
+    margin-bottom: 1%;
+}
 </style>
 </head>
 <body class="flat-blue">
