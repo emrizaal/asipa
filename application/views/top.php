@@ -174,6 +174,11 @@
                                     <span class="icon fa fa-file-o"></span><span class="title">Pengelompokan</span>
                                 </a>
                             </li>
+                            <li class="list <?= ($this->uri->segment(1)=='Lelang')?'active':''; ?>">
+                                <a href="<?=base_url()?>Lelang">
+                                    <span class="icon fa fa-file-o"></span><span class="title">Lelang</span>
+                                </a>
+                            </li>
                                                    
                           
                             <!-- Dropdown-->

@@ -1,0 +1,130 @@
+<!-- Main Content -->
+<?php
+$this->load->view("info_header");
+?>
+<div class="app-container-slide">
+    <div class="container-fluid">
+        <div class="side-body padding-top"  style="padding-top:25px;">
+
+            <div class="row  no-margin-bottom">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <span class="title">Penetapan Hasil Lelang</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                              <table class="table table-stripped table-bordered table-hover">
+                                <tr class="active">
+                                    <th>Nama Dokumen Pengelompokan</th>
+                                    <th>Tahun Anggaran</th>
+                                    <th>Status Lelang</th>
+                                    <th>Aksi</th>
+                                    <?php 
+                                    foreach($lelang as $p){
+                                        ?>
+                                        <tr>
+                                            <td><?=$p['NAMA_PAKET']?></td>
+                                            <td><?=$p['TAHUN_ANGGARAN']?></td>
+                                            <td>
+                                                <?php 
+                                                if($p['STATUS']==8){
+                                                    echo "-";
+                                                }else if($p['STATUS']==9){
+                                                    echo "Sukses";
+                                                }else if($p['STATUS']==-9){
+                                                    echo "Gagal";
+                                                }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-warning" onclick="editLelang('<?= $p['NAMA_PAKET'] ?>','<?= $p['ID_PAKET'] ?>','<?= $p['STATUS'] ?>','<?= $p['TENDER_A'] ?>','<?= $p['TENDER_B'] ?>','<?= $p['TENDER_C'] ?>','<?= $p['TENDER_D'] ?>','<?= $p['TENDER_E'] ?>')"
+                                                    data-toggle="modal" data-target="#modalEditLelang"><i class="fa fa-pencil"></i> Edit</a>
+                                                    <?php 
+                                                    if($p['STATUS']==9){
+                                                        echo "Lihat";
+                                                    }
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            <?php 
+                                        }
+                                        ?>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Main Content -->
+                    <!-- Modal Edit Lelang -->
+                    <div class="modal fade modal-warning" id="modalEditLelang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Edit Penetapan Hasil Lelang</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="card">
+                                   <div class="card-body"  style="padding: 0px 20px !important;">
+                                       <form action="<?=base_url()?>Lelang/updateLelang" method="POST">
+                                        <input type="hidden" name="id" id="frmId">
+                                        <div class="sub-title">Nama Dokumen Penglompokan</div>
+                                        <div>
+                                         <input disabled type="text" name="nama" id="frmNama" class="form-control">
+                                     </div>
+                                     <div class="sub-title">Status Lelang</div>
+                                     <div>
+                                         <select name="status" id="frmStatus" class="form-control">
+                                             <option value="8" class="form-control">-</option>
+                                             <option value="9" class="form-control">Berhasil</option>
+                                             <option value="-9" class="form-control">Gagal</option>
+                                         </select>
+                                     </div>
+                                     <div class="sub-title">Pemenang 1</div>
+                                     <div>
+                                         <input type="text" name="nama" id="frmTenderA" class="form-control">
+                                     </div>
+                                     <div class="sub-title">Pemenang 2</div>
+                                     <div>
+                                         <input type="text" name="nama" id="frmTenderB" class="form-control">
+                                     </div>
+                                     <div class="sub-title">Pemenang 3</div>
+                                     <div>
+                                         <input type="text" name="nama" id="frmTenderC" class="form-control">
+                                     </div>
+                                     <div class="sub-title">Pemenang 4</div>
+                                     <div>
+                                         <input type="text" name="nama" id="frmTenderD" class="form-control">
+                                     </div>
+                                     <div class="sub-title">Pemenang 5</div>
+                                     <div>
+                                         <input type="text" name="nama" id="frmTenderE" class="form-control">
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                        </form>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal Add Pagu -->
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    function editLelang(a,b,status,tA,tB,tC,tD,tE) {
+      document.getElementById('frmNama').value=a;
+      document.getElementById('frmId').value=b;
+      $("#frmStatus option[value="+status+"]").attr("selected");
+  }
+  
+</script>
+
+
