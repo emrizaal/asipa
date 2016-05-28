@@ -17,15 +17,20 @@ class Pagu extends CI_Controller {
 		$this->load->view('bottom');
 	}
 
+	//Menampilkan form add pagu
+	//[PopUp]
 	public function addPagu(){
 		$this->load->view('pagu/pagu_add');
 	}
 
+	//Menampilkan form edit pagu
+	//[PopUp]
 	public function editPagu($id){
 		$data['pagu']=$this->m_pagu->getPaguByIdPagu($id);
 		$this->load->view('pagu/pagu_edit',$data);
 	}
 
+	//Menyimpan data pagu
 	public function savePagu(){
 		$p = $this->input->post();
 		$p['id_jurusan'] = 1;//$this->session->userdata("id_jurusan");
@@ -34,6 +39,7 @@ class Pagu extends CI_Controller {
 		redirect("Pagu");
 	}
 
+	//Mengupdate data pagu
 	public function updatePagu(){
 		$p = $this->input->post();
 		$this->m_pagu->updatePagu($p);

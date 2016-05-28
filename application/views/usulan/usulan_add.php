@@ -15,26 +15,25 @@
           <div class="card-body">
            <div class="text-center">
             <h5>
-              HARGA PERKIRAAN SENDIRI
+              USULAN PENGADAAN ALAT
             </h5>
             <h5>
-              PENGADAAN 
-            </h5>
-            <h5>
-              POLITEKNIK NEGERI BANDUNG
-            </h5>
-            <h5>
-              TAHUN ANGGARAN 2015
+              TAHUN ANGGARAN 2016
             </h5>
             <br>
           </div>
           <form class="form-horizontal row-fluid form-usulan-noborder">
             <div class="col-md-4">
-
               <div class="control-group ">
                 <label class="control-label " >Nama Paket</label>
                 <div class="controls">
                   <input type="text" name="NM_PAKET" id="NM_PAKET"  value="" class="form-control">
+                </div>
+              </div>
+              <div class="control-group ">
+                <label class="control-label " >Sisa Pagu</label>
+                <div class="controls">
+                  <span class="pagu_alat"><?=$pagu['PAGU_ALAT']?></span>
                 </div>
               </div>
             </div>
@@ -87,98 +86,64 @@
   </div>
 </div>
 <!--/.module-->
+<footer class="app-footer">
+  <div class="wrapper">
+    <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
+  </div>
+</footer>
+<!-- Javascript Libs -->
+<script type="text/javascript" src="<?=base_url()?>assets/lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/lib/js/Chart.min.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/lib/js/bootstrap-switch.min.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/lib/js/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/lib/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/lib/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/lib/js/select2.full.min.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/lib/js/ace/ace.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/lib/js/ace/mode-html.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/lib/js/ace/theme-github.js"></script>
+<!-- Javascript -->
+<script type="text/javascript" src="<?=base_url()?>assets/js/app.js"></script>
+
+
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/handsontable/dist/handsontable.full.css">
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/handsontable/plugins/editRow/editRow.css">
-<script type="text/javascript" src="<?=base_url()?>assets/lib/js/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/handsontable/dist/handsontable.full.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/handsontable/plugins/jqueryHandsontable.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/handsontable/plugins/editRow/editRow.js"></script>
 
 <script>
-  jQuery(document).ready(function ($) {
-    $("#Save").click(function(e){
-      var rowUsulan = $("#dataTable").handsontable("getData");
-      var resUsulan = JSON.stringify(rowUsulan);
-        //alert("row usulan : " + rowUsulan);
-        //alert("res usulan : " + resUsulan);
+  $(document).ready(function () {
+   $("#addRow").click(function(){
+     var ht = $("#dataTable").handsontable("getInstance");
+     ht.alter('insert_row');
+   });
+   
+   $("#Save").click(function(e){
+    var rowUsulan = $("#dataTable").handsontable("getData");
+    var jsUsulan=JSON.stringify(rowUsulan);
+    $.ajax({
+      url: '<?=base_url()?>Usulan/saveUsulan',
+      type: "POST",
+      data: { 
+        "data": jsUsulan,
+        "nm_paket": $("#NM_PAKET").val() 
+      },
+      success : function(res){
+        //var data = JSON.parse(res);
+        console.log("berhasil"+res);
+      },
+      error: function (msg) {
+        console.log("gagal");
+        return false;
+      }
 
-        
-        $.ajax({
-          url: '<?=base_url()?>c_usulan/addUsulan',
-          type: "POST",
-          data: { 
-            "dataUsulan": resUsulan,
-            "kd_unit": 'a',
-            "nm_paket": $("#NM_PAKET").val() 
-          },
-            //dataType : 'json',
-            success : function(res){
-
-                //alert("result : " + res);
-                var data = JSON.parse(res);
-                if(data['msg']==true){
-                    //alert("Data Berhasil Disimpan " + data['kd_paket']);
-                    
-                    var typefile = ["file_usulan", "file_hps"];
-                    for(var i=0;i<2;i++){
-
-                      $.ajax({
-                        url: '<?=base_url()?>c_usulan/generateHps',
-                        type: "POST",
-                        data: { "kd_paket" : data["kd_paket"], "path":typefile[i]},
-                        success : function(res){
-
-                        },
-                        error: function (msg) {
-
-                        }
-
-                      })
-
-                    }
-                    
-                    //alert(data['kd_paket']);
-                    
-                    $.ajax({
-                      url: '<?=base_url()?>c_main/setMessage',
-                      type: "POST",
-                      data: { "result" : data['msg'], 
-                      "kd_paket":data['kd_paket'],
-                      "nm_paket": $("#NM_PAKET").val()
-                    },
-                    success : function(res){
-
-                      window.location.replace("<?=base_url()?>c_usulan");
-                            //e.preventDefault();
-                          }
-
-                        })
-
-
-                  }
-                  else {
-                    alert("Data Gagal Disimpan "+ data['msg'] + " and kd_paket " + data['kd_paket']);
-                    e.preventDefault();
-                  }
-
-
-
-                },
-                error: function (msg) {
-                  alert("masuk error :" + msg );
-                  return false;
-                }
-
-              })
+    })
         //alert("res usulan : " + resUsulan);
         //e.preventDefault();
-      }) 
-
-$("#addRow").click(function(e){
-  var ht = $("#dataTable").handsontable("getInstance");
-  ht.alter('insert_row');
-}) 
-}); 
+      }); 
+ }); 
 
 
 </script>
@@ -186,14 +151,14 @@ $("#addRow").click(function(e){
 
   var
   data1 = [
-  ['NAMA BARANG', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH TOTAL', 'HARGA SATUAN', 'TOTAL (Rp)','DISTRIBUSI','KD ITEM'],
-  ['', '', '', '', '', '', '','JURUSAN','JUMLAH','LAB',''],
-  ['', '', '', '', '', '', '','','','',''],
-  ['', '', '', '', '', '', '','','','',''],
-  ['', '', '', '', '', '', '','','','',''],
-  ['', '', '', '', '', '', '','','','',''],
-  ['', '', '', '', '', '', '','','','',''],
-  ['', '', '', '', '', '', '','','','',''],
+  ['NAMA BARANG', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI'],
+  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
+  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
+  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
+  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
+  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
+  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
+  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
   ['', '', '', '', '', '', '','','','','']
   ],
   container1 = document.getElementById('dataTable'),
@@ -226,18 +191,20 @@ $("#addRow").click(function(e){
     colHeaders: false,
     contextMenu: false,
     fixedColumnsLeft: 2,
-    fixedRowsTop:2,
+    fixedRowsTop:1,
     outsideClickDeselects: false,
     mergeCells: [
-    {row: 0, col: 0, rowspan: 2, colspan: 1},
-    {row: 0, col: 1, rowspan: 2, colspan: 1},
-    {row: 0, col: 2, rowspan: 2, colspan: 1},
-    {row: 0, col: 3, rowspan: 2, colspan: 1},
-    {row: 0, col: 4, rowspan: 2, colspan: 1},
-    {row: 0, col: 5, rowspan: 2, colspan: 1},
-    {row: 0, col: 6, rowspan: 2, colspan: 1},
-    {row: 0, col: 7, rowspan: 1, colspan: 3},
-    {row: 0, col: 10, rowspan: 2, colspan: 1}
+    {row: 0, col: 0, rowspan: 1, colspan: 1},
+    {row: 0, col: 1, rowspan: 1, colspan: 1},
+    {row: 0, col: 2, rowspan: 1, colspan: 1},
+    {row: 0, col: 3, rowspan: 1, colspan: 1},
+    {row: 0, col: 4, rowspan: 1, colspan: 1},
+    {row: 0, col: 5, rowspan: 1, colspan: 1},
+    {row: 0, col: 6, rowspan: 1, colspan: 1},
+    {row: 0, col: 7, rowspan: 1, colspan: 1},
+    {row: 0, col: 8, rowspan: 1, colspan: 1},
+    {row: 0, col: 9, rowspan: 1, colspan: 1},
+    {row: 0, col: 10, rowspan: 1, colspan: 1}
     ],
     cell: [
     {row: 0, col: 0, className: "htCenter htMiddle"},
@@ -247,176 +214,133 @@ $("#addRow").click(function(e){
     {row: 0, col: 4, className: "htCenter htMiddle"},
     {row: 0, col: 5, className: "htCenter htMiddle"},
     {row: 0, col: 6, className: "htCenter htMiddle"},
-    {row: 0, col: 7, className: "htCenter"},
+    {row: 0, col: 7, className: "htCenter htMiddle"},
+    {row: 0, col: 8, className: "htCenter htMiddle"},
+    {row: 0, col: 9, className: "htCenter htMiddle"},
     {row: 0, col: 10, className: "htCenter htMiddle"}
     ],
     columns: [
     {
+      width:200,
+      renderer:"html"
+    },
+    {
+      width:200,
+      renderer:"html"
+    },
+    {
+      width:150,
+      renderer:"html"
+    },
+    {
       type: 'autocomplete',
-      source: ['Kelas D1', 'RSG','Lab RPL','Lab Proyek','Lab Database','Lab Multimedia'],
+      source: ['Unit','Set'],
       strict: false
-              // allowInvalid: true // true is default
-            },
-            {
-              width:200,
-              renderer:"html"
-            },
-            {
-              width:150
-            },
-            {
-              type: 'autocomplete',
-              source: ['Kelas D1', 'RSG','Lab RPL','Lab Proyek','Lab Database','Lab Multimedia'],
-              strict: false
-            },
-            {
-              type: 'numeric',
-              format: '0,0',
-              language: 'en',
-              width:80
-            },
-            {
-              type: 'numeric',
-              format: '0,0.00',
-              language: 'en',
-              alignment: 'right',
-              validator: 'numericValidator', 
-              allowInvalid: false
-            },
-            {
-              type: 'numeric',
-              format: '0,0.00',
-              language: 'en',
-              readOnly: true
-            },
-            {
+    },
+    {
+      type: 'numeric',
+      format: '0,0',
+      language: 'en',
+      width:80
+    },
+    {
+      type: 'numeric',
+      format: '0,0.00',
+      language: 'en',
+      alignment: 'right',
+      validator: 'numericValidator', 
+      allowInvalid: false
+    },
+    {
+      type: 'numeric',
+      format: '0,0.00',
+      language: 'en',
+      readOnly: true
+    },
+    {
+      type: 'autocomplete',
+      source: <?=$lokasi?>,
+      strict: false,
+      width:150
+    },
+    {
+      type: 'numeric',
+      renderer:"html"
+    },
+    {
+      width:100,
+      renderer:"html"
+    },
+    {
+      width:100,
+      renderer:"html"
+    }
 
-              width:140
-              /*
-              type: 'text',
-              source: ['JTK'],
-              strict: true
-              */
-              // allowInvalid: true // true is default
-            },
-            {
-              readOnly: true
-            },
-            {
-              type: 'autocomplete',
-              source: ['Kelas D1', 'RSG','Lab RPL','Lab Proyek','Lab Database','Lab Multimedia'],
-              strict: false,
-              width:120 
-                // allowInvalid: true // true is default
-              },
-              {
-                readonly:true
-              }
+    ],
+    cells: function (row, col, prop) {
+      var cellProperties = {};
 
-              ],
-              cells: function (row, col, prop) {
-                var cellProperties = {};
-
-                if (row === 0 || row === 1 || this.instance.getData()[row][col] === 'readOnly') {
+      if (row === 0 || this.instance.getData()[row][col] === 'readOnly') {
             cellProperties.readOnly = true; // make cell read-only if it is first row or the text reads 'readOnly'
           }
-          if (row === 0 || row === 1) {
+          if (row === 0) {
             cellProperties.renderer = firstRowRenderer; // uses function directly
           }
-          if(col === 6){
-            cellProperties.renderer = TotalRowRenderer;  
-          }
+      if(col === 6){
+        cellProperties.renderer = TotalRowRenderer;  
+      }
 
+      return cellProperties;
+    },
+    afterChange : function(changes, source){
 
-          if(col === 10){
-            cellProperties.renderer = KeyRowRenderer;   
-          } 
+      if(changes != null){
+        var row = changes[0][0];
+        var col = changes[0][1];
+        var oldVal = changes[0][2];
+        var newVal = changes[0][3];
+      }
+      var ht = $('#dataTable').handsontable('getInstance');
 
-          return cellProperties;
-        },
-        afterChange : function(changes, source){
+      if(col===4 || col===5){
+        var qty = ht.getData()[row][4];
+        var harga = ht.getData()[row][5];
 
-          if(changes != null){
-            var row = changes[0][0];
-            var col = changes[0][1];
-            var oldVal = changes[0][2];
-            var newVal = changes[0][3];
-          }
-          var ht = $('#dataTable').handsontable('getInstance');
+        if(qty != 0 || harga != 0){
+          ht.setDataAtCell(row, 6, qty*harga); 
+        }  
+      }
 
-            //set harga from master barang
-            if(col === 0 || col===3) {
-
-                //Apakah Barang berdasarkan nama dan satuan sudah tercatat di db
-                //jika ya, harga di set, jika tidak , harga kosong
-                $.ajax({
-                  url: '<?=base_url()?>c_barang/getHargaBarangByNameSatuan',
-                  type: "POST",
-                  data: { 
-                    "namaBrg": ht.getData()[row][0],
-                    "satuanBrg": ht.getData()[row][3] 
-                  },
-                  success: function (res) {
-                    if(res != null){
-
-                        //var data = JSON.parse(res); //jQuery.parseJSON(res);
-                        //alert("data : " + res + " - " + data + " nmBrg : " + newVal + " - " +data['NM_BARANG']  );
-                        
-                        //ht.setDataAtCell(row, 3, data['SATUAN']); 
-                        ht.setDataAtCell(row, 4, 1); 
-                        ht.setDataAtCell(row, 5, res); 
-                      }
-
-                    },
-                    error: function (msg) {
-                        //alert("masuk error :" + msg );
-                      }
-                    })  
-
-                ht.setDataAtCell(row, 7, ''); 
-              }
-
-              if(col===4 || col===5){
-                var qty = ht.getData()[row][4];
-                var harga = ht.getData()[row][5];
-
-                if(qty != 0 || harga != 0){
-                  ht.setDataAtCell(row, 6, qty*harga); 
-                }  
-              }
-
-              if(col===4){
-                ht.setDataAtCell(row, 8, newVal);   
-              }
+              // if(col===4){
+              //   ht.setDataAtCell(row, 8, newVal);   
+              // }
 
             //COunt Total Anggaran
             var totRow = ht.countRows();
             var  totAnggaran = 0;
-            for(var i=2; i<totRow; i++){
+            for(var i=1; i<totRow; i++){
               if(ht.getData()[i][6] != null){
                 totAnggaran = Number(totAnggaran) + ht.getData()[i][6];
-
+                console.log(totAnggaran);
               }
             }
-            
-            //alert( totAnggaran);
-            //Set Total Anggaran
-            $("#totalAnggaran").val("");
-            //$("#totalAnggaran").val(accounting.formatMoney(totAnggaran, "Rp", 2, ",", "."));
+
 
             
-            //Set Jumlah + Keuntungan
+            $("#totalAnggaran").val(totAnggaran);
+            
             var keuntungan = (10/100)*Number(totAnggaran);
             var jumlahKeuntungan = Number(totAnggaran) + Number(keuntungan);
-            $("#totalAnggaranKeuntungan").val("");
+            $("#totalAnggaranKeuntungan").val(jumlahKeuntungan);
             //$("#totalAnggaranKeuntungan").val(accounting.formatMoney(jumlahKeuntungan, "Rp", 2, ",", "."));
             
-            //Set Jumlah + Keuntungan + Pajak
             var pajak = (10/100)*Number(jumlahKeuntungan);
             var jumlahKeuntunganPajak = Number(jumlahKeuntungan) + Number(pajak);
-            $("#totalAnggaranKeuntunganPajak").val("");
-            //$("#totalAnggaranKeuntunganPajak").val(accounting.formatMoney(jumlahKeuntunganPajak, "Rp", 2, ",", "."));
+            $("#totalAnggaranKeuntunganPajak").val(jumlahKeuntunganPajak);
             
+            var pagu = <?=$pagu['PAGU_ALAT']?>;
+            $(".pagu_alat").text(Number(pagu)-jumlahKeuntunganPajak);
+
           }                            
 
         });
@@ -427,4 +351,6 @@ $("#addRow").click(function(e){
 </script>
 
 
+</body>
 
+</html>
