@@ -123,27 +123,77 @@
    $("#Save").click(function(e){
     var rowUsulan = $("#dataTable").handsontable("getData");
     var jsUsulan=JSON.stringify(rowUsulan);
-    $.ajax({
-      url: '<?=base_url()?>Usulan/saveUsulan',
-      type: "POST",
-      data: { 
-        "data": jsUsulan,
-        "nm_paket": $("#NM_PAKET").val() 
-      },
-      success : function(res){
-        //var data = JSON.parse(res);
-        console.log("berhasil"+res);
-      },
-      error: function (msg) {
-        console.log("gagal");
-        return false;
-      }
 
-    })
-        //alert("res usulan : " + resUsulan);
-        //e.preventDefault();
-      }); 
- }); 
+    var myFormData = new FormData();
+    myFormData.append('file','');
+    myFormData.append('nama_alat','');
+    myFormData.append('id_usulan','');
+    myFormData.append('spesifikasi','');
+    myFormData.append('setara','');
+    myFormData.append('satuan','');
+    myFormData.append('jumlah_alat','');
+    myFormData.append('harga_satuan','');
+    myFormData.append('jumlah_distribusi','');
+    myFormData.append('referensi_terkait','');
+    myFormData.append('lokasi','');
+    myFormData.append('data_ahli','');
+    myFormData.append('nama',$("#NM_PAKET").val());
+    myFormData.append('total',$("#totalAnggaranKeuntunganPajak").val());
+
+    $.when(
+      $.ajax({
+        url: '<?=base_url()?>Usulan/saveUsulan',
+        type: "POST",
+        data:myFormData,
+        contentType: false,
+        processData: false,
+        success : function(aw){
+          console.log("adasd");
+          console.log(aw);
+
+          myFormData.set('id_usulan',aw);
+          for(var i=1;i<rowUsulan.length;i++){
+            console.log(rowUsulan[i][10]);
+            if(rowUsulan[i][0]!=""){
+              myFormData.set('file',$("input:file:eq("+(i-1)+")").prop("files")[0]);
+              myFormData.set('nama_alat',rowUsulan[i][0]);
+              myFormData.set('spesifikasi',rowUsulan[i][1]);
+              myFormData.set('setara',rowUsulan[i][2]);
+              myFormData.set('satuan',rowUsulan[i][3]);
+              myFormData.set('jumlah_alat',rowUsulan[i][4]);
+              myFormData.set('harga_satuan',rowUsulan[i][5]);
+              myFormData.set('lokasi',rowUsulan[i][7]);
+              myFormData.set('jumlah_distribusi',rowUsulan[i][8]);
+              myFormData.set('data_ahli',rowUsulan[i][10]);
+              $.ajax({
+                url: '<?=base_url()?>Usulan/saveAlat',
+                type: "POST",
+                data:myFormData,
+                contentType: false,
+                processData: false,
+                success : function(res){
+                  console.log("Save Alat Done");
+                  console.log(res);
+                },
+                error: function (msg) {
+                  console.log("gagal"+msg);
+                  return false;
+                }
+
+              })
+            }
+          }
+        },
+        error: function (msg) {
+          console.log("gagal");
+          return false;
+        }
+      })
+).then(function(){
+  //window.location.href = "<?=base_url()?>Usulan";
+});
+}); 
+}); 
 
 
 </script>
@@ -151,15 +201,15 @@
 
   var
   data1 = [
-  ['NAMA BARANG', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI'],
-  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
-  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
-  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
-  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
-  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
-  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
-  ['', '', '', '', '', '', '','','',"<input type='file'>","<input type='checkbox'>"],
-  ['', '', '', '', '', '', '','','','','']
+  ['NAMA ALAT', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI'],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
+  ['', '', '', '', '', '', '','','','',]
   ],
   container1 = document.getElementById('dataTable'),
   hot1;
@@ -272,8 +322,8 @@
       renderer:"html"
     },
     {
-      width:100,
-      renderer:"html"
+      type:'checkbox',
+      width:100
     }
 
     ],
@@ -286,30 +336,30 @@
           if (row === 0) {
             cellProperties.renderer = firstRowRenderer; // uses function directly
           }
-      if(col === 6){
-        cellProperties.renderer = TotalRowRenderer;  
-      }
+          if(col === 6){
+            cellProperties.renderer = TotalRowRenderer;  
+          }
 
-      return cellProperties;
-    },
-    afterChange : function(changes, source){
+          return cellProperties;
+        },
+        afterChange : function(changes, source){
 
-      if(changes != null){
-        var row = changes[0][0];
-        var col = changes[0][1];
-        var oldVal = changes[0][2];
-        var newVal = changes[0][3];
-      }
-      var ht = $('#dataTable').handsontable('getInstance');
+          if(changes != null){
+            var row = changes[0][0];
+            var col = changes[0][1];
+            var oldVal = changes[0][2];
+            var newVal = changes[0][3];
+          }
+          var ht = $('#dataTable').handsontable('getInstance');
 
-      if(col===4 || col===5){
-        var qty = ht.getData()[row][4];
-        var harga = ht.getData()[row][5];
+          if(col===4 || col===5){
+            var qty = ht.getData()[row][4];
+            var harga = ht.getData()[row][5];
 
-        if(qty != 0 || harga != 0){
-          ht.setDataAtCell(row, 6, qty*harga); 
-        }  
-      }
+            if(qty != 0 || harga != 0){
+              ht.setDataAtCell(row, 6, qty*harga); 
+            }  
+          }
 
               // if(col===4){
               //   ht.setDataAtCell(row, 8, newVal);   
@@ -321,7 +371,7 @@
             for(var i=1; i<totRow; i++){
               if(ht.getData()[i][6] != null){
                 totAnggaran = Number(totAnggaran) + ht.getData()[i][6];
-                console.log(totAnggaran);
+                //console.log(totAnggaran);
               }
             }
 

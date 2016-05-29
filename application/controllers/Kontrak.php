@@ -25,6 +25,7 @@ class Kontrak extends CI_Controller {
 		$this->load->view('bottom');	
 	}
 
+	//Save Kontrak
 	public function saveKontrak(){
 		$config['upload_path']   =   "assets/kontrak";
 		$config['allowed_types'] =   "*"; 
@@ -45,6 +46,7 @@ class Kontrak extends CI_Controller {
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 
+	//Update Kontrak
 	public function updateKontrak(){
 		$config['upload_path']   =   "assets/kontrak";
 		$config['allowed_types'] =   "*"; 
@@ -66,6 +68,7 @@ class Kontrak extends CI_Controller {
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 
+	//Delete Kontrak
 	public function deleteKontrak(){
 		$id = $this->input->post('id_kontrak');
 		$kontrak = $this->m_kontrak->getKontrakById($id);
