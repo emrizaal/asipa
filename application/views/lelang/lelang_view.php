@@ -77,32 +77,40 @@ $this->load->view("info_header");
                                      </div>
                                      <div class="sub-title">Status Lelang</div>
                                      <div>
-                                         <select name="status" id="frmStatus" class="form-control">
-                                             <option value="8" class="form-control">-</option>
-                                             <option value="9" class="form-control">Berhasil</option>
-                                             <option value="-9" class="form-control">Gagal</option>
+                                         <select name="status" id="frmStatus" class="form-control" style="width: 30%;" onchange="getStatus(this)">
+                                             <option value="8">-</option>
+                                             <option value="9">Berhasil</option>
+                                             <option value="-9">Gagal</option>
                                          </select>
                                      </div>
-                                     <div class="sub-title">Pemenang 1</div>
+                                     <div id="successForm" style="display:none">
+                                     <div class="sub-title">Pemenang 1 :</div>
                                      <div>
                                          <input type="text" name="nama" id="frmTenderA" class="form-control">
                                      </div>
-                                     <div class="sub-title">Pemenang 2</div>
+                                     <div class="sub-title">Pemenang 2 :</div>
                                      <div>
                                          <input type="text" name="nama" id="frmTenderB" class="form-control">
                                      </div>
-                                     <div class="sub-title">Pemenang 3</div>
+                                     <div class="sub-title">Pemenang 3 :</div>
                                      <div>
                                          <input type="text" name="nama" id="frmTenderC" class="form-control">
                                      </div>
-                                     <div class="sub-title">Pemenang 4</div>
+                                     <div class="sub-title">Pemenang 4 :</div>
                                      <div>
                                          <input type="text" name="nama" id="frmTenderD" class="form-control">
                                      </div>
-                                     <div class="sub-title">Pemenang 5</div>
+                                     <div class="sub-title">Pemenang 5 :</div>
                                      <div>
                                          <input type="text" name="nama" id="frmTenderE" class="form-control">
                                      </div>
+                                     </div>
+                                      <div id="failForm" style="display:none">
+                                       <div class="sub-title">Keterangan :</div>
+                                     <div>
+                                         <textarea class="form-control" name="ket" id="ket"></textarea>
+                                     </div>
+                                      </div>
                                  </div>
                              </div>
                          </div>
@@ -118,13 +126,29 @@ $this->load->view("info_header");
     </div>
 </div>
 </div>
+<!-- <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/lib/css/bootstrap.min.css"> -->
+
 <script type="text/javascript">
     function editLelang(a,b,status,tA,tB,tC,tD,tE) {
       document.getElementById('frmNama').value=a;
       document.getElementById('frmId').value=b;
       $("#frmStatus option[value="+status+"]").attr("selected");
   }
+  function getStatus(e){
+    if(e.value==9){
+        document.getElementById('failForm').style.display = 'none';
+        document.getElementById('successForm').style.display = 'block';
+    }else if(e.value==-9){
+         document.getElementById('failForm').style.display = 'block';
+        document.getElementById('successForm').style.display = 'none';
+    }else{
+         document.getElementById('failForm').style.display = 'none';
+        document.getElementById('successForm').style.display = 'none';
+    }
+    
+  }
   
 </script>
+
 
 
