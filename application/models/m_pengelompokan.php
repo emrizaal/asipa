@@ -6,9 +6,18 @@ class M_pengelompokan extends CI_Model {
 		parent::__construct();
 	}
 
+	function getPengelompokanById($id){
+		$query = $this->db->query("SELECT * from paket where ID_PAKET = '$id'")->row_array();
+		return $query;
+	}
 
 	function getAllPengelompokan(){
 		$query = $this->db->query("SELECT * from paket")->result_array();
+		return $query;
+	}
+
+	function getAllPengelompokanForKontrak(){
+		$query = $this->db->query("SELECT * from paket where STATUS in (9)")->result_array();
 		return $query;
 	}
 

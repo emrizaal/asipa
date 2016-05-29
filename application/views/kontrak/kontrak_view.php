@@ -12,11 +12,10 @@ $this->load->view("info_header");
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <span class="title">Pengelolaan Usulan</span>
+                                    <span class="title">Manage Penetapan Kontrak</span>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <a href="<?=base_url()?>Usulan/addUsulan" class="btn btn-info"> <i class="fa fa-plus-square"></i>&nbsp; Tambah Usulan</a>
                                 <table class="table table-stripped table-bordered table-hover">
                                 <tr class="active">
                                     <th>No. Dokumen</th>
@@ -28,16 +27,16 @@ $this->load->view("info_header");
                                     <th>Aksi</th>
                                     </tr>
                                     <?php 
-                                    foreach($usulan as $p){
+                                    foreach($paket as $p){
                                         ?>
                                         <tr>
-                                        <td>Usulan-<?=$p['ID_USULAN']?>/<?=$p['INISIAL']?>/<?=$p['TAHUN_ANGGARAN']?></td>
+                                        <td>HPS-<?=$p['ID_PAKET']?>/<?=$p['TAHUN_ANGGARAN']?></td>
                                         <td><?=$p['TAHUN_ANGGARAN']?></td>
                                         <td><?=$p['NAMA_PAKET']?></td>
                                         <td><?=$p['TOTAL_ANGGARAN']?></td>
                                         <td><?=$p['TANGGAL_DIBUAT']?></td>
                                         <td><?=$p['LAST_UPDATE']?></td>
-                                        <td>Export | Revisi</td>
+                                        <td><a href="<?=base_url()?>Kontrak/detail/<?=$p['ID_PAKET']?>">Detail</a></td>
                                         </tr>
                                         <?php 
                                     }

@@ -179,7 +179,11 @@
                                     <span class="icon fa fa-file-o"></span><span class="title">Lelang</span>
                                 </a>
                             </li>
-                                                   
+                            <li class="list <?= ($this->uri->segment(1)=='Kontrak')?'active':''; ?>">
+                                <a href="<?=base_url()?>Kontrak">
+                                    <span class="icon fa fa-file-o"></span><span class="title">Kontrak</span>
+                                </a>
+                            </li>                  
                           
                             <!-- Dropdown-->
                            <!--  <li class="panel panel-default dropdown">
