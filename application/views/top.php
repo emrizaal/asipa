@@ -56,6 +56,11 @@
     margin-top: -1%;
     margin-bottom: 1%;
 }
+.card .card-body .sub-title {
+    font-size: 1.2em;
+    padding: 0.5em 0em 0.4em 0em;
+    margin-bottom: 10px;
+}
 </style>
 </head>
 <body class="flat-blue">
