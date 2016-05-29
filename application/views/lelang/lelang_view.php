@@ -32,21 +32,20 @@ $this->load->view("info_header");
                                                 <?php 
                                                 if($p['STATUS']==8){
                                                     echo "-";
-                                                }else if($p['STATUS']==9){
-                                                    echo "Sukses";
-                                                }else if($p['STATUS']==-9){
-                                                    echo "Gagal";
-                                                }
+                                                }else if($p['STATUS']==9){?>
+                                                <span class="label label-success" style="font-size: 12px;">Sukses</span>
+                                                <?}else if($p['STATUS']==-9){?>
+                                                <span class="label label-danger" style="font-size: 12px;">Gagal</span>
+                                                <?}
                                                 ?>
                                             </td>
                                             <td>
                                                 <a class="btn btn-warning" onclick="editLelang('<?= $p['NAMA_PAKET'] ?>','<?= $p['ID_PAKET'] ?>','<?= $p['STATUS'] ?>','<?= $p['TENDER_A'] ?>','<?= $p['TENDER_B'] ?>','<?= $p['TENDER_C'] ?>','<?= $p['TENDER_D'] ?>','<?= $p['TENDER_E'] ?>','<?=$p['KETERANGAN_GAGAL_KONTRAK']?>')"
                                                     data-toggle="modal" data-target="#modalEditLelang"><i class="fa fa-pencil"></i> Edit</a>
                                                     <?php 
-                                                    if($p['STATUS']==9){
-                                                        echo "Lihat";
-                                                    }
-                                                    ?>
+                                                    if($p['STATUS']==9 || $p['STATUS']==-9){ ?><a class="btn btn-info" onclick="lihatLelang('<?= $p['NAMA_PAKET'] ?>','<?= $p['ID_PAKET'] ?>','<?= $p['STATUS'] ?>','<?= $p['TENDER_A'] ?>','<?= $p['TENDER_B'] ?>','<?= $p['TENDER_C'] ?>','<?= $p['TENDER_D'] ?>','<?= $p['TENDER_E'] ?>','<?=$p['KETERANGAN_GAGAL_KONTRAK']?>')"
+                                                    data-toggle="modal" data-target="#modalLihatLelang"><i class="fa fa-search"></i> Lihat</a>
+                                                    <?}?>
                                                 </td>
                                             </tr>
                                             <?php 
@@ -123,33 +122,113 @@ $this->load->view("info_header");
             </div>
         </div>
         <!-- End Modal Add Pagu -->
+
+        <!-- Modal Lihat Lelang -->
+        <div class="modal fade modal-info" id="modalLihatLelang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Lihat Penetapan Hasil Lelang</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class="card">
+                         <div class="card-body"  style="padding: 0px 20px !important;">
+                            <div class="sub-title">
+                                <b>Nama Dokumen Penglompokan</b> :  <span id="spanNama"></span> 
+                            </div>
+                            <div class="sub-title">
+                               <b>Status Lelang</b> : <span id="spanStatus"  class="label"></span> 
+                           </div>
+                           <div id="spanSuccess" style="display:none">
+                               <div class="sub-title"><b>Pemenang </b>1 :</div>
+                               <div>
+                                 <span id="spanTenA"></span> 
+                             </div>
+                             <div class="sub-title"><b>Pemenang 2 </b>:</div>
+                             <div>
+                                 <span id="spanTenB"></span> 
+                             </div>
+                             <div class="sub-title"><b>Pemenang 3 </b>:</div>
+                             <div>
+                             <span id="spanTenC"></span> 
+                          </div>
+                          <div class="sub-title"><b>Pemenang 4 </b>:</div>
+                          <div>
+                             <span id="spanTenD"></span> 
+                       </div>
+                       <div class="sub-title"><b>Pemenang 5 </b>:</div>
+                       <div>
+                             <span id="spanTenE"></span> 
+                          
+                       </div>
+                   </div>
+                   <div id="spanFail" style="display:none">
+                     <div class="sub-title"><b>Keterangan </b> :</div>
+                     <div>
+                         <span id="spanKet"></span> 
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
     </div>
+</div>
+</div>
+</div>
+<!-- End Modal Add Pagu -->
+</div>
 </div>
 </div>
 <!-- <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/lib/css/bootstrap.min.css"> -->
 
 <script type="text/javascript">
-    function editLelang(a,b,status,tA,tB,tC,tD,tE,ket) {
-      document.getElementById('frmNama').value=a;
-      document.getElementById('frmId').value=b;
-      document.getElementById('frmTenderA').value=tA;
-      document.getElementById('frmTenderB').value=tB;
-      document.getElementById('frmTenderC').value=tC;
-      document.getElementById('frmTenderD').value=tD;
-      document.getElementById('frmTenderE').value=tE;
-      document.getElementById('frmKet').value=ket;
-      $("#frmStatus option").removeAttr("selected");
-      $("#frmStatus option[value="+status+"]").attr("selected","selected");
+    function lihatLelang(a,b,status,tA,tB,tC,tD,tE,ket) {
+      document.getElementById('spanNama').textContent=a;
       if(status==9){
-        document.getElementById('failForm').style.display = 'none';
-        document.getElementById('successForm').style.display = 'block';
-    }else if(status==-9){
-       document.getElementById('failForm').style.display = 'block';
-       document.getElementById('successForm').style.display = 'none';
-   }else{
-       document.getElementById('failForm').style.display = 'none';
-       document.getElementById('successForm').style.display = 'none';
-   }
+          document.getElementById('spanStatus').setAttribute('class','label label-success');
+          document.getElementById('spanStatus').textContent='Sukses';
+          document.getElementById('spanSuccess').style.display = 'block';
+          document.getElementById('spanTenA').textContent=tA;
+          document.getElementById('spanTenB').textContent=tB;
+          document.getElementById('spanTenC').textContent=tC;
+          document.getElementById('spanTenD').textContent=tD;
+          document.getElementById('spanTenE').textContent=tE;
+
+      }else{
+          document.getElementById('spanStatus').setAttribute('class','label label-danger');
+          document.getElementById('spanStatus').textContent='Gagal';
+          document.getElementById('spanFail').style.display = 'block';
+          document.getElementById('spanKet').textContent=ket;
+         // $("#spanKet option[value="+status+"]").attr("selected","selected");
+
+
+     }
+
+ }
+ function editLelang(a,b,status,tA,tB,tC,tD,tE,ket) {
+  document.getElementById('frmNama').value=a;
+  document.getElementById('frmId').value=b;
+  document.getElementById('frmTenderA').value=tA;
+  document.getElementById('frmTenderB').value=tB;
+  document.getElementById('frmTenderC').value=tC;
+  document.getElementById('frmTenderD').value=tD;
+  document.getElementById('frmTenderE').value=tE;
+  document.getElementById('frmKet').value=ket;
+  $("#frmStatus option").removeAttr("selected");
+  $("#frmStatus option[value="+status+"]").attr("selected","selected");
+  if(status==9){
+    document.getElementById('failForm').style.display = 'none';
+    document.getElementById('successForm').style.display = 'block';
+}else if(status==-9){
+   document.getElementById('failForm').style.display = 'block';
+   document.getElementById('successForm').style.display = 'none';
+}else{
+   document.getElementById('failForm').style.display = 'none';
+   document.getElementById('successForm').style.display = 'none';
+}
 }
 function getStatus(e){
     if(e.value==9){
