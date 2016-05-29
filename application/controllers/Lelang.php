@@ -24,7 +24,14 @@ class Lelang extends CI_Controller {
 	//Update 
 	public function updateLelang(){
 		$p = $this->input->post();
-		$this->m_lelang->updateLelang($p);
+		if($p['status']==8){
+			$this->m_lelang->updateLelangNormal($p);
+		}else if($p['status']==9){
+			$this->m_lelang->updateLelangSukses($p);
+		}else if($p['status']==-9){
+			$this->m_lelang->updateLelangGagal($p);
+		}
+		redirect("Lelang");
 	}
 
 }
