@@ -41,7 +41,7 @@
     box-shadow: 4px 4px 2px -3px rgba(0, 0, 0, 0.61);
     margin-right: 1.5%;
 }
-.table tbody tr td a.btn.btn-warning {
+.table tbody tr td a.btn {
     padding: 3px 10px;
     margin: 0;
 }

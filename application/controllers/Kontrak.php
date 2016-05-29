@@ -66,7 +66,8 @@ class Kontrak extends CI_Controller {
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 
-	public function deleteKontrak($id){
+	public function deleteKontrak(){
+		$id = $this->input->post('id_kontrak');
 		$kontrak = $this->m_kontrak->getKontrakById($id);
 		$res=$this->m_kontrak->deleteKontrak($id);
 		if($res){
