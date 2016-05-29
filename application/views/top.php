@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/lib/css/checkbox3.min.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/lib/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/lib/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/lib/css/datepicker.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/lib/css/select2.min.css">
     <!-- CSS App -->
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/style.css">
@@ -60,6 +61,10 @@
     font-size: 1.2em;
     padding: 0.5em 0em 0.4em 0em;
     margin-bottom: 10px;
+}
+.card .card-title a.btn{
+    padding: 3px 10px;
+    margin: 0;
 }
 </style>
 </head>
@@ -189,7 +194,11 @@
                                     <span class="icon fa fa-file-o"></span><span class="title">Kontrak</span>
                                 </a>
                             </li>                  
-                          
+                           <li class="list <?= ($this->uri->segment(1)=='BeritaAcara')?'active':''; ?>">
+                                <a href="<?=base_url()?>BeritaAcara">
+                                    <span class="icon fa fa-file-o"></span><span class="title">Berita Acara</span>
+                                </a>
+                            </li>     
                             <!-- Dropdown-->
                            <!--  <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#component-example">

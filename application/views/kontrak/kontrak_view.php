@@ -36,7 +36,7 @@ $this->load->view("info_header");
                                         <td><?=$p['TOTAL_ANGGARAN']?></td>
                                         <td><?=$p['TANGGAL_DIBUAT']?></td>
                                         <td><?=$p['LAST_UPDATE']?></td>
-                                        <td><a href="<?=base_url()?>Kontrak/detail/<?=$p['ID_PAKET']?>" class="btn btn-primary">Lihat Kontrak</a></td>
+                                        <td><a href="<?=base_url()?>Kontrak/detail/<?=$p['ID_PAKET']?>" class="btn btn-primary"><i class="fa fa-file-text"></i> &nbsp; Lihat Kontrak</a></td>
                                         </tr>
                                         <?php 
                                     }

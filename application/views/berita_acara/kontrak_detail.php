@@ -92,16 +92,47 @@
                                     </div>
                                     <div class="modal-body">
                                       <div class="card">
-                                       <div class="card-body"  style="padding: 0px 20px !important;">
-                                        <form enctype="multipart/form-data" action="<?=base_url()?>Kontrak/saveKontrak" method="POST">
-                                            <input type="hidden" name="id_paket" value="<?=$paket['ID_PAKET']?>">
+                                         <div class="card-body"  style="padding: 0px 20px !important;">
+                                            <form enctype="multipart/form-data" action="<?=base_url()?>Kontrak/saveKontrak" method="POST">
+                                                <input type="hidden" name="id_paket" value="<?=$paket['ID_PAKET']?>">
+                                                <div class="sub-title">Dokumen Kontrak</div>
+                                                <div>
+                                                    <input type="file" name="fupload" class="form-control">
+                                                </div>
+                                                <div class="sub-title">Keterangan</div>
+                                                <div>
+                                                    <textarea class="form-control" name="keterangan" placeholder="Masukan Keterangan Dokumen"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success">Simpan</button>
+                                    </form>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade modal-warning" id="modalEditKontrak" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Edit Dokumen Kontrak</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="card">
+                                     <div class="card-body"  style="padding: 0px 20px !important;">
+                                        <form enctype="multipart/form-data" action="<?=base_url()?>Kontrak/updateKontrak" method="POST">
+                                            <input id="frmId" type="hidden" name="id_kontrak" value="">
                                             <div class="sub-title">Dokumen Kontrak</div>
                                             <div>
                                                 <input type="file" name="fupload" class="form-control">
                                             </div>
                                             <div class="sub-title">Keterangan</div>
                                             <div>
-                                                <textarea class="form-control" name="keterangan" placeholder="Masukan Keterangan Dokumen"></textarea>
+                                                <textarea class="form-control" id="frmKeterangan" name="keterangan" placeholder="Masukan Keterangan Dokumen"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -114,75 +145,43 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade modal-warning" id="modalEditKontrak" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <!-- End Modal Add Pagu -->
+                <!-- modal del Kontrak -->
+                <div class="modal fade modal-danger" id="modalDelKontrak" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Edit Dokumen Kontrak</h4>
+                                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-exclamation-triangle"></i> Hapus Data Kontrak</h4>
                             </div>
                             <div class="modal-body">
-                              <div class="card">
-                               <div class="card-body"  style="padding: 0px 20px !important;">
-                                <form enctype="multipart/form-data" action="<?=base_url()?>Kontrak/updateKontrak" method="POST">
-                                    <input id="frmId" type="hidden" name="id_kontrak" value="">
-                                    <div class="sub-title">Dokumen Kontrak</div>
-                                    <div>
-                                        <input type="file" name="fupload" class="form-control">
-                                    </div>
-                                    <div class="sub-title">Keterangan</div>
-                                    <div>
-                                        <textarea class="form-control" id="frmKeterangan" name="keterangan" placeholder="Masukan Keterangan Dokumen"></textarea>
-                                    </div>
+                                <form enctype="multipart/form-data" action="<?=base_url()?>Kontrak/deleteKontrak" method="POST">
+                                    <input id="frmIddel" type="hidden" name="id_kontrak" value="">
+                                    <h5>Anda Yakin Menghapus Data Ini ?</h5>
+
+
                                 </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success">Ya</button>
+                                </form>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                        </form>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                     </div>
                 </div>
+                <!-- End Modal Add Pagu -->
             </div>
         </div>
-        <!-- End Modal Add Pagu -->
-        <!-- modal del Kontrak -->
-        <div class="modal fade modal-danger" id="modalDelKontrak" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-exclamation-triangle"></i> Hapus Data Kontrak</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form enctype="multipart/form-data" action="<?=base_url()?>Kontrak/deleteKontrak" method="POST">
-                            <input id="frmIddel" type="hidden" name="id_kontrak" value="">
-                            <h5>Anda Yakin Menghapus Data Ini ?</h5>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Ya</button>
-                        </form>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Modal Add Pagu -->
     </div>
-</div>
-</div>
+    <script type="text/javascript">
+        function editKontrak(a,b) {
+          document.getElementById('frmKeterangan').value=a;
+          document.getElementById('frmId').value=b;
+      }
+      function deleteKontrak(a){
+          document.getElementById('frmIddel').value=a;
+          jQuery('#modalDelKontrak').modal('show', {backdrop: 'static'});
 
-<script type="text/javascript">
-    function editKontrak(a,b) {
-      document.getElementById('frmKeterangan').value=a;
-      document.getElementById('frmId').value=b;
-  }
-  function deleteKontrak(a){
-      document.getElementById('frmIddel').value=a;
-      jQuery('#modalDelKontrak').modal('show', {backdrop: 'static'});
+      }
 
-  }
-
-</script>
+  </script>
