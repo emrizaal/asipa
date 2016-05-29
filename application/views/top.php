@@ -48,11 +48,11 @@
 .table tbody tr td{
     vertical-align: middle;
 }
-.card .card-body button.btn.btn-primary.btn-info {
+.card .card-body button.btn{
     margin-top: -1%;
     margin-bottom: 1%;
 }
-.card .card-body a.btn.btn-info {
+.card .card-body a.btn{
     margin-top: -1%;
     margin-bottom: 1%;
 }
