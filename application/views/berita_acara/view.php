@@ -26,7 +26,7 @@ $this->load->view("info_header");
                                         <th>Last Update</th>
                                         <th>BAPP</th>
                                         <th>BAST</th>
-                                        <!-- <th>Bukti Pengadaan</th> -->
+                                        <th>Bukti Pengadaan</th>
                                     </tr>
                                     <tr>
                                      <td>-</td>
@@ -43,6 +43,7 @@ $this->load->view("info_header");
                                          <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modaleditBAST"><i class="fa fa-pencil"></i> Edit </a>
                                          <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalLihatBAST"><i class="fa fa-eye"></i> Lihat </a></td>
                                          <!-- <td><a href="#"><i class="fa fa-search"></i> Detail </a></td> -->
+                                    <td><a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalAddBukti"><i class="fa fa-plus"></i> Tambah </a></td>
                                      </tr>
                                  </table>
                              </div>
@@ -54,6 +55,51 @@ $this->load->view("info_header");
          </div>
      </div>
  </div>
+ <!-- modal add bukti pengadaan -->
+ <div class="modal fade modal-info" id="modalAddBukti" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="myModalLabel">Bukti Pengadaan</h4>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+         <div class="card-body"  style="padding: 0px 20px !important;">
+          <form enctype="multipart/form-data" action="<?=base_url()?>Kontrak/saveKontrak" method="POST">
+            <input type="hidden" name="id_paket">
+            <div class="sub-title">File Bukti Pengadaan</div>
+            <div>
+              <input type="file" name="fupload" class="form-control">
+            </div>
+            <div class="sub-title">List Pengadaan</div>
+            <div>
+              <table class="table table-bordered">
+                <tr class="active">
+                <th> Tanggal </th>
+                <th> Bukti Pengadaan </th>
+                <th> Aksi </th>
+                </tr>
+                <tr>
+                  <td> - </td>
+                  <td> - </td>
+                  <td> <a href="#"> Hapus </a>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Simpan</button>
+      </form>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+    </div>
+  </div>
+</div>
+</div>
+
+ <!-- end add bukti pengadan -->
  <!-- modal lihat bast -->
  <div class="modal fade modal-info " id="modalLihatBAST" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
   <div class="modal-dialog modal-lg">
