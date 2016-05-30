@@ -188,7 +188,7 @@ $this->load->view("info_header");
                           </div>
                           <div class="checkbox3 checkbox-check">
                             <input type="checkbox" id="checkbox-3E" class="dataPgE" value="Jaka">
-                            <label for="checkbox-3">
+                            <label for="checkbox-3E">
                               Jaka 
                           </label>
                       </div>

@@ -169,7 +169,7 @@
                 </div>
             </div>
         </div>
-        <!-- End Modal Add Pagu -->
+        <!-- End Modal Del Pagu -->
     </div>
 </div>
 </div>
