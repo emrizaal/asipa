@@ -187,7 +187,7 @@
         error: function (msg) {
           console.log("gagal");
           return false;
-        }
+        },
       })
 ).then(function(){
   //window.location.href = "<?=base_url()?>Usulan";

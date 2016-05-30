@@ -36,6 +36,20 @@
                   <span class="pagu_alat"><?=$usulan['PAGU_ALAT']?></span>
                 </div>
               </div>
+              <div class="control-group ">
+                <label class="control-label " >Revisi Ke : </label>
+                <div class="controls">
+                  <select name="revisi" class="revisi">
+                    <?php 
+                    for($i=1;$i<=$max['m'];$i++){
+                      ?>
+                      <option <?=$i==$curr ? 'selected' : ''?>><?=$i?></option>
+                      <?php 
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
             </div>
             <div class="col-md-4"></div>
             <div class="col-md-4" style="margin-bottom: 2%;">
@@ -115,6 +129,11 @@
 
 <script>
   $(document).ready(function () {
+
+    $(".revisi").change(function(){
+      window.location.href = "<?=base_url()?>Usulan/DetailUsulan/<?=$usulan['ID_USULAN']?>/"+$(".revisi").val();
+    });
+
    $("#addRow").click(function(){
      var ht = $("#dataTable").handsontable("getInstance");
      ht.alter('insert_row');

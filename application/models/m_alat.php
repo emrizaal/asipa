@@ -11,8 +11,7 @@ class M_alat extends CI_Model {
 		return $query;
 	}
 
-	function getAlatByIdUsulan($id){
-		$max = $this->getMaxRevisi($id);
+	function getAlatByIdUsulan($id,$max){
 		$query = $this->db->query("SELECT * from alat where ID_USULAN ='$id' AND REVISI='$max[m]'")->result_array();
 		return $query;
 	}
@@ -54,7 +53,7 @@ class M_alat extends CI_Model {
 	}
 
 	function saveUpdateAlat($p){
-		if($p['ref']=""){
+		if($p['ref']==""){
 			$query = $this->db->query("INSERT INTO alat(
 				ID_JURUSAN,
 				ID_USER,
@@ -68,7 +67,6 @@ class M_alat extends CI_Model {
 				JUMLAH_ALAT,
 				HARGA_SATUAN,
 				JUMLAH_DISTRIBUSI,
-				REFERENSI_TERKAIT,
 				REVISI,
 				DATA_AHLI
 				)values(
@@ -84,7 +82,6 @@ class M_alat extends CI_Model {
 				'$p[jumlah_alat]',
 				'$p[harga_satuan]',
 				'$p[jumlah_distribusi]',
-				'$p[ref]',
 				'$p[revisi]',
 				'$p[data_ahli]'
 				)");

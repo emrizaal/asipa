@@ -38,4 +38,10 @@ class M_usulan extends CI_Model {
 		return $this->db->insert_id();
 	}
 
+	//Update last update
+	function updateUsulanById($id){
+		$query = $this->db->query("UPDATE usulan set LAST_UPDATE = NOW() where ID_USULAN='$id'");
+		return $query;
+	}
+
 }
