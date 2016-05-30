@@ -12,10 +12,16 @@ class Usulan extends CI_Controller {
 	}
 
 	public function index(){
+	    $id_jenis = $this->session->userdata('ID_JENIS_USER');
 		$this->load->view('top');
 		$id = 1;//$this->session->userdata("id_jurusan");
 		$data['usulan']=$this->m_usulan->getUsulanByIdJurusan($id);
-		$this->load->view('usulan/usulan_view',$data);
+		if($id_jenis==5){
+			$this->load->view('usulan/usulan_view_ppk',$data);
+		}else{
+			$this->load->view('usulan/usulan_view',$data);
+		}
+
 	}
 
 	public function indexPPK(){

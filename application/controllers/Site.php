@@ -5,7 +5,6 @@ class Site extends CI_Controller {
 
 	public function main(){
 		parent::__construct();
-
 	}
 
 	public function index(){
@@ -15,9 +14,21 @@ class Site extends CI_Controller {
 
 	}
 	public function login(){
-		redirect(base_url().'Dashboard');
-
-
+		$username = $this->input->post('user-name');
+		$password = md5($this->input->post('pass-word'));
+		$cek = $this->m_site->Auth($username,$password);
+		if($cek){
+			$this->session->set_userdata($cek);
+			redirect(base_url().'Dashboard');
+		}else{
+			$this->session->set_flashdata('data', '1');
+			redirect(site_url());
+		}
+			// echo $this->session->userdata('USERNAME');
+	}
+	function logout(){
+		$this->session->sess_destroy();
+		redirect(base_url(),'refresh');
 	}
 	
 }

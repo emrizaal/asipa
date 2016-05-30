@@ -105,7 +105,7 @@ box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
                                                 <a href="#step3-2" role="tab" id="step3-tab" data-toggle="tab" aria-controls="profile">
                                                     <div class="icon fa fa-pencil"></div>
                                                     <div class="step-title">
-                                                        <div class="title">Pengadaan</div>
+                                                        <div class="title">Pencatatan</div>
                                                         <!-- <div class="description">...</div> -->
                                                     </div>
                                                 </a>

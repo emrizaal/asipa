@@ -93,3 +93,6 @@ $this->load->view("info_header");
 </div>
 </div>
 <!-- End Modal Add Pagu -->
+<?php
+$this->load->view('bottom');
+?>
