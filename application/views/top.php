@@ -199,6 +199,11 @@
                                     <span class="icon fa fa-file-o"></span><span class="title">Berita Acara</span>
                                 </a>
                             </li>     
+                             <li class="list <?= ($this->uri->segment(1)=='TimHPS')?'active':''; ?>">
+                                <a href="<?=base_url()?>TimHPS">
+                                    <span class="icon fa fa-file-o"></span><span class="title">Tim HPS</span>
+                                </a>
+                            </li>     
                             <!-- Dropdown-->
                            <!--  <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#component-example">
