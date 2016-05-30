@@ -66,6 +66,13 @@
     padding: 3px 10px;
     margin: 0;
 }
+.flat-blue a {
+    color: #2196F3;
+}
+.card .card-body a#addRow{
+    margin-top: -1%;
+    margin-bottom: 2%;
+}
 </style>
 </head>
 <body class="flat-blue">
@@ -162,8 +169,8 @@
                             </button>
                         </div>
                         <ul class="nav navbar-nav" style="font-size: 20px;">
-                            <li class="list <?= ($this->uri->segment(1)=='')?'active':''; ?>">
-                                <a href="<?=base_url()?>">
+                            <li class="list <?= ($this->uri->segment(1)=='')?'active':'Dashboard'; ?>">
+                                <a href="<?=base_url()?>Dashboard">
                                     <span class="icon fa fa-tachometer"></span><span class="title">Home 
                                     </span>
                                 </a>
