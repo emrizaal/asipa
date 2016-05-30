@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class BeritaAcara extends CI_Controller {
+class SPM extends CI_Controller {
 
 	public function kontrak(){
 		parent::__construct();
@@ -12,7 +12,7 @@ class BeritaAcara extends CI_Controller {
 	public function index(){
 		$this->load->view('top');
 		$data['paket']='';
-		$this->load->view("berita_acara/view",$data);
+		$this->load->view("spm/view",$data);
 		$this->load->view('bottom');
 	}
 

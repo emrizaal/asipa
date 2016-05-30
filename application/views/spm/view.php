@@ -12,7 +12,7 @@ $this->load->view("info_header");
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <span class="title">Mencatat Berita Acara</span>
+                                    <span class="title">Surat Perintah Membayar</span>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -43,7 +43,7 @@ $this->load->view("info_header");
                                          <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modaleditBAST"><i class="fa fa-pencil"></i> Edit </a>
                                          <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalLihatBAST"><i class="fa fa-eye"></i> Lihat </a></td>
                                          <!-- <td><a href="#"><i class="fa fa-search"></i> Detail </a></td> -->
-                                    <td><a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalAddBukti"><i class="fa fa-plus"></i> Tambah </a></td>
+                                    <td><a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalAddBukti"><i class="fa fa-plus"></i> Tambah </a></td>
                                      </tr>
                                  </table>
                              </div>
