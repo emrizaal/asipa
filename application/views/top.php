@@ -186,6 +186,11 @@
                                     <span class="icon fa fa-file-o"></span><span class="title">Usulan</span>
                                 </a>
                             </li>
+                             <li class="list <?= ($this->uri->segment(2)=='indexPPK')?'active':''; ?>">
+                                <a href="<?=base_url()?>Usulan/indexPPK">
+                                    <span class="icon fa fa-file-o"></span><span class="title">Usulan (PPK)</span>
+                                </a>
+                            </li>
                             <li class="list <?= ($this->uri->segment(1)=='Pengelompokan')?'active':''; ?>">
                                 <a href="<?=base_url()?>Pengelompokan">
                                     <span class="icon fa fa-file-o"></span><span class="title">Pengelompokan</span>
@@ -210,7 +215,17 @@
                                 <a href="<?=base_url()?>TimHPS">
                                     <span class="icon fa fa-file-o"></span><span class="title">Tim HPS</span>
                                 </a>
-                            </li>     
+                            </li>   
+                             <li class="list <?= ($this->uri->segment(1)=='TimPenerimaan')?'active':''; ?>">
+                                <a href="<?=base_url()?>TimPenerimaan">
+                                    <span class="icon fa fa-file-o"></span><span class="title">Tim Penerimaan</span>
+                                </a>
+                            </li>    
+                             <li class="list <?= ($this->uri->segment(1)=='TimPenerimaan')?'active':''; ?>">
+                                <a href="<?=base_url()?>TimPenerimaan">
+                                    <span class="icon fa fa-file-o"></span><span class="title">-</span>
+                                </a>
+                            </li>      
                             <!-- Dropdown-->
                            <!--  <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#component-example">

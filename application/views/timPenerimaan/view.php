@@ -12,11 +12,11 @@ $this->load->view("info_header");
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <span class="title">Mencatat Tim HPS</span>
+                                    <span class="title">Mencatat Tim Penerimaan</span>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <a href="#"  data-toggle="modal" data-target="#modalAddTimHPS"  class="btn btn-info"><i class="fa fa-plus"></i> Tambah Tim HPS </a>
+                                <a href="#"  data-toggle="modal" data-target="#modalAddTimPenerimaan"  class="btn btn-info"><i class="fa fa-plus"></i> Tambah Tim Penerimaan </a>
                                 <table class="table table-stripped table-bordered table-hover">
                                     <tr class="active">
                                         <th>No</th>
@@ -26,10 +26,10 @@ $this->load->view("info_header");
                                     </tr>
                                     <tr>
                                        <td>1</td>
-                                       <td><a href="#"  data-toggle="modal" data-target="#modalLihatTimHPS">Tim HPS Komputer dan Elektronika</a></td>
+                                       <td><a href="#"  data-toggle="modal" data-target="#modalLihatTimPenerimaan">Tim Penerimaan Komputer dan Elektronika</a></td>
                                        <td>2014</td>
-                                       <td><a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modalEditTimHPS"><i class="fa fa-pencil"></i> Edit </a>
-                                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modalDelTimHPS"><i class="fa fa-remove"></i> Hapus </a>
+                                       <td><a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modalEditTimPenerimaan"><i class="fa fa-pencil"></i> Edit </a>
+                                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modalDelTimPenerimaan"><i class="fa fa-remove"></i> Hapus </a>
                                     </tr>
                                 </table>
                             </div>
@@ -62,23 +62,23 @@ $this->load->view("info_header");
     
 });
 </script>
-  <!-- Modal Lihat Tim HPS-->
-                <div class="modal fade modal-info" id="modalLihatTimHPS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <!-- Modal Lihat Tim Penerimaan-->
+                <div class="modal fade modal-info" id="modalLihatTimPenerimaan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Lihat Tim HPS</h4>
+                                <h4 class="modal-title" id="myModalLabel">Lihat Tim Penerimaan</h4>
                             </div>
                             <div class="modal-body">
                               <div class="card">
                                <div class="card-body"  style="padding: 0px 20px !important;">
                                     <div class="sub-title">
-                                    <b>Nama Tim HPS </b> : Tim HPS Komputer dan Elektronika</div>
+                                    <b>Nama Tim Penerimaan </b> : Tim Penerimaan Komputer dan Elektronika</div>
                                     <div class="sub-title">
                                     <b>Tahun Anggaran </b> : 2013</div>
                                     <div class="sub-title">
-                                    <b>Nama Tim HPS </b> : </div>
+                                    <b>Nama Tim Penerimaan </b> : </div>
                                     <div style="font-size: 15px;">
                                       <li> Agus </li>
                                       <li> Bembi </li>
@@ -94,14 +94,14 @@ $this->load->view("info_header");
                 </div>
             </div>
         </div>
-        <!-- End Modal Lihat Tim HPS -->
-<!-- Modal Add Tim HPS -->
-<div class="modal fade modal-info" id="modalAddTimHPS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <!-- End Modal Lihat Tim Penerimaan -->
+<!-- Modal Add Tim Penerimaan -->
+<div class="modal fade modal-info" id="modalAddTimPenerimaan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Tambah Tim HPS</h4>
+                <h4 class="modal-title" id="myModalLabel">Tambah Tim Penerimaan</h4>
             </div>
             <div class="modal-body">
               <div class="card">
@@ -113,7 +113,7 @@ $this->load->view("info_header");
                         width: 100%;
                         margin: auto;
                         ">
-                        <div class="sub-title col-md-3">Nama Tim HPS</div>
+                        <div class="sub-title col-md-3">Nama Tim Penerimaan</div>
                         <div class="col-md-9">
                             <input type="text" name="nama" class="form-control">
                         </div>
@@ -176,15 +176,15 @@ $this->load->view("info_header");
 </div>
 </div>
 </div>
-<!-- End Modal Add Tim HPS -->
+<!-- End Modal Add Tim Penerimaan -->
 
-<!-- Modal Edit Tim HPS -->
-<div class="modal fade modal-warning" id="modalEditTimHPS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<!-- Modal Edit Tim Penerimaan -->
+<div class="modal fade modal-warning" id="modalEditTimPenerimaan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit Tim HPS</h4>
+                <h4 class="modal-title" id="myModalLabel">Edit Tim Penerimaan</h4>
             </div>
             <div class="modal-body">
               <div class="card">
@@ -196,7 +196,7 @@ $this->load->view("info_header");
                         width: 100%;
                         margin: auto;
                         ">
-                        <div class="sub-title col-md-3">Nama Tim HPS</div>
+                        <div class="sub-title col-md-3">Nama Tim Penerimaan</div>
                         <div class="col-md-9">
                             <input type="text" name="nama" class="form-control">
                         </div>
@@ -259,14 +259,14 @@ $this->load->view("info_header");
 </div>
 </div>
 </div>
-<!-- End Modal Edit Tim HPS -->
+<!-- End Modal Edit Tim Penerimaan -->
  <!-- modal del Kontrak -->
-        <div class="modal fade modal-danger" id="modalDelTimHPS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal fade modal-danger" id="modalDelTimPenerimaan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-exclamation-triangle"></i> Hapus Data Tim HPS</h4>
+                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-exclamation-triangle"></i> Hapus Data Tim Penerimaan</h4>
                     </div>
                     <div class="modal-body">
                         <form enctype="multipart/form-data" action="<?=base_url()?>Kontrak/deleteKontrak" method="POST">
