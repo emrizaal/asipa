@@ -12,6 +12,13 @@ class M_usulan extends CI_Model {
 		return $query;
 	}
 
+	//Mengambil data usulan berdasarkan Id Usulan
+	function getUsulanByIdUsulan($id){
+		$query = $this->db->query("SELECT * from usulan,pagu where ID_USULAN = '$id' AND usulan.TAHUN_ANGGARAN = pagu.TAHUN_ANGGARAN")->row_array();
+		return $query;
+	}
+
+	//Menyimpan data usulan
 	function saveUsulan($p){
 		$query = $this->db->query("INSERT into usulan(
 			ID_USER,

@@ -18,26 +18,30 @@ $this->load->view("info_header");
                             <div class="card-body">
                                 <a href="<?=base_url()?>Usulan/addUsulan" class="btn btn-info"> <i class="fa fa-plus-square"></i>&nbsp; Tambah Usulan</a>
                                 <table class="table table-stripped table-bordered table-hover">
-                                <tr class="active">
-                                    <th>No. Dokumen</th>
-                                    <th>Tahun</th>
-                                    <th>Nama Paket</th>
-                                    <th>Total Anggaran</th>
-                                    <th>Tanggal Dibuat</th>
-                                    <th>Last Update</th>
-                                    <th>Aksi</th>
+                                    <tr class="active">
+                                        <th>No. Dokumen</th>
+                                        <th>Tahun</th>
+                                        <th>Nama Paket</th>
+                                        <th>Total Anggaran</th>
+                                        <th>Tanggal Dibuat</th>
+                                        <th>Last Update</th>
+                                        <th>Aksi</th>
                                     </tr>
                                     <?php 
                                     foreach($usulan as $p){
                                         ?>
                                         <tr>
-                                        <td>Usulan-<?=$p['ID_USULAN']?>/<?=$p['INISIAL']?>/<?=$p['TAHUN_ANGGARAN']?></td>
-                                        <td><?=$p['TAHUN_ANGGARAN']?></td>
-                                        <td><?=$p['NAMA_PAKET']?></td>
-                                        <td><?=$p['TOTAL_ANGGARAN']?></td>
-                                        <td><?=$p['TANGGAL_DIBUAT']?></td>
-                                        <td><?=$p['LAST_UPDATE']?></td>
-                                        <td>Export | Revisi</td>
+                                            <td>Usulan-<?=$p['ID_USULAN']?>/<?=$p['INISIAL']?>/<?=$p['TAHUN_ANGGARAN']?></td>
+                                            <td><?=$p['TAHUN_ANGGARAN']?></td>
+                                            <td>
+                                                <a href="<?=base_url()?>Usulan/DetailUsulan/<?=$p['ID_USULAN']?>">
+                                                    <?=$p['NAMA_PAKET']?>
+                                                </a>
+                                            </td>
+                                            <td><?=$p['TOTAL_ANGGARAN']?></td>
+                                            <td><?=$p['TANGGAL_DIBUAT']?></td>
+                                            <td><?=$p['LAST_UPDATE']?></td>
+                                            <td>Export | Revisi</td>
                                         </tr>
                                         <?php 
                                     }

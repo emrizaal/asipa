@@ -15,9 +15,15 @@ class Lelang extends CI_Controller {
 		$this->load->view('bottom');
 	}
 
-	//Menampilkan form edit lelang
+	//Menampilkan form add lelang
 	//[PopUp]
-	public function editLelang(){
+	public function addLelang($id){
+
+	}
+
+	//Menampilkan form show Lelang
+	//[PopUp]
+	public function showLelang($id){
 
 	}
 

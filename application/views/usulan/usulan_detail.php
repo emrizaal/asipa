@@ -27,13 +27,13 @@
               <div class="control-group ">
                 <label class="control-label " >Nama Paket</label>
                 <div class="controls">
-                  <input type="text" name="NM_PAKET" id="NM_PAKET"  value="" class="form-control">
+                  <input type="text" name="NM_PAKET" id="NM_PAKET"  value="<?=$usulan['NAMA_PAKET']?>" class="form-control">
                 </div>
               </div>
               <div class="control-group ">
                 <label class="control-label " >Sisa Pagu</label>
                 <div class="controls">
-                  <span class="pagu_alat"><?=$pagu['PAGU_ALAT']?></span>
+                  <span class="pagu_alat"><?=$usulan['PAGU_ALAT']?></span>
                 </div>
               </div>
             </div>
@@ -139,78 +139,52 @@
     myFormData.append('data_ahli','');
     myFormData.append('nama',$("#NM_PAKET").val());
     myFormData.append('total',$("#totalAnggaranKeuntunganPajak").val());
-
-    $.when(
-      $.ajax({
-        url: '<?=base_url()?>Usulan/saveUsulan',
-        type: "POST",
-        data:myFormData,
-        contentType: false,
-        processData: false,
-        success : function(aw){
-          console.log("adasd");
-          console.log(aw);
-
-          myFormData.set('id_usulan',aw);
-          for(var i=1;i<rowUsulan.length;i++){
-            console.log(rowUsulan[i][10]);
-            if(rowUsulan[i][0]!=""){
-              myFormData.set('file',$("input:file:eq("+(i-1)+")").prop("files")[0]);
-              myFormData.set('nama_alat',rowUsulan[i][0]);
-              myFormData.set('spesifikasi',rowUsulan[i][1]);
-              myFormData.set('setara',rowUsulan[i][2]);
-              myFormData.set('satuan',rowUsulan[i][3]);
-              myFormData.set('jumlah_alat',rowUsulan[i][4]);
-              myFormData.set('harga_satuan',rowUsulan[i][5]);
-              myFormData.set('lokasi',rowUsulan[i][7]);
-              myFormData.set('jumlah_distribusi',rowUsulan[i][8]);
-              myFormData.set('data_ahli',rowUsulan[i][10]);
-              $.ajax({
-                url: '<?=base_url()?>Usulan/saveAlat',
-                type: "POST",
-                data:myFormData,
-                contentType: false,
-                processData: false,
-                success : function(res){
-                  console.log("Save Alat Done");
-                  console.log(res);
-                },
-                error: function (msg) {
-                  console.log("gagal"+msg);
-                  return false;
-                }
-
-              })
-            }
-          }
-        },
-        error: function (msg) {
-          console.log("gagal");
-          return false;
+    myFormData.append('revisi',<?=$max['m']+1?>);
+    myFormData.set('id_usulan',<?=$usulan['ID_USULAN']?>);
+    for(var i=1;i<rowUsulan.length;i++){
+      console.log(rowUsulan[i][10]);
+      if(rowUsulan[i][0]!=""){
+        myFormData.set('file',$("input:file:eq("+(i-1)+")").prop("files")[0]);
+        myFormData.set('nama_alat',rowUsulan[i][0]);
+        myFormData.set('spesifikasi',rowUsulan[i][1]);
+        myFormData.set('setara',rowUsulan[i][2]);
+        myFormData.set('satuan',rowUsulan[i][3]);
+        myFormData.set('jumlah_alat',rowUsulan[i][4]);
+        myFormData.set('harga_satuan',rowUsulan[i][5]);
+        myFormData.set('lokasi',rowUsulan[i][7]);
+        myFormData.set('jumlah_distribusi',rowUsulan[i][8]);
+        var ahli = 0;
+        if(rowUsulan[i][10]==true){
+          var ahli = 1;  
         }
-      })
-).then(function(){
-  //window.location.href = "<?=base_url()?>Usulan";
-});
-}); 
+        
+        myFormData.set('data_ahli',rowUsulan[i][10]);
+        $.ajax({
+          url: '<?=base_url()?>Usulan/updateAlat',
+          type: "POST",
+          data:myFormData,
+          contentType: false,
+          processData: false,
+          success : function(res){
+            console.log("Save Alat Done");
+            console.log(res);
+          },
+          error: function (msg) {
+            console.log("gagal"+msg);
+            return false;
+          }
+
+        })
+      }
+    }
+  }); 
 }); 
 
 
 </script>
 <script data-jsfiddle="excel1">
-
   var
-  data1 = [
-  ['NAMA ALAT', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI'],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false],
-  ['', '', '', '', '', '', '','','','',]
-  ],
+  data1 = <?=$alat?>,
   container1 = document.getElementById('dataTable'),
   hot1;
 
@@ -254,7 +228,8 @@
     {row: 0, col: 7, rowspan: 1, colspan: 1},
     {row: 0, col: 8, rowspan: 1, colspan: 1},
     {row: 0, col: 9, rowspan: 1, colspan: 1},
-    {row: 0, col: 10, rowspan: 1, colspan: 1}
+    {row: 0, col: 10, rowspan: 1, colspan: 1},
+    {row: 0, col: 11, rowspan: 1, colspan: 1}
     ],
     cell: [
     {row: 0, col: 0, className: "htCenter htMiddle"},
@@ -267,7 +242,8 @@
     {row: 0, col: 7, className: "htCenter htMiddle"},
     {row: 0, col: 8, className: "htCenter htMiddle"},
     {row: 0, col: 9, className: "htCenter htMiddle"},
-    {row: 0, col: 10, className: "htCenter htMiddle"}
+    {row: 0, col: 10, className: "htCenter htMiddle"},
+    {row: 0, col: 11, className: "htCenter htMiddle"}
     ],
     columns: [
     {
@@ -318,12 +294,16 @@
       renderer:"html"
     },
     {
-      width:100,
+      width:200,
       renderer:"html"
     },
     {
       type:'checkbox',
       width:100
+    },
+    {
+      width:200,
+      renderer:"html"
     }
 
     ],
@@ -388,7 +368,7 @@
             var jumlahKeuntunganPajak = Number(jumlahKeuntungan) + Number(pajak);
             $("#totalAnggaranKeuntunganPajak").val(jumlahKeuntunganPajak);
             
-            var pagu = <?=$pagu['PAGU_ALAT']?>;
+            var pagu = <?=$usulan['PAGU_ALAT']?>;
             $(".pagu_alat").text(Number(pagu)-jumlahKeuntunganPajak);
 
           }                            

@@ -7,8 +7,8 @@ class M_lokasi extends CI_Model {
 	}
 
 	//Mengambil data nama lokasi berdasarkan id jurusan
-	function getNamaLokasiByIdJurusan($id){
-		$query = $this->db->query("SELECT NAMA_LOKASI from lokasi where ID_JURUSAN='$id'")->result_array();
+	function getLokasiByIdJurusan($id){
+		$query = $this->db->query("SELECT * from lokasi where ID_JURUSAN='$id'")->result_array();
 		return $query;
 	}
 

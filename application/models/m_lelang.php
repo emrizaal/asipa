@@ -6,11 +6,18 @@ class M_lelang extends CI_Model {
 		parent::__construct();
 	}
 
+	//Mengambil semua paket yang telah terferifikasi oleh PPK
 	function getAllLelang(){
 		$query = $this->db->query("SELECT * from paket where STATUS in (8,9,-9)")->result_array();
 		return $query;
 	}
 
+	//Mengambil data paket lelang berdasarkan id paket
+	function getPaketLelangById($id){
+
+	}
+
+	//Mengupdate data paket apabila status lelangnya sukses
 	function updateLelangSukses($p){
 		$query = $this->db->query("UPDATE paket set 
 			STATUS='9',
@@ -25,6 +32,7 @@ class M_lelang extends CI_Model {
 		return $query;
 	}
 
+	//Mengupdate data paket apabila status lelangnya gagal
 	function updateLelangGagal($p){
 		$query = $this->db->query("UPDATE paket set 
 			STATUS='-9',
@@ -39,6 +47,7 @@ class M_lelang extends CI_Model {
 		return $query;
 	}
 
+	//Mengupdate data paket kembali ke normal
 	function updateLelangNormal($p){
 		$query = $this->db->query("UPDATE paket set 
 			STATUS='8',
