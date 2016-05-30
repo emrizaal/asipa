@@ -19,7 +19,10 @@
 <!-- Javascript -->
 <script type="text/javascript" src="<?=base_url()?>assets/js/app.js"></script>
 <script>
-    $(document).ready(function(){     
+    $(document).ready(function(){  
+    $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})   
       $('.datepicker').datepicker({       
         format:'dd M yyyy' , 
         autoclose: true,
