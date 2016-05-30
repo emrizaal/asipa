@@ -39,8 +39,12 @@ class M_usulan extends CI_Model {
 	}
 
 	//Update last update
-	function updateUsulanById($id){
-		$query = $this->db->query("UPDATE usulan set LAST_UPDATE = NOW() where ID_USULAN='$id'");
+	function updateUsulanById($p){
+		$query = $this->db->query("UPDATE usulan set 
+			LAST_UPDATE = NOW(),
+			NAMA_PAKET='$p[nama]',
+			TOTAL_ANGGARAN='$p[total]'
+			where ID_USULAN='$p[id_usulan]'");
 		return $query;
 	}
 

@@ -16,7 +16,6 @@ class Usulan extends CI_Controller {
 		$id = 1;//$this->session->userdata("id_jurusan");
 		$data['usulan']=$this->m_usulan->getUsulanByIdJurusan($id);
 		$this->load->view('usulan/usulan_view',$data);
-		$this->load->view('bottom');
 	}
 
 	//Menampilkan form add usulan
@@ -81,6 +80,7 @@ class Usulan extends CI_Controller {
 		$this->m_alat->saveAlat($p);
 	}
 
+	//Menampilkan detail usulan
 	public function detailUsulan($p,$curr=0){
 		$id = 1;//$this->session->userdata("id_jurusan");
 		$max=$this->m_alat->getMaxRevisi($p);
@@ -128,6 +128,7 @@ class Usulan extends CI_Controller {
 		$this->load->view("usulan/usulan_detail",$data);
 	}
 
+	//Mengupdate data alat
 	public function updateAlat(){
 		//$data="[[\"NAMA BARANG\",\"SPESIFIKASI\",\"SETARA\",\"SATUAN\",\"JUMLAH ALAT\",\"HARGA SATUAN\",\"TOTAL (Rp)\",\"LOKASI\",\"JUMLAH DISTRIBUSI\",\"REFERENSI TERKAIT\",\"DATA AHLI\"],[\"barang\",\"spek\",\"setara\",\"Set\",18,50000,900000,\"RSG\",10,\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]";
 		$config['upload_path']   =   "assets/referensi";
@@ -156,8 +157,14 @@ class Usulan extends CI_Controller {
 		}else{
 			$p['data_ahli']=0;
 		}
-		$this->m_usulan->updateUsulanById($p['id_usulan']);
+		$this->m_usulan->updateUsulanById($p);
 		$this->m_alat->saveUpdateAlat($p);
+	}
+
+	//Mengambil data revisi berdasarkan Id Usulan
+	public function revisi($id){
+		$data['revisi'] = $this->m_alat->getAllRevisiByIdUsulan($id);
+		$this->load->view("usulan/revisi_view",$data);
 	}
 
 }

@@ -6,6 +6,11 @@ class M_alat extends CI_Model {
 		parent::__construct();
 	}
 
+	function getAllRevisiByIdUsulan($id){
+		$query = $this->db->query("SELECT *,(SELECT NAMA from user where user.ID_USER=alat.ID_USER) as NAMA from alat where alat.ID_USULAN = '$id' group by REVISI order by REVISI ASC")->result_array();
+		return $query;
+	}
+
 	function getMaxRevisi($id){
 		$query = $this->db->query("SELECT MAX(REVISI) as m from alat where ID_USULAN='$id'")->row_array();
 		return $query;
