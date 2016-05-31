@@ -12,12 +12,16 @@ class Usulan extends CI_Controller {
 	}
 
 	public function index(){
-	    $id_jenis = $this->session->userdata('ID_JENIS_USER');
+		$id_jenis = $this->session->userdata('ID_JENIS_USER');
 		$this->load->view('top');
 		$id = $this->session->userdata("ID_JURUSAN");
 		$data['usulan']=$this->m_usulan->getUsulanByIdJurusan($id);
-		if($id_jenis==5){
-			$this->load->view('usulan/usulan_view_ppk',$data);
+		if($id_jenis==5 || $id_jenis==4){
+			$data['anggaran_usulan']=$this->m_usulan->getUsulanAnggaranByIdJurusan($id);
+			$this->load->view('usulan/usulan_view_pd',$data);
+		}else if($id_jenis==6){
+			$data['anggaran_usulan']=$this->m_usulan->getUsulanAnggaranByIdJurusan($id);
+			$this->load->view('usulan/usulan_view_tim_hps',$data);
 		}else{
 			$this->load->view('usulan/usulan_view',$data);
 		}
@@ -96,6 +100,8 @@ class Usulan extends CI_Controller {
 
 	//Menampilkan detail usulan
 	public function detailUsulan($p,$curr=-1){
+		$id_jenis = $this->session->userdata('ID_JENIS_USER');
+
 		$id = $this->session->userdata("ID_JURUSAN");
 		$max=$this->m_alat->getMaxRevisi($p);
 		if($curr==-1){
@@ -137,9 +143,18 @@ class Usulan extends CI_Controller {
 			$res[]=array('', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'','');
 		}
 		//print_r($res);
+
 		$data['alat']=json_encode($res);
-		$this->load->view('top');
-		$this->load->view("usulan/usulan_detail",$data);
+		if($id_jenis==6){
+			$data['detailAlat'] = $alat;	
+			$data['detailUsulan'] = $usulan;	
+			$this->load->view('top');
+			$this->load->view("usulan/usulan_detail_tim_hps",$data);
+			$this->load->view('bottom');
+		}else{
+			$this->load->view('top');
+			$this->load->view("usulan/usulan_detail",$data);
+		}
 	}
 
 	public function detailUsulanPPK($p){

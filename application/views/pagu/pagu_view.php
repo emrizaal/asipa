@@ -22,15 +22,24 @@ $this->load->view("info_header");
 
                           <table class="table table-stripped table-bordered table-hover">
                               <tr class="active">
+                                <th>Jurusan</th>
                                 <th>Tahun Anggaran</th>
                                 <th>Pagu Alat</th>
                                 <th>Aksi</th>
                             </tr>
-                            <?php 
-                            foreach($pagu as $p){
+                            <tr>
+                                <td> Teknik Kimia </td>
+                                <td> 2016 </td>
+                                <td> <?= number_format(9000000,0,',','.')?> </td>
+                                <td>  <a class="btn btn-warning" onclick="editPagu(1,1)"
+                                    data-toggle="modal" data-target="#modalEditPagu"><i class="fa fa-pencil"></i> Edit</a>
+                                    <!-- <a class="btn btn-warning" disabled><i class="fa fa-pencil"></i> Edit</a> </td> -->
+                                </tr>
+                                <?php 
+                            // foreach($pagu as $p){
 
                                 ?>
-                                <tr>
+                              <!--   <tr>
                                     <td><?=$p['TAHUN_ANGGARAN']?></td>
                                     <td>Rp. <?= number_format($p['PAGU_ALAT'],0,',','.')?></td>
                                     <td>
@@ -41,65 +50,77 @@ $this->load->view("info_header");
                                             <a class="btn btn-warning" disabled><i class="fa fa-pencil"></i> Edit</a>
                                             <? } ?>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                     <?php 
-                                }
-                                ?>
-                            </table>
+                                // }
+                                    ?>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Main Content -->
+                <!-- Modal Add Pagu -->
+                <div class="modal fade modal-info" id="modalAddPagu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Tambah Data Pagu (Tahun Anggaran <?= date('Y')?>)</h4>
+                            </div>
+                            <div class="modal-body">
+                              <div class="card">
+                               <div class="card-body"  style="padding: 0px 20px !important;">
+                                <form action="<?=base_url()?>Pagu/savePagu" method="POST">
+
+                                    <div class="sub-title">Pagu Alat Jurusan <b style="float: right;"> TOTAL PAGU : <span id="totPagujur">0</span></b></div>
+                                    <?$totJur = 0;
+                                    foreach ($jurusan as $j) {
+                                        if($j->ID_JURUSAN!=0){?>
+                                        <div class="sub-title"><b><?= $j->NAMA_JURUSAN ?></b>
+                                            <input type="text" name="<?= $j->ID_JURUSAN ?>" class="form-control formattedNumberField dataJur<?= $j->ID_JURUSAN?>" placeholder="Masukan Nominal Pagu <?= $j->NAMA_JURUSAN ?>">
+                                        </div>
+
+                                        <? $totJur++; }} ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Simpan</button>
+                            </form>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- End Main Content -->
-            <!-- Modal Add Pagu -->
-            <div class="modal fade modal-info" id="modalAddPagu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <!-- End Modal Add Pagu -->
+            <!-- Modal Edit Pagu -->
+            <div class="modal fade modal-warning" id="modalEditPagu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Tambah Data Pagu (Tahun Anggaran <?= date('Y')?>)</h4>
+                            <h4 class="modal-title" id="myModalLabel">Edit Data Pagu (Tahun Anggaran <?= date('Y')?>)</h4>
                         </div>
                         <div class="modal-body">
                           <div class="card">
-                             <div class="card-body"  style="padding: 0px 20px !important;">
-                                <form action="<?=base_url()?>Pagu/savePagu" method="POST">
-                                    <div class="sub-title">Pagu Alat Jurusan</div>
-                                    <div>
-                                        <input type="text" name="pagu" class="form-control" placeholder="Masukan Nominal Pagu" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                        </form>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Modal Add Pagu -->
-        <!-- Modal Edit Pagu -->
-        <div class="modal fade modal-warning" id="modalEditPagu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Edit Data Pagu (Tahun Anggaran <?= date('Y')?>)</h4>
-                    </div>
-                    <div class="modal-body">
-                      <div class="card">
-                         <div class="card-body"  style="padding: 0px 20px !important;">
+                           <div class="card-body"  style="padding: 0px 20px !important;">
                             <form action="<?=base_url()?>Pagu/updatePagu" method="POST">
-                                <div class="sub-title">Pagu Alat Jurusan</div>
-                                <div>
-                                   <input type="hidden" name="id" id="frmIdNamaPagu">
-                                   <input type="text" name="pagu" id="frmEditNamaPagu" class="form-control" placeholder="Masukan Nominal Pagu" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="modal-footer">
+                                <div class="sub-title">Pagu Alat Jurusan <b style="float: right;"> TOTAL PAGU : <span id="totPagujurE">0</span></b></div>
+                                    <?$totJur = 0;
+                                    foreach ($jurusan as $j) {
+                                        if($j->ID_JURUSAN!=0){?>
+                                        <div class="sub-title"><b><?= $j->NAMA_JURUSAN ?></b>
+                                            <input type="text" name="<?= $j->ID_JURUSAN ?>" class="form-control formattedNumberFieldE dataJurE<?= $j->ID_JURUSAN?>" placeholder="Masukan Nominal Pagu <?= $j->NAMA_JURUSAN ?>">
+                                        </div>
+
+                                        <? $totJur++; }} ?>
+
+                         </div>
+                     </div>
+                 </div>
+                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
@@ -111,11 +132,60 @@ $this->load->view("info_header");
 </div>
 </div>
 </div>
+<script type="text/javascript" src="<?=base_url()?>assets/lib/js/jquery.min.js"></script>
 <script type="text/javascript">
     function editPagu (a,b) {
       document.getElementById('frmEditNamaPagu').value=a;
       document.getElementById('frmIdNamaPagu').value=b;
   }
-  
+//   function myParse(num) {
+//       var n2 = num.split(".")
+//       out = 0
+//       for(var i = 0; i < n2.length; i++) {
+//         out *= 1000;
+//         out += parseFloat(n2[i])
+//     }
+//     return out;
+// }
+$(".formattedNumberField").on('keyup',function(event) {
+// var n = parseInt($(this).val().replace(/\D/g,''),10);
+// $(this).val(n.toLocaleString());
+if(event.which < 46
+    || event.which > 59) {
+    event.preventDefault();
+    } // prevent if not number/dot
+    var jml = <?=$totJur?> ;
+    var tot = 0;
+// tot = 2;
+for(var i=1;i<=jml;i++){
+    if($('.dataJur'+i).val()!=''){
+        tot += parseInt($('.dataJur'+i).val());
+    }
+}
+ var n = parseInt(tot.toString().replace(/\D/g,''),10);
+   $('#totPagujur').text(n.toLocaleString());
+// $('#totPagujur').text(tot);
+});
+
+$(".formattedNumberFieldE").on('keyup',function(event) {
+// var n = parseInt($(this).val().replace(/\D/g,''),10);
+// $(this).val(n.toLocaleString());
+if(event.which < 46
+    || event.which > 59) {
+    event.preventDefault();
+    } // prevent if not number/dot
+    var jml = <?=$totJur?> ;
+    var tot = 0;
+// tot = 2;
+for(var i=1;i<=jml;i++){
+    if($('.dataJurE'+i).val()!=''){
+        tot += parseInt($('.dataJurE'+i).val());
+    }
+}
+var n = parseInt(tot.toString().replace(/\D/g,''),10);
+   $('#totPagujurE').text(n.toLocaleString());
+// $('#totPagujurE').text(tot);
+});
+
 </script>
 

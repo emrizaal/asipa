@@ -142,7 +142,11 @@
                             font-size: 15px;
                             "><span >
                             <?= $this->m_data->getDataFromTblWhere('jenis_user', 'ID_JENIS_USER', $id_jenis)->row()->NAMA_JENIS_USER ?>
-                            <br> <b>( <?= $this->m_data->getDataFromTblWhere('jurusan', 'ID_JURUSAN', $id_jurusan)->row()->NAMA_JURUSAN ?> )</b> </span> 
+                            <br> 
+                            <? $nama_jur = $this->m_data->getDataFromTblWhere('jurusan', 'ID_JURUSAN', $id_jurusan)->row()->NAMA_JURUSAN;
+                            if($nama_jur!=''){?>
+                            <b>( <?= $nama_jur ?> )</b> </span> 
+                            <?}?>
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu animated fadeInDown" style="margin-top:10px">
                                 <!-- <li class="profile-img" style="width: 100px;margin: auto;">
@@ -177,13 +181,13 @@
                             </button>
                         </div>
                         <ul class="nav navbar-nav" style="font-size: 20px;">
-                            <li class="list <?= ($this->uri->segment(1)=='')?'active':'Dashboard'; ?>">
+                            <li class="list <?= ($this->uri->segment(1)=='Dashboard')?'active':''; ?>">
                                 <a href="<?=base_url()?>Dashboard">
-                                    <span class="icon fa fa-tachometer"></span><span class="title">Home 
+                                    <span class="icon fa fa-tachometer"></span><span class="title">Dashboard 
                                 </span>
                             </a>
                         </li>
-                        <? if($id_jenis==3){ ?>
+                        <? if($id_jenis==4){ ?>
                         <li class="list <?= ($this->uri->segment(1)=='Pagu')?'active':''; ?>">
                             <a href="<?=base_url()?>Pagu">
                                 <span class="icon fa fa-money"></span><span class="title">Pagu</span>

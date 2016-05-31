@@ -18,6 +18,13 @@ class M_usulan extends CI_Model {
 		return $query;
 	}
 
+	//Mengambil data anggaran usulan berdasarkan Id jurusan
+	function getUsulanAnggaranByIdJurusan($id){
+		$th = date('Y');
+		$query = $this->db->query("SELECT * from usulan,pagu,jurusan where usulan.ID_JURUSAN = '$id'  AND jurusan.ID_JURUSAN = usulan.ID_JURUSAN AND pagu.ID_JURUSAN = '$id' AND pagu.TAHUN_ANGGARAN = '$th'")->result_array();
+		return $query;
+	}
+
 	//Menyimpan data usulan
 	function saveUsulan($p){
 		$query = $this->db->query("INSERT into usulan(

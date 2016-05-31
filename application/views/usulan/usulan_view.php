@@ -39,7 +39,7 @@ $this->load->view("info_header");
                                                     <?=$p['NAMA_PAKET']?>
                                                 </a>
                                             </td>
-                                            <td><?=$p['TOTAL_ANGGARAN']?></td>
+                                            <td><?=number_format($p['TOTAL_ANGGARAN'],'0',',','.')?></td>
                                             <td><?=$p['TANGGAL_DIBUAT']?></td>
                                             <td><?=$p['LAST_UPDATE']?></td>
                                             <td><a href="#" download class="btn btn-success"><i class="fa fa-download"></i> </a> | <a href="#" download class="btn btn-primary" onclick="getRevisi(<?=$p['ID_USULAN']?>,'<?=$noDok?>')" data-toggle="modal" data-target="#modalLihatRevisi"><i class="fa fa-files-o"></i> Revisi </a></td>

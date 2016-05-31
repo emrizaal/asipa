@@ -13,6 +13,7 @@ class Pagu extends CI_Controller {
 		$this->load->view('top');
 		$id = $this->session->userdata("ID_JURUSAN");
 		$data['pagu']=$this->m_pagu->getPaguByIdJurusan($id);
+		$data['jurusan']=$this->m_data->getAllDataTbl('jurusan')->result();
 		$this->load->view('pagu/pagu_view',$data);
 		$this->load->view('bottom');
 	}
