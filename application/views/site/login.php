@@ -50,10 +50,10 @@ redirect(site_url().'Dashboard');
                        <?php } ?>
                         <form method="POST" action="<?=site_url()?>Site/login">
                             <div class="control">
-                                <input type="text" class="form-control" placeholder="Username" name="user-name" />
+                                <input type="text" class="form-control" placeholder="Username" name="user-name" style="padding: 10px;"/>
                             </div>
                             <div class="control">
-                                <input type="password" class="form-control" placeholder="Password" name="pass-word"  />
+                                <input type="password" class="form-control" placeholder="Password" name="pass-word"  style="padding: 10px;" />
                             </div>
                             <div class="login-button text-center">
                                 <input type="submit" class="btn btn-primary" value="Login">
