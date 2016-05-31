@@ -37,7 +37,8 @@ class M_alat extends CI_Model {
 			HARGA_SATUAN,
 			JUMLAH_DISTRIBUSI,
 			REFERENSI_TERKAIT,
-			DATA_AHLI
+			DATA_AHLI,
+			PRIORITY
 			)values(
 			'$p[id_jurusan]',
 			'$p[id_user]',
@@ -52,7 +53,8 @@ class M_alat extends CI_Model {
 			'$p[harga_satuan]',
 			'$p[jumlah_distribusi]',
 			'$p[ref]',
-			'$p[data_ahli]'
+			'$p[data_ahli]',
+			'$p[prioritas]'
 			)");
 		return $query;
 	}
@@ -73,7 +75,8 @@ class M_alat extends CI_Model {
 				HARGA_SATUAN,
 				JUMLAH_DISTRIBUSI,
 				REVISI,
-				DATA_AHLI
+				DATA_AHLI,
+				PRIORITY
 				)values(
 				'$p[id_jurusan]',
 				'$p[id_user]',
@@ -88,7 +91,8 @@ class M_alat extends CI_Model {
 				'$p[harga_satuan]',
 				'$p[jumlah_distribusi]',
 				'$p[revisi]',
-				'$p[data_ahli]'
+				'$p[data_ahli]',
+				'$p[prioritas]'
 				)");
 		}else{
 			$query = $this->db->query("INSERT INTO alat(

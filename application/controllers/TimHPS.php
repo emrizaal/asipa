@@ -5,12 +5,12 @@ class TimHPS extends CI_Controller {
 
 	public function kontrak(){
 		parent::__construct();
-		$this->load->model("m_kontrak");
-		$this->load->model("m_pengelompokan");
+		$this->load->model("m_timHps");
 	}
 
 	public function index(){
 		$this->load->view('top');
+		//$data['tim']=$this->m_timHps->getAllTimHps()
 		$data['paket']='';
 		$this->load->view("timHPS/view",$data);
 		$this->load->view('bottom');

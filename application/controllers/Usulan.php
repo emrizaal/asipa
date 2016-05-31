@@ -14,7 +14,7 @@ class Usulan extends CI_Controller {
 	public function index(){
 	    $id_jenis = $this->session->userdata('ID_JENIS_USER');
 		$this->load->view('top');
-		$id = 1;//$this->session->userdata("id_jurusan");
+		$id = $this->session->userdata("ID_JURUSAN");
 		$data['usulan']=$this->m_usulan->getUsulanByIdJurusan($id);
 		if($id_jenis==5){
 			$this->load->view('usulan/usulan_view_ppk',$data);
@@ -26,7 +26,7 @@ class Usulan extends CI_Controller {
 
 	public function indexPPK(){
 		$this->load->view('top');
-		$id = 1;//$this->session->userdata("id_jurusan");
+		$id = $this->session->userdata("ID_JURUSAN");
 		$data['usulan']=$this->m_usulan->getUsulanByIdJurusan($id);
 		$this->load->view('usulan/usulan_view_ppk',$data);
 		$this->load->view('bottom');
@@ -34,7 +34,7 @@ class Usulan extends CI_Controller {
 
 	//Menampilkan form add usulan
 	public function addUsulan(){
-		$id = 1;//$this->session->userdata("id_jurusan");
+		$id = $this->session->userdata("ID_JURUSAN");
 		$tahun = date("Y");
 		$data['pagu']=$this->m_pagu->getCurrentPaguByIdJurusan($id,$tahun);
 		$resLokasi=$this->m_lokasi->getLokasiByIdJurusan($id);
@@ -77,8 +77,8 @@ class Usulan extends CI_Controller {
 			$finfo=$this->upload->data();
 		}
 		$p=$this->input->post();
-		$p['id_jurusan']=1;
-		$p['id_user']=1;
+		$p['id_jurusan']=$this->session->userdata("ID_JURUSAN");
+		$p['id_user']=$this->session->userdata("ID_USER");
 		$p['ref']=$finfo['file_name'];
 		$lokasi = $this->m_lokasi->getIdLokasiByName($p['id_jurusan'],$p['lokasi']);
 		if(empty($lokasi)){
@@ -95,10 +95,10 @@ class Usulan extends CI_Controller {
 	}
 
 	//Menampilkan detail usulan
-	public function detailUsulan($p,$curr=0){
-		$id = 1;//$this->session->userdata("id_jurusan");
+	public function detailUsulan($p,$curr=-1){
+		$id = $this->session->userdata("ID_JURUSAN");
 		$max=$this->m_alat->getMaxRevisi($p);
-		if($curr==0){
+		if($curr==-1){
 			$rev=$max['m'];
 		}else{
 			$rev=$curr;
@@ -113,13 +113,13 @@ class Usulan extends CI_Controller {
 		$data['lokasi']=json_encode(array_values($lokasi));
 		$data['usulan']=$usulan;
 		$data['max']=$max;
-		if($curr==0){
+		if($curr==-1){
 			$data['curr']=$max['m'];
 		}else{
 			$data['curr']=$curr;
 		}
-		
-		$res[0] = array('NAMA ALAT', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI','KONFIRMASI');
+
+		$res[0] = array('NAMA ALAT', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI','PRIORITAS','KONFIRMASI');
 		foreach($alat as $a){
 			if($a['DATA_AHLI']==1){
 				$ahli = true;
@@ -131,10 +131,10 @@ class Usulan extends CI_Controller {
 			}else{
 				$link = "";
 			}
-			$res[]=array($a['NAMA_ALAT'], $a['SPESIFIKASI'], $a['SETARA'], $a['SATUAN'], $a['JUMLAH_ALAT'], $a['HARGA_SATUAN'], $a['JUMLAH_ALAT']*$a['HARGA_SATUAN'], $lokasi[$a['ID_LOKASI']],$a['JUMLAH_DISTRIBUSI'],$link." <input name='file[]' type='file'>",$ahli,'');		
+			$res[]=array($a['NAMA_ALAT'], $a['SPESIFIKASI'], $a['SETARA'], $a['SATUAN'], $a['JUMLAH_ALAT'], $a['HARGA_SATUAN'], $a['JUMLAH_ALAT']*$a['HARGA_SATUAN'], $lokasi[$a['ID_LOKASI']],$a['JUMLAH_DISTRIBUSI'],$link." <input name='file[]' type='file'>",$ahli,$a['PRIORITY'],'');		
 		}
 		for($i=0;$i<9;$i++){
-			$res[]=array('', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'');
+			$res[]=array('', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'','');
 		}
 		//print_r($res);
 		$data['alat']=json_encode($res);
@@ -190,8 +190,8 @@ class Usulan extends CI_Controller {
 			$finfo=$this->upload->data();
 		}
 		$p=$this->input->post();
-		$p['id_jurusan']=1;
-		$p['id_user']=1;
+		$p['id_jurusan']=$this->session->userdata("ID_JURUSAN");
+		$p['id_user']=$this->session->userdata("ID_USER");
 		$p['ref']=$finfo['file_name'];
 		$lokasi = $this->m_lokasi->getIdLokasiByName($p['id_jurusan'],$p['lokasi']);
 		if(empty($lokasi)){

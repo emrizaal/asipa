@@ -41,7 +41,7 @@
                 <div class="controls">
                   <select name="revisi" class="revisi">
                     <?php 
-                    for($i=1;$i<=$max['m'];$i++){
+                    for($i=0;$i<=$max['m'];$i++){
                       ?>
                       <option <?=$i==$curr ? 'selected' : ''?>><?=$i?></option>
                       <?php 
@@ -156,6 +156,7 @@
     myFormData.append('referensi_terkait','');
     myFormData.append('lokasi','');
     myFormData.append('data_ahli','');
+    myFormData.append('prioritas','');
     myFormData.append('nama',$("#NM_PAKET").val());
     myFormData.append('total',$("#totalAnggaranKeuntunganPajak").val());
     myFormData.append('revisi',<?=$max['m']+1?>);
@@ -178,6 +179,7 @@
         }
         
         myFormData.set('data_ahli',rowUsulan[i][10]);
+        myFormData.set('prioritas',rowUsulan[i][11]);
         $.ajax({
           url: '<?=base_url()?>Usulan/updateAlat',
           type: "POST",
@@ -248,7 +250,8 @@
     {row: 0, col: 8, rowspan: 1, colspan: 1},
     {row: 0, col: 9, rowspan: 1, colspan: 1},
     {row: 0, col: 10, rowspan: 1, colspan: 1},
-    {row: 0, col: 11, rowspan: 1, colspan: 1}
+    {row: 0, col: 11, rowspan: 1, colspan: 1},
+    {row: 0, col: 12, rowspan: 1, colspan: 1}
     ],
     cell: [
     {row: 0, col: 0, className: "htCenter htMiddle"},
@@ -262,7 +265,8 @@
     {row: 0, col: 8, className: "htCenter htMiddle"},
     {row: 0, col: 9, className: "htCenter htMiddle"},
     {row: 0, col: 10, className: "htCenter htMiddle"},
-    {row: 0, col: 11, className: "htCenter htMiddle"}
+    {row: 0, col: 11, className: "htCenter htMiddle"},
+    {row: 0, col: 12, className: "htCenter htMiddle"}
     ],
     columns: [
     {
@@ -321,10 +325,13 @@
       width:100
     },
     {
+      width:100,
+      renderer:"html"
+    },
+    {
       width:200,
       renderer:"html"
     }
-
     ],
     cells: function (row, col, prop) {
       var cellProperties = {};

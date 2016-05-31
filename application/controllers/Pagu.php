@@ -11,7 +11,7 @@ class Pagu extends CI_Controller {
 
 	public function index(){
 		$this->load->view('top');
-		$id = 1;//$this->session->userdata("id_jurusan");
+		$id = $this->session->userdata("ID_JURUSAN");
 		$data['pagu']=$this->m_pagu->getPaguByIdJurusan($id);
 		$this->load->view('pagu/pagu_view',$data);
 		$this->load->view('bottom');
@@ -33,7 +33,7 @@ class Pagu extends CI_Controller {
 	//Menyimpan data pagu
 	public function savePagu(){
 		$p = $this->input->post();
-		$p['id_jurusan'] = 1;//$this->session->userdata("id_jurusan");
+		$p['id_jurusan'] = $this->session->userdata("ID_JURUSAN");
 		$p['tahun_anggaran']=date("Y");
 		$this->m_pagu->savePagu($p);
 		redirect("Pagu");
