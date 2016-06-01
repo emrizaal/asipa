@@ -57,10 +57,11 @@ $this->load->view("info_header");
       if($(this).val()!=''){
        selVals.push('<option value='+$(this).attr('da')+'>'+$(this).val()+'<option>');
      }
-     allVals.push($(this).val()+'<br>'); 
+     allVals.push($(this).attr('da')+','); 
+     // allVals.push($(this).val()+'<br>'); 
 
    });
-    $('.timData').html(allVals);
+    $('.timDatas').html(allVals);
     $('#selKetua').html(selVals);
   }); 
 
@@ -173,6 +174,8 @@ $this->load->view("info_header");
                         </div>
                       </td>
                       <td style="vertical-align: top;">
+                        <span class="timDatas"></span>
+                      
                        <fieldset class="col-md-12" style="border: 1px solid #ccc;padding-bottom: 1%;">
                         <legend> Data Tim </legend>
                         <div class="checkbox3 timData">  </div>
