@@ -6,12 +6,14 @@ class Pengelompokan extends CI_Controller {
 	public function pengelompokan(){
 		parent::__construct();
 		$this->load->model("m_pengelompokan");
+		$this->load->model("m_kategori");
 
 	}
 
 	public function index(){
 		$this->load->view('top');
 		$data['pengelompokan']=$this->m_pengelompokan->getAllPengelompokan();
+		$data['kategori']=$this->m_kategori->getAllKategori();
 		$this->load->view('pengelompokan/pengelompokan_view',$data);
 		$this->load->view('bottom');
 	}

@@ -73,7 +73,7 @@
        
        <table class="table table-bordered table-stripped table-hovered">
         <tr class="active">
-          <th> Nama Dokumen Usulan </th>
+          <th> Jurusan </th>
           <th> Nama Alat </th>
           <th> Spesifikasi </th>
           <th> Setara </th>
@@ -89,7 +89,7 @@
           <th> <input type="checkbox"> </th>
         </tr>
         <tr>
-          <td> Usulan Teknik Komputer </td>
+          <td> Teknik Komputer & Informatika </td>
           <td> Hardisk External </td>
           <td> 2TB Toshiba </td>
           <td> Seagate </td>
