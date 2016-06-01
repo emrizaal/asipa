@@ -7,6 +7,7 @@ class TimHPS extends CI_Controller {
 		parent::__construct();
 		$this->load->model("m_timHps");
 		$this->load->model("m_pegawai");
+		$this->load->model("m_user");
 	}
 
 	public function index(){
@@ -21,6 +22,13 @@ class TimHPS extends CI_Controller {
 		$this->load->view('top');
 		$this->load->view("timHPS/timHps_add",$data);
 		$this->load->view('bottom');
+	}
+
+	public function saveTimHps(){
+		$p=$this->input->post();
+		$id=$this->m_user->saveUserFromTim($p);
+		$p['id']=$id;
+		$this->m_timHps->saveTimHps($p);
 	}
 
 }

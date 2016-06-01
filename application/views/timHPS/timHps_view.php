@@ -16,6 +16,7 @@ $this->load->view("info_header");
                 </div>
               </div>
               <div class="card-body">
+                <span class="listId" style="display:none;"></span>
                 <a href="#"  data-toggle="modal" data-target="#modalAddTimHPS"  class="btn btn-info"><i class="fa fa-plus"></i> Tambah Tim HPS </a>
                 <table class="table table-stripped table-bordered table-hover">
                   <tr class="active">
@@ -48,6 +49,7 @@ $this->load->view("info_header");
 </div>
 <script type="text/javascript" src="<?=base_url()?>assets/lib/js/jquery.min.js"></script>
 <script>
+  var allValsId = [];
   $(document).ready(function(){
    $(".user_password").focus(function(){
     this.type = "text";
@@ -63,7 +65,7 @@ $this->load->view("info_header");
        selVals.push('<option value='+$(this).attr('da')+'>'+$(this).val()+'<option>');
      }
      allVals.push($(this).val()+'<br>'); 
-
+     allValsId.push($(this).attr('da')); 
    });
     $('.timData').html(allVals);
     $('#selKetua').html(selVals);
@@ -149,9 +151,9 @@ $this->load->view("info_header");
                           <?php 
                           foreach($pegawai as $pe){
                             ?>
-                            <div class="checkbox3 checkbox-check">
-                              <input type="checkbox" id="checkbox-1" class="dataPg" value="<?=$pe['NAMA_PEGAWAI']?>" da="1">
-                              <label for="checkbox-1">
+                            <div class="checkbox3 checkbox-check addcheck">
+                              <input type="checkbox" id="checkbox-<?=$pe['NIP']?>" class="dataPg" value="<?=$pe['NAMA_PEGAWAI']?>" da="<?=$pe['NIP']?>">
+                              <label for="checkbox-<?=$pe['NIP']?>">
                                 <?=$pe['NAMA_PEGAWAI']?>
                               </label>
                             </div>
@@ -181,11 +183,11 @@ $this->load->view("info_header");
                     </div>
                     <div class="sub-title col-md-3">Username</div>
                     <div class="col-md-9">
-                     <input type="text" class="form-control">
+                     <input name="username" type="text" class="form-control">
                    </div>
                    <div class="sub-title col-md-3">Password</div>
                    <div class="col-md-9">
-                    <input type="password" class="form-control user_password">
+                    <input name="password" type="password" class="form-control user_password">
                   </div>
                 </div>
               </div>
@@ -194,7 +196,7 @@ $this->load->view("info_header");
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success">Simpan</button>
+          <button type="submit" class="btn btn-success" id="simpanAdd">Simpan</button>
         </form>
         <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
       </div>
@@ -279,11 +281,11 @@ $this->load->view("info_header");
                 </div>
                 <div class="sub-title col-md-3">Username</div>
                 <div class="col-md-9">
-                 <input type="text" class="form-control">
+                 <input type="text" class="form-control" name="username">
                </div>
                <div class="sub-title col-md-3">Password</div>
                <div class="col-md-9">
-                <input type="password" class="form-control user_password">
+                <input type="password" class="form-control user_password" name="password">
               </div>
             </div>
           </div>
@@ -312,8 +314,6 @@ $this->load->view("info_header");
         <form enctype="multipart/form-data" action="<?=base_url()?>Kontrak/deleteKontrak" method="POST">
           <input id="frmIddel" type="hidden" name="id_kontrak" value="">
           <h5>Anda Yakin Menghapus Data Ini ?</h5>
-
-
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-success">Ya</button>
@@ -323,4 +323,35 @@ $this->load->view("info_header");
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function(e){
+    $("#simpanAdd").click(function(e){
+      e.preventDefault();
+      var myFormData = new FormData();
+      myFormData.append('namatim',$("input[name='nama']").val());
+      myFormData.append('ketua',$("#selKetua").val());
+      myFormData.append('username',$("input[name='username']").val());
+      myFormData.append('password',$("input[name='password']").val());
+      myFormData.append('anggota',allValsId);
+
+      $.ajax({
+        url: '<?=base_url()?>TimHPS/saveTimHps',
+        type: "POST",
+        data:myFormData,
+        processData: false,
+        contentType: false,
+        success : function(res){
+          window.location.href ="<?=base_url()?>TimHPS";
+        },
+        error: function (msg) {
+          console.log("gagal"+msg);
+          return false;
+        }
+
+      })
+      console.log($('.timData').text());
+    });
+  });
+
+</script>
         <!-- End Modal Del Pagu -->
