@@ -113,8 +113,9 @@
             <div class="col-md-4" style="
             text-align: right;
             ">
+              <? if($this->session->userdata('ID_JENIS_USER') == 2 || $this->session->userdata('ID_JENIS_USER') == 3){?>
             <a href="#" class="btn btn-danger"><i class="fa fa-warning"></i> &nbsp;Konfirmasi</a>
-
+            <? } ?>
             <a href="#" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp;Kirim Ajuan</a>
 
           </div>
