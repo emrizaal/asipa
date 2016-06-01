@@ -16,13 +16,23 @@ class Kontrak extends CI_Controller {
 		$this->load->view('bottom');
 	}
 
-	//Menampilkan detail dari kontrak
+	//Menampilkan detail dari dokumen pengelompokan berdasarkan id paket (pengelompokan)
 	public function detail($id){
 		$this->load->view('top');
 		$data['paket']=$this->m_pengelompokan->getPengelompokanById($id);
 		$data['kontrak']=$this->m_kontrak->getKontrakByIdPaket($id);
 		$this->load->view("kontrak/kontrak_detail",$data);
-		$this->load->view('bottom');	
+		$this->load->view('bottom');
+	}
+
+	//[PopUp]
+	public function addKontrak(){
+
+	}
+
+	//[PopUp]
+	public function editKontrak($id){
+
 	}
 
 	//Save Kontrak
@@ -41,7 +51,7 @@ class Kontrak extends CI_Controller {
 
 		$p = $this->input->post();
 		$p['file'] = $finfo['file_name'];
-		$p['id_user']=1;//$this->session->userdata("id_jurusan");
+		$p['id_user']=$this->session->userdata("ID_USER");
 		$this->m_kontrak->saveKontrak($p);
 		redirect($_SERVER['HTTP_REFERER']);
 	}

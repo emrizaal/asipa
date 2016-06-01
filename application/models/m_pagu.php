@@ -12,6 +12,18 @@ class M_pagu extends CI_Model {
 		return $query;
 	}
 
+	//Mengambil data pagu beserta jurusannya
+	function getPaguByPeriode($tahun){
+		$query = $this->db->query("SELECT * from pagu,jurusan where TAHUN_ANGGARAN = '$tahun' AND pagu.ID_JURUSAN= jurusan.ID_JURUSAN")->result_array();
+		return $query;
+	}
+
+	//Mengambil data tahun anggaran yg telah terinputkan di database
+	function getPeriodePagu(){
+		$query = $this->db->query("SELECT TAHUN_ANGGARAN from pagu group by TAHUN_ANGGARAN order by TAHUN_ANGGARAN desc")->result_array();
+		return $query;
+	}
+
 	//Mengambil data pagu berdasarkan id jurusan
 	function getPaguByIdJurusan($id){
 		$query = $this->db->query("SELECT * from pagu where ID_JURUSAN = '$id' ORDER BY TAHUN_ANGGARAN DESC")->result_array();
@@ -40,7 +52,7 @@ class M_pagu extends CI_Model {
 
 	//Mengupdate data pagu
 	function updatePagu($p){
-		$query = $this->db->query("UPDATE pagu set PAGU_ALAT = '$p[pagu]' where ID_PAGU = '$p[id]'");
+		$query = $this->db->query("UPDATE pagu set PAGU_ALAT = '$p[pagu]' where ID_JURUSAN = '$p[id_jurusan]' AND TAHUN_ANGGARAN = '$p[tahun_anggaran]'");
 		return $query;
 	}
 	

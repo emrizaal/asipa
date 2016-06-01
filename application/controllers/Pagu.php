@@ -6,14 +6,19 @@ class Pagu extends CI_Controller {
 	public function pagu(){
 		parent::__construct();
 		$this->load->model("m_pagu");
-
+		$this->load->model("m_jurusan");
 	}
 
-	public function index(){
+	public function index($tahun=0){
 		$this->load->view('top');
 		$id = $this->session->userdata("ID_JURUSAN");
-		$data['pagu']=$this->m_pagu->getPaguByIdJurusan($id);
-		$data['jurusan']=$this->m_data->getAllDataTbl('jurusan')->result();
+		$data['currentDate']=date("Y");
+		if($tahun!=0){
+			$data['currentDate']=$tahun;
+		}
+		$data['periode']=$this->m_pagu->getPeriodePagu();
+		$data['pagu']=$this->m_pagu->getPaguByPeriode($data['currentDate']);
+		$data['jurusan']=$this->m_jurusan->getAllJurusan();
 		$this->load->view('pagu/pagu_view',$data);
 		$this->load->view('bottom');
 	}
@@ -34,16 +39,28 @@ class Pagu extends CI_Controller {
 	//Menyimpan data pagu
 	public function savePagu(){
 		$p = $this->input->post();
-		$p['id_jurusan'] = $this->session->userdata("ID_JURUSAN");
-		$p['tahun_anggaran']=date("Y");
-		$this->m_pagu->savePagu($p);
+		foreach($p['pagu'] as $key=>$a){
+			$data=array(
+				'id_jurusan'=>$key,
+				'pagu'=>$a,
+				'tahun_anggaran'=>date("Y")
+				);
+			$this->m_pagu->savePagu($data);
+		}
 		redirect("Pagu");
 	}
 
 	//Mengupdate data pagu
 	public function updatePagu(){
 		$p = $this->input->post();
-		$this->m_pagu->updatePagu($p);
+		foreach($p['pagu'] as $key=>$a){
+			$data=array(
+				'id_jurusan'=>$key,
+				'pagu'=>$a,
+				'tahun_anggaran'=>date("Y")
+				);
+			$this->m_pagu->updatePagu($data);
+		}
 		redirect("Pagu");
 	}
 
