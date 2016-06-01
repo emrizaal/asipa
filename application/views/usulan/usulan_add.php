@@ -42,78 +42,94 @@
               <div class="control-group ">
                 <label class="control-label " ></label>
                 <div class="controls">
-                   <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalLihatUsulanFinal"> <i class="fa fa-search"></i>&nbsp; Lihat Usulan Final</a>
-                </div>
+                 <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalLihatUsulanFinal"> <i class="fa fa-search"></i>&nbsp; Lihat Usulan Final</a>
+               </div>
+             </div>
+           <? } ?>
+           </div>
+           <div class="col-md-4"></div>
+           <div class="col-md-4" style="margin-bottom: 2%;">
+            <div class="control-group ">
+              <label class="label-jumlah" >Jumlah </label>
+              <div class="controls">
+                <input type="text" id="totalAnggaran" readonly value="" class="form-control">
               </div>
             </div>
-            <? } ?>
-            <div class="col-md-4"></div>
-            <div class="col-md-4" style="margin-bottom: 2%;">
-              <div class="control-group ">
-                <label class="label-jumlah" >Jumlah </label>
-                <div class="controls">
-                  <input type="text" id="totalAnggaran" readonly value="" class="form-control">
-                </div>
-              </div>
-              <div class="control-group ">
-                <label class="label-jumlah" >Jumlah + Biaya Kirim </label>
-                <div class="controls">
-                  <input type="text" id="totalAnggaranKeuntungan" readonly value="" class="form-control">
-                </div>
-              </div>
-              <div class="control-group ">
-                <label class="label-jumlah" >Jumlah + Biaya Kirim + Pajak </label>
-                <div class="controls">
-                  <input type="text" id="totalAnggaranKeuntunganPajak" readonly value="" class="form-control">
-                </div>
+            <div class="control-group ">
+              <label class="label-jumlah" >Jumlah + Biaya Kirim </label>
+              <div class="controls">
+                <input type="text" id="totalAnggaranKeuntungan" readonly value="" class="form-control">
               </div>
             </div>
-          </form>
-          <br>
-          <div class="row-fluid " style="height:auto;background:#fff">
-            <div id="dataTable" style="width:100%; height:300px; overflow: hidden;">  </div>
-            <br><br>
-            <center>
-              <div class="control-group">
-                <div class="controls">
-                  <a id="addRow" class="btn btn-info">Add New Row</a>
-                </div>
+            <div class="control-group ">
+              <label class="label-jumlah" >Jumlah + Biaya Kirim + Pajak </label>
+              <div class="controls">
+                <input type="text" id="totalAnggaranKeuntunganPajak" readonly value="" class="form-control">
               </div>
-              <div class="control-group">
-                <div class="controls">
-                  <a id="Save" class="btn btn-success">Save</a>
-                  <a href="<?=base_url()?>Usulan" class="btn btn-warning">Cancel</a>
-                </div>
+            </div>
+          </div>
+        </form>
+        <br>
+        <div class="row-fluid " style="height:auto;background:#fff">
+          <div id="dataTable" style="width:100%; height:300px; overflow: hidden;">  </div>
+          <br><br>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4" style="
+          margin-bottom: 2%;
+          ">
+          <center>
+            <div class="control-group">
+              <div class="controls">
+                <a id="addRow" class="btn btn-info">Add New Row</a>
+
               </div>
-              <center>
+
+
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <a id="Save" class="btn btn-success">Save</a>
+                <a href="<?=base_url()?>Usulan" class="btn btn-warning">Cancel</a>
               </div>
 
             </div>
+            </center>
+            </div>
+            <div class="col-md-4" style="
+            text-align: right;
+            ">
+            <a href="#" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp;Kirim Ajuan</a>
           </div>
+
         </div>
+
       </div>
     </div>
   </div>
 </div>
+</div>
+</div>
+</div>
 <!-- Modal Show Usulan Final -->
 <div class="modal fade modal-primary" id="modalLihatUsulanFinal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Dokumen Usulan Final</h4>
-            </div>
-            <div class="modal-body">
-              <div class="card">
-               <div class="card-body"  style="padding: 0px 20px !important;">
-               <? include 'usulan_final_view.php'; ?>
-            </div>
-        </div>
+  <div class="modal-dialog modal-lg" style="width: 90%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="myModalLabel">Dokumen Usulan Final</h4>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+         <div class="card-body"  style="padding: 0px 20px !important;">
+           <? include 'usulan_final_view.php'; ?>
+         </div>
+       </div>
+     </div>
+     <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
     </div>
-    <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-</div>
-</div>
+  </div>
 </div>
 </div>
 <!-- End Modal Usulan Final -->

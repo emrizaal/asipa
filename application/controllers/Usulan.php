@@ -157,6 +157,65 @@ class Usulan extends CI_Controller {
 		}
 	}
 
+	//Menampilkan detail usulan
+	public function detailUsulanVerifikasi($p,$idUser){
+		$curr=-1;
+		$id_jenis = $this->session->userdata('ID_JENIS_USER');
+		$id = $this->session->userdata("ID_JURUSAN");
+		$max=$this->m_alat->getMaxRevisi($p);
+		if($curr==-1){
+			$rev=$max['m'];
+		}else{
+			$rev=$curr;
+		}
+		$usulan = $this->m_usulan->getUsulanByIdUsulan($p);
+		$alat = $this->m_alat->getAlatByIdUsulan($usulan['ID_USULAN'],$rev);
+		$resLokasi=$this->m_lokasi->getLokasiByIdJurusan($id);
+		$lokasi=array();
+		foreach($resLokasi as $re){	
+			$lokasi[$re['ID_LOKASI']]=$re['NAMA_LOKASI'];
+		}
+		$data['lokasi']=json_encode(array_values($lokasi));
+		$data['usulan']=$usulan;
+		$data['max']=$max;
+		if($curr==-1){
+			$data['curr']=$max['m'];
+		}else{
+			$data['curr']=$curr;
+		}
+
+		$res[0] = array('NAMA ALAT', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI','PRIORITAS','KONFIRMASI');
+		foreach($alat as $a){
+			if($a['DATA_AHLI']==1){
+				$ahli = true;
+			}else{
+				$ahli = false;
+			}
+			if($a['REFERENSI_TERKAIT']!=""){
+				$link = "<a target='_blank' href='".base_url()."assets/referensi/".$a['REFERENSI_TERKAIT']."'>Referensi</a>";
+			}else{
+				$link = "";
+			}
+			$res[]=array($a['NAMA_ALAT'], $a['SPESIFIKASI'], $a['SETARA'], $a['SATUAN'], $a['JUMLAH_ALAT'], $a['HARGA_SATUAN'], $a['JUMLAH_ALAT']*$a['HARGA_SATUAN'], $lokasi[$a['ID_LOKASI']],$a['JUMLAH_DISTRIBUSI'],$link." <input name='file[]' type='file'>",$ahli,$a['PRIORITY'],'');		
+		}
+		for($i=0;$i<9;$i++){
+			$res[]=array('', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'','');
+		}
+		//print_r($res);
+
+		$data['alat']=json_encode($res);
+		if($id_jenis==6){
+			$data['detailAlat'] = $alat;	
+			$data['detailUsulan'] = $usulan;	
+			$this->load->view('top');
+			$this->load->view("usulan/usulan_detail_tim_hps",$data);
+			$this->load->view('bottom');
+		}else{
+			$this->load->view('top');
+			$this->load->view("usulan/usulan_detail",$data);
+		}
+	}
+
 	public function detailUsulanPPK($p){
 		// $id = 1;//$this->session->userdata("id_jurusan");
 		// $max=$this->m_alat->getMaxRevisi($p);

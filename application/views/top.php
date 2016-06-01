@@ -5,6 +5,7 @@
 }else{
     $id_jurusan = $this->session->userdata('ID_JURUSAN');
     $id_jenis = $this->session->userdata('ID_JENIS_USER');
+    $nip = $this->session->userdata('NIP');
 }?>
 <head>
     <title>SIPA POLBAN</title>
@@ -154,7 +155,7 @@
                                 </li> -->
                                 <li>
                                     <div class="profile-info">
-                                        <h4 class="username"><?=$this->session->userdata('NAMA')?></h4>
+                                        <h4 class="username"><?=$this->m_data->getDataFromTblWhere('pegawai', 'NIP', $nip)->row()->NAMA_PEGAWAI?></h4>
                                         <p><?=$this->session->userdata('EMAIL')?></p>
                                         <div class="btn-group margin-bottom-2x" role="group">
                                             <button type="button" class="btn btn-default"><i class="fa fa-user"></i> Profile</button>
