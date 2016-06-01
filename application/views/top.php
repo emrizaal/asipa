@@ -264,6 +264,23 @@
                             </a>
                         </li>  
                          <? } ?>  
+                          <? if($id_jenis==99){ ?>  
+                        <li class="list <?= ($this->uri->segment(1)=='Jurusan')?'active':''; ?>">
+                            <a href="<?=base_url()?>Jurusan">
+                                <span class="icon fa fa-file-o"></span><span class="title">Data Jurusan</span>
+                            </a>
+                        </li>  
+                         <li class="list <?= ($this->uri->segment(1)=='Lokasi')?'active':''; ?>">
+                            <a href="<?=base_url()?>Lokasi">
+                                <span class="icon fa fa-file-o"></span><span class="title">Data Lokasi</span>
+                            </a>
+                        </li>  
+                           <li class="list <?= ($this->uri->segment(1)=='Pegawai')?'active':''; ?>">
+                            <a href="<?=base_url()?>Pegawai">
+                                <span class="icon fa fa-file-o"></span><span class="title">Data Pegawai</span>
+                            </a>
+                        </li>  
+                         <? } ?>  
                         <!-- Dropdown-->
                            <!--  <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#component-example">

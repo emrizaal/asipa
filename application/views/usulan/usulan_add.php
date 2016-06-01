@@ -30,13 +30,23 @@
                   <input type="text" name="NM_PAKET" id="NM_PAKET"  value="" class="form-control">
                 </div>
               </div>
+              <? if($this->session->userdata('ID_JENIS_USER') == 3){?>
               <div class="control-group ">
                 <label class="control-label " >Sisa Pagu</label>
                 <div class="controls">
                   <span class="pagu_alat"><?=$pagu['PAGU_ALAT']?></span>
                 </div>
               </div>
+              <?}?>
+              <? if($this->session->userdata('ID_JENIS_USER') == 2 || $this->session->userdata('ID_JENIS_USER') == 1){?>
+              <div class="control-group ">
+                <label class="control-label " ></label>
+                <div class="controls">
+                   <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalLihatUsulanFinal"> <i class="fa fa-search"></i>&nbsp; Lihat Usulan Final</a>
+                </div>
+              </div>
             </div>
+            <? } ?>
             <div class="col-md-4"></div>
             <div class="col-md-4" style="margin-bottom: 2%;">
               <div class="control-group ">
@@ -85,6 +95,28 @@
     </div>
   </div>
 </div>
+<!-- Modal Show Usulan Final -->
+<div class="modal fade modal-primary" id="modalLihatUsulanFinal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">Dokumen Usulan Final</h4>
+            </div>
+            <div class="modal-body">
+              <div class="card">
+               <div class="card-body"  style="padding: 0px 20px !important;">
+               <? include 'usulan_final_view.php'; ?>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+</div>
+</div>
+</div>
+</div>
+<!-- End Modal Usulan Final -->
 <!--/.module-->
 <footer class="app-footer">
   <div class="wrapper">

@@ -17,6 +17,8 @@ $this->load->view("info_header");
                             </div>
                             <div class="card-body">
                                 <a href="<?=base_url()?>Usulan/addUsulan" class="btn btn-info"> <i class="fa fa-plus-square"></i>&nbsp; Tambah Usulan</a>
+                                &nbsp;
+                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalLihatUsulanFinal"> <i class="fa fa-search"></i>&nbsp; Lihat Usulan Final</a>
                                 <table class="table table-stripped table-bordered table-hover">
                                     <tr class="active">
                                         <th>No. Dokumen</th>
@@ -57,6 +59,28 @@ $this->load->view("info_header");
         </div>
     </div>
 </div>
+<!-- Modal Show Usulan Final -->
+<div class="modal fade modal-primary" id="modalLihatUsulanFinal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">Dokumen Usulan Final</h4>
+            </div>
+            <div class="modal-body">
+              <div class="card">
+               <div class="card-body"  style="padding: 0px 20px !important;">
+               <? include 'usulan_final_view.php'; ?>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+</div>
+</div>
+</div>
+</div>
+<!-- End Modal Usulan Final -->
 <!-- Modal Show Revisi -->
 <div class="modal fade modal-primary" id="modalLihatRevisi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
@@ -67,22 +91,22 @@ $this->load->view("info_header");
             </div>
             <div class="modal-body">
               <div class="card">
-                 <div class="card-body"  style="padding: 0px 20px !important;">
+               <div class="card-body"  style="padding: 0px 20px !important;">
 
-                    <div class="sub-title">Daftar Data Dokumen Usulan </div>
-                    <div>
-                        <b>Nomor Dokumen </b>  : <span id="noDok"></span> 
-                        <div id="revisiTabel">                           
-                        </div>
+                <div class="sub-title">Daftar Data Dokumen Usulan </div>
+                <div>
+                    <b>Nomor Dokumen </b>  : <span id="noDok"></span> 
+                    <div id="revisiTabel">                           
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Simpan</button>
-        </form>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
     </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Simpan</button>
+    </form>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+</div>
 </div>
 </div>
 </div>
@@ -98,9 +122,9 @@ $this->load->view('bottom');
           url: '<?=base_url()?>Usulan/revisi/'+id,
           type: "GET",
           success : function(res){
-           $("#revisiTabel").html(res);
-        },
-        error: function (msg) {
+             $("#revisiTabel").html(res);
+         },
+         error: function (msg) {
             console.log("gagal"+msg);
             return false;
         }
