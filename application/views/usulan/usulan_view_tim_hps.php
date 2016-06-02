@@ -12,7 +12,7 @@ $this->load->view("info_header");
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <span class="title">Pengelolaan Usulan</span>
+                                    <span class="title">Pengelolaan Dokumen Paket</span>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -22,35 +22,29 @@ $this->load->view("info_header");
                                         <!-- <th>Tahun</th> -->
                                         <th>Nama Paket</th>
                                         <th>Tanggal Dibuat</th>
-                                        <th>Last Update</th>
-                                         <th>Pagu Alat Jurusan</th>
+                                        <th>Update Terakhir</th>
                                         <th>Total Anggaran</th>
-                                        <th>% Penggunaan Anggaran</th>
-                                        <th>Sisa Pagu</th>
-                                        <th style="
-    width: 23%;
-">Aksi</th>
+                                        <th>Status</th>
+                                        <th style="width: 23%;">Aksi</th>
                                     </tr>
                                     <?php 
                                     foreach($anggaran_usulan as $p){
-                                        $noDok = "Usulan-".$p['ID_USULAN']."/".$p['INISIAL']."/".$p['TAHUN_ANGGARAN'];
+                                        $noDok = "Paket-".$p['ID_USULAN']."/".$p['TAHUN_ANGGARAN'];
                                         ?>
                                         <tr>
                                             <td><?=$noDok?></td>
                                             <!-- <td><?=$p['TAHUN_ANGGARAN']?></td> -->
-                                            <td>
-                                                <a href="<?=base_url()?>Usulan/DetailUsulan/<?=$p['ID_USULAN']?>">
-                                                    <?=$p['NAMA_PAKET']?>
-                                                </a>
-                                            </td>
+                                            <td><?=$p['NAMA_PAKET']?></td>
                                             <td><?=$p['TANGGAL_DIBUAT']?></td>
                                             <td><?=$p['LAST_UPDATE']?></td>
-                                             <td><?=number_format($p['PAGU_ALAT'],'0',',','.')?></td>
                                             <td><?=number_format($p['TOTAL_ANGGARAN'],'0',',','.')?></td>
-                                            <td><?=number_format($p['PAGU_ALAT'] - $p['TOTAL_ANGGARAN'],'0',',','.')?></td>
-                                            <td><?=number_format(($p['TOTAL_ANGGARAN']/$p['PAGU_ALAT'] *100),'2',',','.')?> % </td>
-                                            <td><a href="#" download class="btn btn-success"><i class="fa fa-download"></i> </a> | <a href="#" download class="btn btn-info" data-toggle="modal" data-target="#modalLihatRevisi"><i class="fa fa-check-circle"></i> Approve </a>
-                                            | <a href="#" download class="btn btn-warning" data-toggle="modal" data-target="#modalAddKonfirmasiUsulan"><i class="fa fa-warning"></i> Konfirmasi </a></td>
+                                            <td> - /
+                                                <span class="label label-success" style="font-size: 12px;"><i class="fa fa-check"></i> Disetujui</span>
+                                                /
+                                                <span class="label label-danger" style="font-size: 12px;"><i class="fa fa-warning"></i> Konfirmasi</span>
+                                            </td>
+                                            <td><a href="#" download class="btn btn-success"><i class="fa fa-download"></i> </a> &nbsp; <a href="<?=base_url()?>Usulan/DetailUsulan/<?=$p['ID_USULAN']?>" class="btn btn-primary"><i class="fa fa-search"></i> Detail </a>
+                                          </td>
                                         </tr>
                                         <?php 
                                     }

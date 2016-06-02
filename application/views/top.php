@@ -92,7 +92,7 @@
                             <i class="fa fa-bars icon"></i>
                         </button>
                         <ol class="breadcrumb navbar-breadcrumb" style="background: url(<?php echo base_url()?>/assets/img/opl.png) no-repeat;background-size: contain;padding-left: 70px;">
-                            <li class="active">Sitem Informasi Pengadaan Alat</li>
+                        <li class="active">Sistem Informasi Pengadaan Alat</li>
                         </ol>
                         <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                             <i class="fa fa-th icon"></i>
@@ -195,20 +195,6 @@
                             </a>
                         </li>
                         <? } ?>
-                         <? if($id_jenis==1 || $id_jenis==2 || $id_jenis==3 || $id_jenis==4 || $id_jenis==5 || $id_jenis==6){ ?>
-                        <li class="list <?= ($this->uri->segment(1)=='Usulan')?'active':''; ?>">
-                            <a href="<?=base_url()?>Usulan">
-                                <span class="icon fa fa-file-o"></span><span class="title">Usulan</span>
-                            </a>
-                        </li>
-                          <? } ?>
-                           <? if($id_jenis==1){ ?>
-                        <li class="list <?= ($this->uri->segment(1)=='Pencatatan')?'active':''; ?>">
-                            <a href="<?=base_url()?>Pencatatan">
-                                <span class="icon fa fa-pencil"></span><span class="title">Pencatatan</span>
-                            </a>
-                        </li>
-                        <? } ?>
                         <? if($id_jenis==5){ ?>
                         <li class="list <?= ($this->uri->segment(1)=='Pengelompokan')?'active':''; ?>">
                             <a href="<?=base_url()?>Pengelompokan">
@@ -216,6 +202,25 @@
                             </a>
                         </li>
                         <? } ?>
+                        <? if($id_jenis==1 || $id_jenis==2 || $id_jenis==3 || $id_jenis==4 || $id_jenis==5 || $id_jenis==6){ ?>
+                        <li class="list <?= ($this->uri->segment(1)=='Usulan')?'active':''; ?>">
+                            <a href="<?=base_url()?>Usulan">
+                                <? if($id_jenis==6 || $id_jenis==5){ ?>
+                                <span class="icon fa fa-file-o"></span><span class="title">Dokumen Paket</span>
+                                <?}else{?>
+                                <span class="icon fa fa-file-o"></span><span class="title">Usulan</span>
+                                <?}?>
+                            </a>
+                        </li>
+                        <? } ?>
+                        <? if($id_jenis==1){ ?>
+                        <li class="list <?= ($this->uri->segment(1)=='Pencatatan')?'active':''; ?>">
+                            <a href="<?=base_url()?>Pencatatan">
+                                <span class="icon fa fa-pencil"></span><span class="title">Pencatatan</span>
+                            </a>
+                        </li>
+                        <? } ?>
+
                         <? if($id_jenis==7){ ?>
                         <li class="list <?= ($this->uri->segment(1)=='Lelang')?'active':''; ?>">
                             <a href="<?=base_url()?>Lelang">
@@ -251,37 +256,37 @@
                             </a>
                         </li>   
                         <? } ?>
-                          <? if($id_jenis==10){ ?>  
+                        <? if($id_jenis==10){ ?>  
                         <li class="list <?= ($this->uri->segment(1)=='Performa')?'active':''; ?>">
                             <a href="<?=base_url()?>Performa">
                                 <span class="icon fa fa-money"></span><span class="title">Performa Serapan</span>
                             </a>
                         </li>  
-                         <? } ?>  
-                         <? if($id_jenis==10){ ?>  
+                        <? } ?>  
+                        <? if($id_jenis==10){ ?>  
                         <li class="list <?= ($this->uri->segment(1)=='TimPenerimaan')?'active':''; ?>">
                             <a href="<?=base_url()?>TimPenerimaan">
                                 <span class="icon fa fa-file-o"></span><span class="title">Tim Penerimaan</span>
                             </a>
                         </li>  
-                         <? } ?>  
-                          <? if($id_jenis==99){ ?>  
+                        <? } ?>  
+                        <? if($id_jenis==99){ ?>  
                         <li class="list <?= ($this->uri->segment(1)=='Jurusan')?'active':''; ?>">
                             <a href="<?=base_url()?>Jurusan">
                                 <span class="icon fa fa-file-o"></span><span class="title">Data Jurusan</span>
                             </a>
                         </li>  
-                         <li class="list <?= ($this->uri->segment(1)=='Lokasi')?'active':''; ?>">
+                        <li class="list <?= ($this->uri->segment(1)=='Lokasi')?'active':''; ?>">
                             <a href="<?=base_url()?>Lokasi">
                                 <span class="icon fa fa-file-o"></span><span class="title">Data Lokasi</span>
                             </a>
                         </li>  
-                           <li class="list <?= ($this->uri->segment(1)=='Pegawai')?'active':''; ?>">
+                        <li class="list <?= ($this->uri->segment(1)=='Pegawai')?'active':''; ?>">
                             <a href="<?=base_url()?>Pegawai">
                                 <span class="icon fa fa-file-o"></span><span class="title">Data Pegawai</span>
                             </a>
                         </li>  
-                         <? } ?>  
+                        <? } ?>  
                         <!-- Dropdown-->
                            <!--  <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#component-example">
