@@ -22,24 +22,32 @@ $this->load->view("info_header");
                                     <th>Tahun</th>
                                     <th>Nama Paket</th>
                                     <th>Total Anggaran</th>
-                                    <th>Tanggal Dibuat</th>
-                                    <th>Last Update</th>
-                                    <th>Aksi</th>
+                                    <th>Tanggal Hasil Lelang</th>
+                                    <th>Penyedia</th>
+                                    <th>Dokumen Kontrak</th>
                                     </tr>
                                     <?php 
-                                    foreach($paket as $p){
+                                    // foreach($paket as $p){
                                         ?>
                                         <tr>
+                                            <td> PAKET-1/2015 </td>
+                                            <td> 2015 </td>
+                                            <td> Paket AN JTK </td>
+                                            <td> 20000000 </td>
+                                            <td> 20 May 2015</td>
+                                            <td> - </td>
+                                            <td><a href="<?=base_url()?>Kontrak/detail/1" class="btn btn-primary"><i class="fa fa-file-text"></i> &nbsp; Lihat Kontrak</a></td>
+                                        </tr>
+                                       <!--  <tr>
                                         <td>HPS-<?=$p['ID_PAKET']?>/<?=$p['TAHUN_ANGGARAN']?></td>
                                         <td><?=$p['TAHUN_ANGGARAN']?></td>
                                         <td><?=$p['NAMA_PAKET']?></td>
                                         <td><?=$p['TOTAL_ANGGARAN']?></td>
                                         <td><?=$p['TANGGAL_DIBUAT']?></td>
                                         <td><?=$p['LAST_UPDATE']?></td>
-                                        <td><a href="<?=base_url()?>Kontrak/detail/<?=$p['ID_PAKET']?>" class="btn btn-primary"><i class="fa fa-file-text"></i> &nbsp; Lihat Kontrak</a></td>
-                                        </tr>
+                                        </tr> -->
                                         <?php 
-                                    }
+                                    // }
                                     ?>
                                 </table>
                             </div>

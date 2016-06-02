@@ -38,10 +38,7 @@ $this->load->view("info_header");
                                      <td><a href="<?=site_url()?>BeritaAcara/BAPP" class="btn btn-info"><i class="fa fa-search"></i> Detail </a></td>
                                      <td>
                                          <!-- <a href="#" class="btn btn-success"><i class="fa fa-plus"></i> Tambah </a> -->
-                                         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalAddBAST" onclick=""><i class="fa fa-plus"></i> Tambah </a>
-
-                                         <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modaleditBAST"><i class="fa fa-pencil"></i> Edit </a>
-                                         <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalLihatBAST"><i class="fa fa-eye"></i> Lihat </a></td>
+                                         <a href="#" class="btn btn-primary" target="_blank"><i class="fa fa-eye"></i> Lihat </a></td>
                                          <!-- <td><a href="#"><i class="fa fa-search"></i> Detail </a></td> -->
                                     <td><a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalAddBukti"><i class="fa fa-plus"></i> Tambah </a></td>
                                      </tr>

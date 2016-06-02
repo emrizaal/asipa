@@ -65,14 +65,13 @@ $this->load->view("info_header");
                         <div class="modal-body">
                           <div class="card">
                              <div class="card-body"  style="padding: 0px 20px !important;">
-                                <div class="sub-title">Nama Paket Penglompokan</div>
+                                <div class="sub-title">Nama Paket Penglompokan  <input type="text" style="
+                                width: 30%; margin-left: 1%;" name="nama" class="form-control" placeholder="Masukan Nama Paket Pengelompokan"> </div>
                                 <div>
-                                    <input type="text" name="nama" class="form-control" placeholder="Masukan Nama Paket Pengelompokan">
                                 </div>
                                 <div class="sub-title">Tim HPS <select name="tim" class="form-control" style="
                                 width: 20%;
                                     margin-left: 1%;
-                                    margin-top: 1%
                                     ">
                                     <option>Rizky</option>
                                     <option>Febian</option>
