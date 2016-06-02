@@ -16,7 +16,7 @@ $this->load->view("info_header");
                              <li role="presentation" class="active">
                              <a href="#usulan" aria-controls="rd" role="tab" data-toggle="tab">Usulan Pengadaan</a></li>
                               <? if($this->session->userdata('ID_JENIS_USER') == 2 || $this->session->userdata('ID_JENIS_USER') == 3){?>
-                             <li role="presentation" ><a href="#verusulan" aria-controls="verusulan" role="tab" data-toggle="tab">Verifikasi Usulan <span class="badge danger">2</span> </a></li>
+                             <li role="presentation" ><a href="#verusulan" aria-controls="verusulan" role="tab" data-toggle="tab">Verifikasi Usulan <span class="badge danger">!</span> </a></li>
                              <? }?>
 
 
@@ -76,14 +76,14 @@ $this->load->view("info_header");
                                             <th>Aksi</th>
                                         </tr>
                                         <?php 
-                                        foreach($usulan as $p){
+                                        foreach($usulan_teknisi as $p){
                                             $noDok = "Usulan-".$p['ID_USULAN']."/".$p['INISIAL']."/".$p['TAHUN_ANGGARAN'];
                                             ?>
                                             <tr>
                                                 <td><?=$noDok?></td>
                                                 <td><?=$p['TAHUN_ANGGARAN']?></td>
                                                 <td>
-                                                    <a href="<?=base_url()?>Usulan/detailUsulanVerifikasi/<?=$p['ID_USULAN']?>/<?=$p['ID_USER']?>">
+                                                    <a href="<?=base_url()?>Usulan/detailUsulan/<?=$p['ID_USULAN']?>/<?=$p['REVISI_KE']?>">
                                                         <?=$p['NAMA_PAKET']?>
                                                     </a>
                                                 </td>

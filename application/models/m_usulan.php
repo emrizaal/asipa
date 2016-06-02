@@ -7,8 +7,13 @@ class M_usulan extends CI_Model {
 	}
 
 	//Mengambil data usulan berdasarkan id jurusan
-	function getUsulanByIdJurusan($id){
-		$query = $this->db->query("SELECT * from usulan,jurusan where usulan.ID_JURUSAN = '$id' AND jurusan.ID_JURUSAN = usulan.ID_JURUSAN")->result_array();
+	function getUsulanByIdJurusan($id,$id_jenis){
+		$query = $this->db->query("SELECT * from usulan,jurusan where usulan.ID_JURUSAN = '$id' AND jurusan.ID_JURUSAN = usulan.ID_JURUSAN AND usulan.ID_JENIS_USER = '$id_jenis'")->result_array();
+		return $query;
+	}
+
+	function getUsulanFromTeknisi($id){
+		$query = $this->db->query("SELECT *,progress_paket.STATUS as STAT from progress_paket,usulan,jurusan where jurusan.ID_JURUSAN = usulan.ID_JURUSAN AND progress_paket.ID_JURUSAN = '$id' order by ID_PROGRESS_PAKET DESC limit 0,1")->result_array();
 		return $query;
 	}
 
@@ -25,6 +30,11 @@ class M_usulan extends CI_Model {
 		return $query;
 	}
 
+	function getUsulanFinal($id,$tahun){
+		$query = $this->db->query("SELECT * from usulan,alat where usulan.ID_JURUSAN = '$id' AND usulan.TAHUN_ANGGARAN = '$tahun' AND usulan.ID_USULAN = alat.ID_USULAN AND alat.IS_FINAL='1'")->result_array();
+		return $query;
+	}
+
 	//Menyimpan data usulan
 	function saveUsulan($p){
 		$query = $this->db->query("INSERT into usulan(
@@ -33,14 +43,16 @@ class M_usulan extends CI_Model {
 			NAMA_PAKET,
 			TANGGAL_DIBUAT,
 			TAHUN_ANGGARAN,
-			TOTAL_ANGGARAN
+			TOTAL_ANGGARAN,
+			ID_JENIS_USER
 			)values(
 			'$p[id_user]',
 			'$p[id_jurusan]',
 			'$p[nama]',
 			NOW(),
 			'$p[tahun]',
-			'$p[total]'
+			'$p[total]',
+			'$p[id_jenis_user]'
 			)");
 		return $this->db->insert_id();
 	}

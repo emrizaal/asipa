@@ -30,7 +30,7 @@
                   <input type="text" name="NM_PAKET" id="NM_PAKET"  value="<?=$usulan['NAMA_PAKET']?>" class="form-control">
                 </div>
               </div>
-               <? if($this->session->userdata('ID_JENIS_USER') == 3){?>
+              <? if($this->session->userdata('ID_JENIS_USER') == 3){?>
               <div class="control-group ">
                 <label class="control-label " >Sisa Pagu</label>
                 <div class="controls">
@@ -45,49 +45,49 @@
                  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalLihatUsulanFinal"> <i class="fa fa-search"></i>&nbsp; Lihat Usulan Final</a>
                </div>
              </div>
-           <? } ?>
-              <div class="control-group ">
-                <label class="control-label " >Revisi Ke : </label>
-                <div class="controls">
-                  <select name="revisi" class="revisi">
-                    <?php 
-                    for($i=0;$i<=$max['m'];$i++){
-                      ?>
-                      <option <?=$i==$curr ? 'selected' : ''?>><?=$i?></option>
-                      <?php 
-                    }
+             <? } ?>
+             <div class="control-group ">
+              <label class="control-label " >Revisi Ke : </label>
+              <div class="controls">
+                <select name="revisi" class="revisi">
+                  <?php 
+                  for($i=0;$i<=$max['m'];$i++){
                     ?>
-                  </select>
-                </div>
+                    <option <?=$i==$curr ? 'selected' : ''?>><?=$i?></option>
+                    <?php 
+                  }
+                  ?>
+                </select>
               </div>
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4" style="margin-bottom: 2%;">
-              <div class="control-group ">
-                <label class="label-jumlah" >Jumlah </label>
-                <div class="controls">
-                  <input type="text" id="totalAnggaran" readonly value="" class="form-control">
-                </div>
-              </div>
-              <div class="control-group ">
-                <label class="label-jumlah" >Jumlah + Biaya Kirim </label>
-                <div class="controls">
-                  <input type="text" id="totalAnggaranKeuntungan" readonly value="" class="form-control">
-                </div>
-              </div>
-              <div class="control-group ">
-                <label class="label-jumlah" >Jumlah + Biaya Kirim + Pajak </label>
-                <div class="controls">
-                  <input type="text" id="totalAnggaranKeuntunganPajak" readonly value="" class="form-control">
-                </div>
+          </div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4" style="margin-bottom: 2%;">
+            <div class="control-group ">
+              <label class="label-jumlah" >Jumlah </label>
+              <div class="controls">
+                <input type="text" id="totalAnggaran" readonly value="" class="form-control">
               </div>
             </div>
-          </form>
-          <br>
-          <div class="row-fluid " style="height:auto;background:#fff">
-            <div id="dataTable" style="width:100%; height:300px; overflow: hidden;">  </div>
-            <br><br>
-            <div class="col-md-4">
+            <div class="control-group ">
+              <label class="label-jumlah" >Jumlah + Biaya Kirim </label>
+              <div class="controls">
+                <input type="text" id="totalAnggaranKeuntungan" readonly value="" class="form-control">
+              </div>
+            </div>
+            <div class="control-group ">
+              <label class="label-jumlah" >Jumlah + Biaya Kirim + Pajak </label>
+              <div class="controls">
+                <input type="text" id="totalAnggaranKeuntunganPajak" readonly value="" class="form-control">
+              </div>
+            </div>
+          </div>
+        </form>
+        <br>
+        <div class="row-fluid " style="height:auto;background:#fff">
+          <div id="dataTable" style="width:100%; height:300px; overflow: hidden;">  </div>
+          <br><br>
+          <div class="col-md-4">
           </div>
           <div class="col-md-4" style="
           margin-bottom: 2%;
@@ -108,25 +108,29 @@
               </div>
 
             </div>
-            </center>
-            </div>
-            <div class="col-md-4" style="
-            text-align: right;
-            ">
-              <? if($this->session->userdata('ID_JENIS_USER') == 2 || $this->session->userdata('ID_JENIS_USER') == 3){?>
-            <a href="#" class="btn btn-danger"><i class="fa fa-warning"></i> &nbsp;Konfirmasi</a>
-            <? } ?>
-            <a href="#" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp;Kirim Ajuan</a>
-
-          </div>
-              </div>
-
-            </div>
-          </div>
+          </center>
         </div>
+        <div class="col-md-4" style="
+        text-align: right;
+        ">
+        <? if($this->session->userdata('ID_JENIS_USER') == 2 || $this->session->userdata('ID_JENIS_USER') == 3){?>
+        <button id="btnKonfirm" class="btn btn-danger"><i class="fa fa-warning"></i> &nbsp;Konfirmasi</button>
+        <? } ?>
+        <form method="POST" action="<?=base_url()?>Progress/saveProgressUsulan"/>
+          <input type="hidden" name="id_usulan" value="<?=$usulan['ID_USULAN']?>">
+          <input type="hidden" name="revisi_ke" value="<?=$curr?>">
+          <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp;Kirim Ajuan</button>
+        </form>
+
       </div>
     </div>
+
   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <!-- Modal Show Usulan Final -->
 <div class="modal fade modal-primary" id="modalLihatUsulanFinal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -185,71 +189,157 @@
       window.location.href = "<?=base_url()?>Usulan/DetailUsulan/<?=$usulan['ID_USULAN']?>/"+$(".revisi").val();
     });
 
-   $("#addRow").click(function(){
+    $("#addRow").click(function(){
      var ht = $("#dataTable").handsontable("getInstance");
      ht.alter('insert_row');
    });
-   
-   $("#Save").click(function(e){
-    var rowUsulan = $("#dataTable").handsontable("getData");
-    var jsUsulan=JSON.stringify(rowUsulan);
+    
+    $("#Save").click(function(e){
+      var rowUsulan = $("#dataTable").handsontable("getData");
+      var jsUsulan=JSON.stringify(rowUsulan);
 
-    var myFormData = new FormData();
-    myFormData.append('file','');
-    myFormData.append('nama_alat','');
-    myFormData.append('id_usulan','');
-    myFormData.append('spesifikasi','');
-    myFormData.append('setara','');
-    myFormData.append('satuan','');
-    myFormData.append('jumlah_alat','');
-    myFormData.append('harga_satuan','');
-    myFormData.append('jumlah_distribusi','');
-    myFormData.append('referensi_terkait','');
-    myFormData.append('lokasi','');
-    myFormData.append('data_ahli','');
-    myFormData.append('prioritas','');
-    myFormData.append('nama',$("#NM_PAKET").val());
-    myFormData.append('total',$("#totalAnggaranKeuntunganPajak").val());
-    myFormData.append('revisi',<?=$max['m']+1?>);
-    myFormData.set('id_usulan',<?=$usulan['ID_USULAN']?>);
-    for(var i=1;i<rowUsulan.length;i++){
-      console.log(rowUsulan[i][10]);
-      if(rowUsulan[i][0]!=""){
-        myFormData.set('file',$("input:file:eq("+(i-1)+")").prop("files")[0]);
-        myFormData.set('nama_alat',rowUsulan[i][0]);
-        myFormData.set('spesifikasi',rowUsulan[i][1]);
-        myFormData.set('setara',rowUsulan[i][2]);
-        myFormData.set('satuan',rowUsulan[i][3]);
-        myFormData.set('jumlah_alat',rowUsulan[i][4]);
-        myFormData.set('harga_satuan',rowUsulan[i][5]);
-        myFormData.set('lokasi',rowUsulan[i][7]);
-        myFormData.set('jumlah_distribusi',rowUsulan[i][8]);
-        var ahli = 0;
-        if(rowUsulan[i][10]==true){
-          var ahli = 1;  
-        }
-        
-        myFormData.set('data_ahli',rowUsulan[i][10]);
-        myFormData.set('prioritas',rowUsulan[i][11]);
-        $.ajax({
-          url: '<?=base_url()?>Usulan/updateAlat',
-          type: "POST",
-          data:myFormData,
-          contentType: false,
-          processData: false,
-          success : function(res){
-            console.log("Save Alat Done");
-            console.log(res);
-          },
-          error: function (msg) {
-            console.log("gagal"+msg);
-            return false;
+      var myFormData = new FormData();
+      myFormData.append('file','');
+      myFormData.append('nama_alat','');
+      myFormData.append('id_usulan','');
+      myFormData.append('spesifikasi','');
+      myFormData.append('setara','');
+      myFormData.append('satuan','');
+      myFormData.append('jumlah_alat','');
+      myFormData.append('harga_satuan','');
+      myFormData.append('jumlah_distribusi','');
+      myFormData.append('referensi_terkait','');
+      myFormData.append('lokasi','');
+      myFormData.append('data_ahli','');
+      myFormData.append('prioritas','');
+      myFormData.append('kategori','');
+      myFormData.append('nama',$("#NM_PAKET").val());
+      myFormData.append('total',$("#totalAnggaranKeuntunganPajak").val());
+      myFormData.append('revisi',<?=$max['m']+1?>);
+      myFormData.set('id_usulan',<?=$usulan['ID_USULAN']?>);
+      myFormData.append('konfirmasi','');
+      for(var i=1;i<rowUsulan.length;i++){
+        console.log(rowUsulan[i][10]);
+        if(rowUsulan[i][0]!=""){
+          myFormData.set('file',$("input:file:eq("+(i-1)+")").prop("files")[0]);
+          myFormData.set('nama_alat',rowUsulan[i][0]);
+          myFormData.set('spesifikasi',rowUsulan[i][1]);
+          myFormData.set('setara',rowUsulan[i][2]);
+          myFormData.set('satuan',rowUsulan[i][3]);
+          myFormData.set('jumlah_alat',rowUsulan[i][4]);
+          myFormData.set('harga_satuan',rowUsulan[i][5]);
+          myFormData.set('lokasi',rowUsulan[i][7]);
+          myFormData.set('jumlah_distribusi',rowUsulan[i][8]);
+          var ahli = 0;
+          if(rowUsulan[i][10]==true){
+            var ahli = 1;  
           }
+          
+          myFormData.set('data_ahli',rowUsulan[i][10]);
+          myFormData.set('prioritas',rowUsulan[i][11]);
+          myFormData.set('kategori',rowUsulan[i][12]);
+          myFormData.set('konfirmasi',rowUsulan[i][13]);
+          $.ajax({
+            url: '<?=base_url()?>Usulan/updateAlat',
+            type: "POST",
+            data:myFormData,
+            contentType: false,
+            processData: false,
+            success : function(res){
+              console.log("Save Alat Done");
+              console.log(res);
+            },
+            error: function (msg) {
+              console.log("gagal"+msg);
+              return false;
+            }
 
-        })
+          })
+        }
       }
+    }); 
+$("#btnKonfirm").click(function(e){
+  var rowUsulan = $("#dataTable").handsontable("getData");
+  var jsUsulan=JSON.stringify(rowUsulan);
+
+  var myFormData = new FormData();
+  myFormData.append('file','');
+  myFormData.append('nama_alat','');
+  myFormData.append('id_usulan','');
+  myFormData.append('spesifikasi','');
+  myFormData.append('setara','');
+  myFormData.append('satuan','');
+  myFormData.append('jumlah_alat','');
+  myFormData.append('harga_satuan','');
+  myFormData.append('jumlah_distribusi','');
+  myFormData.append('referensi_terkait','');
+  myFormData.append('lokasi','');
+  myFormData.append('data_ahli','');
+  myFormData.append('prioritas','');
+  myFormData.append('kategori','');
+  myFormData.append('nama',$("#NM_PAKET").val());
+  myFormData.append('total',$("#totalAnggaranKeuntunganPajak").val());
+  myFormData.append('revisi',<?=$max['m']+1?>);
+  myFormData.set('id_usulan',<?=$usulan['ID_USULAN']?>);
+  myFormData.append('konfirmasi','');
+
+  $.ajax({
+    url: '<?=base_url()?>Progress/saveProgressKonfirmasi',
+    type: "POST",
+    data:myFormData,
+    contentType: false,
+    processData: false,
+    success : function(res){
+      console.log("Save Konfirmasi Done");
+      console.log(res);
+    },
+    error: function (msg) {
+      console.log("gagal"+msg);
+      return false;
     }
-  }); 
+
+  })
+
+  for(var i=1;i<rowUsulan.length;i++){
+    console.log(rowUsulan[i][10]);
+    if(rowUsulan[i][0]!=""){
+      myFormData.set('file',$("input:file:eq("+(i-1)+")").prop("files")[0]);
+      myFormData.set('nama_alat',rowUsulan[i][0]);
+      myFormData.set('spesifikasi',rowUsulan[i][1]);
+      myFormData.set('setara',rowUsulan[i][2]);
+      myFormData.set('satuan',rowUsulan[i][3]);
+      myFormData.set('jumlah_alat',rowUsulan[i][4]);
+      myFormData.set('harga_satuan',rowUsulan[i][5]);
+      myFormData.set('lokasi',rowUsulan[i][7]);
+      myFormData.set('jumlah_distribusi',rowUsulan[i][8]);
+      var ahli = 0;
+      if(rowUsulan[i][10]==true){
+        var ahli = 1;  
+      }
+
+      myFormData.set('data_ahli',rowUsulan[i][10]);
+      myFormData.set('prioritas',rowUsulan[i][11]);
+      myFormData.set('kategori',rowUsulan[i][12]);
+      myFormData.set('konfirmasi',rowUsulan[i][13]);
+      $.ajax({
+        url: '<?=base_url()?>Usulan/updateAlat',
+        type: "POST",
+        data:myFormData,
+        contentType: false,
+        processData: false,
+        success : function(res){
+          console.log("Save Alat Done");
+          console.log(res);
+        },
+        error: function (msg) {
+          console.log("gagal"+msg);
+          return false;
+        }
+
+      })
+    }
+  }
+}); 
 }); 
 
 
@@ -302,7 +392,8 @@
     {row: 0, col: 9, rowspan: 1, colspan: 1},
     {row: 0, col: 10, rowspan: 1, colspan: 1},
     {row: 0, col: 11, rowspan: 1, colspan: 1},
-    {row: 0, col: 12, rowspan: 1, colspan: 1}
+    {row: 0, col: 12, rowspan: 1, colspan: 1},
+    {row: 0, col: 13, rowspan: 1, colspan: 1}
     ],
     cell: [
     {row: 0, col: 0, className: "htCenter htMiddle"},
@@ -317,7 +408,8 @@
     {row: 0, col: 9, className: "htCenter htMiddle"},
     {row: 0, col: 10, className: "htCenter htMiddle"},
     {row: 0, col: 11, className: "htCenter htMiddle"},
-    {row: 0, col: 12, className: "htCenter htMiddle"}
+    {row: 0, col: 12, className: "htCenter htMiddle"},
+    {row: 0, col: 13, className: "htCenter htMiddle"}
     ],
     columns: [
     {
@@ -380,6 +472,11 @@
       renderer:"html"
     },
     {
+      type: 'autocomplete',
+      source: <?=$kategori?>,
+      strict: false,
+      width:150
+    },{
       width:200,
       renderer:"html"
     }

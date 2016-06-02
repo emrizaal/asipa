@@ -1,3 +1,16 @@
+<?php 
+$sess=$this->session->userdata();
+$status="";
+if($sess['ID_JENIS_USER']==1){
+    if($sess['PROGRESS']){
+        if($sess['PROGRESS'][0]['STATUS']==11){
+            $status = "Sudah Mengajukan Usulan <a href='".base_url()."Usulan/DetailUsulan/".$sess['PROGRESS'][0]['ID_USULAN']."/".$sess['PROGRESS'][0]['REVISI_KE']."'>(Lihat)</a>";
+        }
+    }else{
+        $status = "Belum Mengajukan Usulan";
+    }
+}
+?>
 <!-- Main Content -->
 <div class="app-container-slide" style="
 background: white;
@@ -10,7 +23,7 @@ box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
         <div class="row  no-margin-bottom">
             <div class="col-xs-6 col-md-5">
                 <div class="alert" role="alert" style="margin-bottom: 0px;padding: 5px;font-size: 16px;">
-                    <strong>Status : </strong>Pagu Belum Dibuat <span> <strong><span><i class="fa fa-exclamation-triangle icon"></i></span></strong></span>
+                    <strong>Status : </strong><?=$status?> <span> <strong><span><i class="fa fa-exclamation-triangle icon"></i></span></strong></span>
                 </div>
             </div>
             <div class="col-xs-6 col-md-4 text-right">

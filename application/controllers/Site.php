@@ -3,8 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Site extends CI_Controller {
 
-	public function main(){
+	public function site(){
 		parent::__construct();
+		$this->load->model('m_progress');
 	}
 
 	public function index(){
@@ -18,7 +19,9 @@ class Site extends CI_Controller {
 		$password = md5($this->input->post('pass-word'));
 		$cek = $this->m_site->Auth($username,$password);
 		if($cek){
+			$cek['PROGRESS']=$this->m_progress->getProgressByJurusan($cek['ID_JURUSAN']);
 			$this->session->set_userdata($cek);
+			$this->session->set_userdata($progress);
 			redirect(base_url().'Dashboard');
 		}else{
 			$this->session->set_flashdata('data', '1');

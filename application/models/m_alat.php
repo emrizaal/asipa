@@ -7,7 +7,7 @@ class M_alat extends CI_Model {
 	}
 
 	function getAllRevisiByIdUsulan($id){
-		$query = $this->db->query("SELECT *,(SELECT NAMA from user where user.ID_USER=alat.ID_USER) as NAMA from alat where alat.ID_USULAN = '$id' group by REVISI order by REVISI ASC")->result_array();
+		$query = $this->db->query("SELECT *,(SELECT NAMA from user where user.ID_USER=alat.ID_USER) as NAMA, (SELECT NAMA_JENIS_USER from jenis_user,user where user.ID_USER=alat.ID_USER AND user.ID_JENIS_USER = jenis_user.ID_JENIS_USER) as JENIS from alat where alat.ID_USULAN = '$id' group by REVISI order by REVISI ASC")->result_array();
 		return $query;
 	}
 
@@ -24,6 +24,7 @@ class M_alat extends CI_Model {
 	//Menyimpan data alat
 	function saveAlat($p){
 		$query = $this->db->query("INSERT INTO alat(
+			TANGGAL_UPDATE,
 			ID_JURUSAN,
 			ID_USER,
 			ID_LOKASI,
@@ -38,8 +39,10 @@ class M_alat extends CI_Model {
 			JUMLAH_DISTRIBUSI,
 			REFERENSI_TERKAIT,
 			DATA_AHLI,
-			PRIORITY
+			PRIORITY,
+			ID_KATEGORI
 			)values(
+			NOW(),
 			'$p[id_jurusan]',
 			'$p[id_user]',
 			'$p[id_lokasi]',
@@ -54,7 +57,8 @@ class M_alat extends CI_Model {
 			'$p[jumlah_distribusi]',
 			'$p[ref]',
 			'$p[data_ahli]',
-			'$p[prioritas]'
+			'$p[prioritas]',
+			'$p[kategori]'
 			)");
 		return $query;
 	}
@@ -62,6 +66,7 @@ class M_alat extends CI_Model {
 	function saveUpdateAlat($p){
 		if($p['ref']==""){
 			$query = $this->db->query("INSERT INTO alat(
+				TANGGAL_UPDATE,
 				ID_JURUSAN,
 				ID_USER,
 				ID_LOKASI,
@@ -76,8 +81,11 @@ class M_alat extends CI_Model {
 				JUMLAH_DISTRIBUSI,
 				REVISI,
 				DATA_AHLI,
-				PRIORITY
+				PRIORITY,
+				ID_KATEGORI,
+				KONFIRMASI
 				)values(
+				NOW(),
 				'$p[id_jurusan]',
 				'$p[id_user]',
 				'$p[id_lokasi]',
@@ -92,10 +100,13 @@ class M_alat extends CI_Model {
 				'$p[jumlah_distribusi]',
 				'$p[revisi]',
 				'$p[data_ahli]',
-				'$p[prioritas]'
+				'$p[prioritas]',
+				'$p[kategori]',
+				'$p[konfirmasi]'
 				)");
 		}else{
 			$query = $this->db->query("INSERT INTO alat(
+				TANGGAL_UPDATE,
 				ID_JURUSAN,
 				ID_USER,
 				ID_LOKASI,
@@ -110,8 +121,12 @@ class M_alat extends CI_Model {
 				JUMLAH_DISTRIBUSI,
 				REFERENSI_TERKAIT,
 				REVISI,
-				DATA_AHLI
+				DATA_AHLI,
+				PRIORITY,
+				ID_KATEGORI,
+				KONFIRMASI
 				)values(
+				NOW(),
 				'$p[id_jurusan]',
 				'$p[id_user]',
 				'$p[id_lokasi]',
@@ -126,7 +141,10 @@ class M_alat extends CI_Model {
 				'$p[jumlah_distribusi]',
 				'$p[ref]',
 				'$p[revisi]',
-				'$p[data_ahli]'
+				'$p[data_ahli]',
+				'$p[prioritas]',
+				'$p[kategori]',
+				'$p[konfirmasi]'
 				)");
 		}
 		return $query;

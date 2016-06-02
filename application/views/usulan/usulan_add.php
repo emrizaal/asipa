@@ -99,7 +99,6 @@
             <div class="col-md-4" style="
             text-align: right;
             ">
-            <a href="#" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp;Kirim Ajuan</a>
           </div>
 
         </div>
@@ -186,6 +185,7 @@
     myFormData.append('lokasi','');
     myFormData.append('data_ahli','');
     myFormData.append('prioritas','');
+    myFormData.append('kategori','');
     myFormData.append('nama',$("#NM_PAKET").val());
     myFormData.append('total',$("#totalAnggaranKeuntunganPajak").val());
 
@@ -215,6 +215,7 @@
               myFormData.set('jumlah_distribusi',rowUsulan[i][8]);
               myFormData.set('data_ahli',rowUsulan[i][10]);
               myFormData.set('prioritas',rowUsulan[i][11]);
+              myFormData.set('kategori',rowUsulan[i][12]);
               $.ajax({
                 url: '<?=base_url()?>Usulan/saveAlat',
                 type: "POST",
@@ -251,15 +252,15 @@
 
   var
   data1 = [
-  ['NAMA ALAT', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI','PRIORITAS'],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,''],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,''],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,''],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,''],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,''],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,''],
-  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,''],
-  ['', '', '', '', '', '', '','','','','','']
+  ['NAMA ALAT', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI','PRIORITAS','KATEGORI'],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'',''],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'',''],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'',''],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'',''],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'',''],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'',''],
+  ['', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'',''],
+  ['', '', '', '', '', '', '','','','','','','']
   ],
   container1 = document.getElementById('dataTable'),
   hot1;
@@ -305,7 +306,8 @@
     {row: 0, col: 8, rowspan: 1, colspan: 1},
     {row: 0, col: 9, rowspan: 1, colspan: 1},
     {row: 0, col: 10, rowspan: 1, colspan: 1},
-    {row: 0, col: 11, rowspan: 1, colspan: 1}
+    {row: 0, col: 11, rowspan: 1, colspan: 1},
+    {row: 0, col: 12, rowspan: 1, colspan: 1}
     ],
     cell: [
     {row: 0, col: 0, className: "htCenter htMiddle"},
@@ -319,7 +321,8 @@
     {row: 0, col: 8, className: "htCenter htMiddle"},
     {row: 0, col: 9, className: "htCenter htMiddle"},
     {row: 0, col: 10, className: "htCenter htMiddle"},
-    {row: 0, col: 11, className: "htCenter htMiddle"}
+    {row: 0, col: 11, className: "htCenter htMiddle"},
+    {row: 0, col: 12, className: "htCenter htMiddle"}
     ],
     columns: [
     {
@@ -380,7 +383,13 @@
     {
       width:100,
       renderer:"html"
-    }
+    },
+    {
+      type: 'autocomplete',
+      source: <?=$kategori?>,
+      strict: false,
+      width:150
+    },
     ],
     cells: function (row, col, prop) {
       var cellProperties = {};

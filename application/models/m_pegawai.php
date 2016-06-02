@@ -12,7 +12,7 @@ class M_pegawai extends CI_Model {
 	}
 
 	function getAllTeknisi(){
-		$query = $this->db->query("SELECT * from pegawai where is_teknisi = '1'")->result_array();
+		$query = $this->db->query("SELECT * from pegawai where IS_TEKNISI = '1'")->result_array();
 		return $query;
 	}
 }

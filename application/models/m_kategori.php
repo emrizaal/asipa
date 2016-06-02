@@ -16,6 +16,11 @@ class M_kategori extends CI_Model {
 		return $query;
 	}
 
+	function getKategoriByName($name){
+		$query = $this->db->query("SELECT * from kategori where KATEGORI = '$name'")->row_array();
+		return $query;
+	}
+
 
 }
 
