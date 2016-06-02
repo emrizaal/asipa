@@ -149,7 +149,7 @@ class Usulan extends CI_Controller {
 			$data['detailAlat'] = $alat;	
 			$data['detailUsulan'] = $usulan;	
 			$this->load->view('top');
-			$this->load->view("usulan/usulan_detail_tim_hps",$data);
+			$this->load->view("usulan/usulan_detail",$data);
 			$this->load->view('bottom');
 		}else{
 			$this->load->view('top');
