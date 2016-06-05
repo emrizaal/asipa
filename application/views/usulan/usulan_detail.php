@@ -110,26 +110,45 @@
             </div>
           </center>
         </div>
-        <div class="col-md-4" style="
-        text-align: right;
+        <div class="col-md-4" style="text-align: right;
         ">
-        <? if($this->session->userdata('ID_JENIS_USER') == 2 || $this->session->userdata('ID_JENIS_USER') == 3){?>
-        <button id="btnKonfirm" class="btn btn-danger"><i class="fa fa-warning"></i> &nbsp;Konfirmasi</button>
-        <? } ?>
-        <form method="POST" action="<?=base_url()?>Progress/saveProgressUsulan"/>
-          <input type="hidden" name="id_usulan" value="<?=$usulan['ID_USULAN']?>">
-          <input type="hidden" name="revisi_ke" value="<?=$curr?>">
-          <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp;Kirim Ajuan</button>
-        </form>
+        <? if($this->session->userdata('ID_JENIS_USER') == 2 || $this->session->userdata('ID_JENIS_USER') == 3){
+          if($this->session->userdata('ID_USER') != $usulan['ID_USER'] ){
+            ?>
+            <button id="btnKonfirm" class="btn btn-danger"><i class="fa fa-warning"></i> &nbsp;Konfirmasi</button>
+            <? } } ?>
+            <?php 
+            $jenis = $this->session->userdata('ID_JENIS_USER');
+            if($jenis==3){
+              if($jenis==$usulan['ID_JENIS_USER']){
+                ?>
+                <form method="POST" action="<?=base_url()?>Progress/saveProgressUsulan"/>
+                  <input type="hidden" name="id_usulan" value="<?=$usulan['ID_USULAN']?>">
+                  <input type="hidden" name="revisi_ke" value="<?=$curr?>">
+                  <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp;Kirim Ajuan</button>
+                </form>
+                <?php }else{
+                  ?>
+                  <button id="btnAccept" type="button" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp;Setujui</button>
+                  <?php 
+                }
+              }else{
+                ?>
+                <form method="POST" action="<?=base_url()?>Progress/saveProgressUsulan"/>
+                  <input type="hidden" name="id_usulan" value="<?=$usulan['ID_USULAN']?>">
+                  <input type="hidden" name="revisi_ke" value="<?=$curr?>">
+                  <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp;Kirim Ajuan</button>
+                </form>
+                <?php } ?>
 
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
-</div>
-</div>
-</div>
-</div>
 </div>
 </div>
 <!-- Modal Show Usulan Final -->
@@ -218,6 +237,23 @@
       myFormData.append('revisi',<?=$max['m']+1?>);
       myFormData.set('id_usulan',<?=$usulan['ID_USULAN']?>);
       myFormData.append('konfirmasi','');
+      myFormData.append('pic','');
+
+      $.ajax({
+        url: '<?=base_url()?>Usulan/clearFinal',
+        type: "POST",
+        data:myFormData,
+        contentType: false,
+        processData: false,
+        success : function(res){
+          console.log("Clear Done");
+        },
+        error: function (msg) {
+          console.log("gagal"+msg);
+          return false;
+        }
+
+      })
       for(var i=1;i<rowUsulan.length;i++){
         console.log(rowUsulan[i][10]);
         if(rowUsulan[i][0]!=""){
@@ -239,6 +275,7 @@
           myFormData.set('prioritas',rowUsulan[i][11]);
           myFormData.set('kategori',rowUsulan[i][12]);
           myFormData.set('konfirmasi',rowUsulan[i][13]);
+          myFormData.set('pic',rowUsulan[i][14]);
           $.ajax({
             url: '<?=base_url()?>Usulan/updateAlat',
             type: "POST",
@@ -340,6 +377,89 @@ $("#btnKonfirm").click(function(e){
     }
   }
 }); 
+
+$("#btnAccept").click(function(e){
+  var rowUsulan = $("#dataTable").handsontable("getData");
+  var jsUsulan=JSON.stringify(rowUsulan);
+
+  var myFormData = new FormData();
+  myFormData.append('file','');
+  myFormData.append('nama_alat','');
+  myFormData.append('id_usulan','');
+  myFormData.append('spesifikasi','');
+  myFormData.append('setara','');
+  myFormData.append('satuan','');
+  myFormData.append('jumlah_alat','');
+  myFormData.append('harga_satuan','');
+  myFormData.append('jumlah_distribusi','');
+  myFormData.append('referensi_terkait','');
+  myFormData.append('lokasi','');
+  myFormData.append('data_ahli','');
+  myFormData.append('prioritas','');
+  myFormData.append('kategori','');
+  myFormData.append('nama',$("#NM_PAKET").val());
+  myFormData.append('total',$("#totalAnggaranKeuntunganPajak").val());
+  myFormData.append('revisi',<?=$max['m']+1?>);
+  myFormData.set('id_usulan',<?=$usulan['ID_USULAN']?>);
+  myFormData.append('konfirmasi','');
+
+  $.ajax({
+    url: '<?=base_url()?>Progress/acceptUsulan',
+    type: "POST",
+    data:myFormData,
+    contentType: false,
+    processData: false,
+    success : function(res){
+      console.log("Accept Done");
+      console.log(res);
+    },
+    error: function (msg) {
+      console.log("gagal"+msg);
+      return false;
+    }
+
+  })
+
+  for(var i=1;i<rowUsulan.length;i++){
+    console.log(rowUsulan[i][10]);
+    if(rowUsulan[i][0]!=""){
+      myFormData.set('file',$("input:file:eq("+(i-1)+")").prop("files")[0]);
+      myFormData.set('nama_alat',rowUsulan[i][0]);
+      myFormData.set('spesifikasi',rowUsulan[i][1]);
+      myFormData.set('setara',rowUsulan[i][2]);
+      myFormData.set('satuan',rowUsulan[i][3]);
+      myFormData.set('jumlah_alat',rowUsulan[i][4]);
+      myFormData.set('harga_satuan',rowUsulan[i][5]);
+      myFormData.set('lokasi',rowUsulan[i][7]);
+      myFormData.set('jumlah_distribusi',rowUsulan[i][8]);
+      var ahli = 0;
+      if(rowUsulan[i][10]==true){
+        var ahli = 1;  
+      }
+
+      myFormData.set('data_ahli',rowUsulan[i][10]);
+      myFormData.set('prioritas',rowUsulan[i][11]);
+      myFormData.set('kategori',rowUsulan[i][12]);
+      myFormData.set('konfirmasi',rowUsulan[i][13]);
+      $.ajax({
+        url: '<?=base_url()?>Usulan/updateFinal',
+        type: "POST",
+        data:myFormData,
+        contentType: false,
+        processData: false,
+        success : function(res){
+          console.log("Save Alat Done");
+          console.log(res);
+        },
+        error: function (msg) {
+          console.log("gagal"+msg);
+          return false;
+        }
+
+      })
+    }
+  }
+}); 
 }); 
 
 
@@ -393,7 +513,8 @@ $("#btnKonfirm").click(function(e){
     {row: 0, col: 10, rowspan: 1, colspan: 1},
     {row: 0, col: 11, rowspan: 1, colspan: 1},
     {row: 0, col: 12, rowspan: 1, colspan: 1},
-    {row: 0, col: 13, rowspan: 1, colspan: 1}
+    {row: 0, col: 13, rowspan: 1, colspan: 1},
+    {row: 0, col: 14, rowspan: 1, colspan: 1}
     ],
     cell: [
     {row: 0, col: 0, className: "htCenter htMiddle"},
@@ -409,7 +530,8 @@ $("#btnKonfirm").click(function(e){
     {row: 0, col: 10, className: "htCenter htMiddle"},
     {row: 0, col: 11, className: "htCenter htMiddle"},
     {row: 0, col: 12, className: "htCenter htMiddle"},
-    {row: 0, col: 13, className: "htCenter htMiddle"}
+    {row: 0, col: 13, className: "htCenter htMiddle"},
+    {row: 0, col: 14, className: "htCenter htMiddle"}
     ],
     columns: [
     {
@@ -478,6 +600,10 @@ $("#btnKonfirm").click(function(e){
       width:150
     },{
       width:200,
+      renderer:"html"
+    },
+    {
+      width:100,
       renderer:"html"
     }
     ],

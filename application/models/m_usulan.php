@@ -12,8 +12,8 @@ class M_usulan extends CI_Model {
 		return $query;
 	}
 
-	function getUsulanFromTeknisi($id){
-		$query = $this->db->query("SELECT *,progress_paket.STATUS as STAT from progress_paket,usulan,jurusan where jurusan.ID_JURUSAN = usulan.ID_JURUSAN AND progress_paket.ID_JURUSAN = '$id' order by ID_PROGRESS_PAKET DESC limit 0,1")->result_array();
+	function getUsulanFromBelow($id){
+		$query = $this->db->query("SELECT *,progress_paket.STATUS as STAT from progress_paket,usulan,jurusan where jurusan.ID_JURUSAN = usulan.ID_JURUSAN AND progress_paket.ID_JURUSAN = '$id' AND usulan.ID_USULAN = progress_paket.ID_USULAN AND ID_PROGRESS_PAKET = (SELECT MAX(ID_PROGRESS_PAKET) from progress_paket where progress_paket.ID_USULAN = usulan.ID_USULAN) group by progress_paket.ID_USULAN order by ID_PROGRESS_PAKET DESC")->result_array();
 		return $query;
 	}
 
@@ -31,7 +31,7 @@ class M_usulan extends CI_Model {
 	}
 
 	function getUsulanFinal($id,$tahun){
-		$query = $this->db->query("SELECT * from usulan,alat where usulan.ID_JURUSAN = '$id' AND usulan.TAHUN_ANGGARAN = '$tahun' AND usulan.ID_USULAN = alat.ID_USULAN AND alat.IS_FINAL='1'")->result_array();
+		$query = $this->db->query("SELECT * from usulan,alat,lokasi,user,pegawai where alat.ID_USER = user.ID_USER AND pegawai.NIP=user.NIP AND usulan.ID_JURUSAN = '$id' AND usulan.TAHUN_ANGGARAN = '$tahun' AND usulan.ID_USULAN = alat.ID_USULAN AND alat.IS_FINAL='1' AND lokasi.ID_LOKASI = alat.ID_LOKASI")->result_array();
 		return $query;
 	}
 

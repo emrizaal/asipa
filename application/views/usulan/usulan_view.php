@@ -16,7 +16,7 @@ $this->load->view("info_header");
                              <li role="presentation" class="active">
                              <a href="#usulan" aria-controls="rd" role="tab" data-toggle="tab">Usulan Pengadaan</a></li>
                               <? if($this->session->userdata('ID_JENIS_USER') == 2 || $this->session->userdata('ID_JENIS_USER') == 3){?>
-                             <li role="presentation" ><a href="#verusulan" aria-controls="verusulan" role="tab" data-toggle="tab">Verifikasi Usulan <span class="badge danger">!</span> </a></li>
+                             <li role="presentation" ><a href="#verusulan" aria-controls="verusulan" role="tab" data-toggle="tab">Verifikasi Usulan <?php if(!empty($usulan_below)){?><span class="badge danger">!</span><?php } ?> </a></li>
                              <? }?>
 
 
@@ -76,7 +76,7 @@ $this->load->view("info_header");
                                             <th>Aksi</th>
                                         </tr>
                                         <?php 
-                                        foreach($usulan_teknisi as $p){
+                                        foreach($usulan_below as $p){
                                             $noDok = "Usulan-".$p['ID_USULAN']."/".$p['INISIAL']."/".$p['TAHUN_ANGGARAN'];
                                             ?>
                                             <tr>

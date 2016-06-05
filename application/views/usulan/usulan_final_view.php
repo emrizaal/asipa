@@ -1,7 +1,6 @@
 <?php 
 if(!empty($final)){
   ?>
-  <div class="sub-title">Nomor Dokumen : USULAN/JTK/2016/2 </div>
   <div>
    <table class="table table-bordered table-stripped table-hovered">
     <tr class="active">
@@ -18,22 +17,26 @@ if(!empty($final)){
       <th> Referensi Terkait </th>
       <th> Data Ahli </th>
       <th> Tanggal Update </th>
+      <th> PIC </th>
     </tr>
+    <?php foreach($final as $f){ ?>
     <tr>
-      <td> Usulan Teknik Komputer </td>
-      <td> Hardisk External </td>
-      <td> 2TB Toshiba </td>
-      <td> Seagate </td>
-      <td> Buah </td>
-      <td> 5 </td>
-      <td> <?=number_format(1000000,'0',',','.')?> </td>
-      <td> <?=number_format(5000000,'0',',','.')?> </td>
-      <td> Ruang Dosen </td>
-      <td> 5</td>
-      <td> <a href="#" target="_blank"> file.png </a></td>
-      <td> <input type="checkbox" checked disabled=""></td>
-      <td> 20 May 2013</td>
+      <td> <?=$f['NAMA_PAKET']?> </td>
+      <td> <?=$f['NAMA_ALAT']?> </td>
+      <td> <?=$f['SPESIFIKASI']?> </td>
+      <td> <?=$f['SETARA']?> </td>
+      <td> <?=$f['SATUAN']?></td>
+      <td> <?=$f['JUMLAH_ALAT']?> </td>
+      <td> <?=number_format($f['HARGA_SATUAN'],'0',',','.')?> </td>
+      <td> <?=number_format($f['HARGA_SATUAN']*$f['JUMLAH_ALAT'],'0',',','.')?> </td>
+      <td> <?=$f['NAMA_LOKASI']?></td>
+      <td> <?=$f['JUMLAH_DISTRIBUSI']?></td>
+      <td> <a href="<?=base_url()?>assets/referensi/<?=$f['REFERENSI_TERKAIT']?>" target="_blank"> <?=$f['REFERENSI_TERKAIT']?> </a></td>
+      <td> <input type="checkbox" <?=$f['DATA_AHLI']==1 ? 'checked' : ''?> disabled=""></td>
+      <td> <?=$f['TANGGAL_UPDATE']?></td>
+      <td> <?=$f['NAMA_PEGAWAI']?></td>
     </tr>
+    <?php } ?>
   </table>
 </div>
 <?php 

@@ -6,8 +6,8 @@ class M_progress extends CI_Model {
 		parent::__construct();
 	}
 
-	function getProgressByJurusan($id){
-		$query=$this->db->query("SELECT * from progress_paket where ID_JURUSAN = '$id' order by ID_PROGRESS_PAKET DESC")->result_array();
+	function getProgressByUserJurusan($id,$id_jenis){
+		$query=$this->db->query("SELECT * from progress_paket where ID_JURUSAN = '$id' AND ID_JENIS_USER='$id_jenis' order by ID_PROGRESS_PAKET DESC")->row_array();
 		return $query;
 	}
 

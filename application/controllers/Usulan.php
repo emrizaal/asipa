@@ -11,22 +11,33 @@ class Usulan extends CI_Controller {
 		$this->load->model("m_alat");
 		$this->load->model("m_kategori");
 		$this->load->model("m_progress");
+		$this->load->model("m_pegawai");
 	}
 
 	public function index(){
 		$id_jenis = $this->session->userdata('ID_JENIS_USER');
 		$this->load->view('top');
 		$id = $this->session->userdata("ID_JURUSAN");
+		$tahun = date('Y');
 		$data['usulan']=$this->m_usulan->getUsulanByIdJurusan($id,$id_jenis);
-		
+		$data['final']=$this->m_usulan->getUsulanFinal($id,$tahun);
+		$data['usulan_below']=array();
+
+
 		if($id_jenis==2){
-			$usulTeknisi=$this->m_usulan->getUsulanFromTeknisi($id);
-			if($usulTeknisi[0]['STAT']==11){
-				$data['usulan_teknisi']=$usulTeknisi;	
-			}else{
-				$data['usulan_teknisi']=array();
+			$usul=$this->m_usulan->getUsulanFromBelow($id);
+			foreach($usul as $u){
+				if($u['STAT']==11){
+					$data['usulan_below'][]=$u;	
+				}
 			}
-			
+		}else if($id_jenis==3){
+			$usul=$this->m_usulan->getUsulanFromBelow($id);
+			foreach($usul as $u){
+				if($u['STAT']==1 || $u['STAT']==22){
+					$data['usulan_below'][]=$u;
+				}
+			}
 		}
 		if($id_jenis==5 || $id_jenis==4){
 			$data['anggaran_usulan']=$this->m_usulan->getUsulanAnggaranByIdJurusan($id);
@@ -74,8 +85,8 @@ class Usulan extends CI_Controller {
 	public function saveUsulan(){
 		$p=$this->input->post();
 		$param=array(
-			'id_jurusan'=>1,//$this->session->userdata("id_jurusan");,
-			'id_user'=>1,
+			'id_jurusan'=>$this->session->userdata("ID_JURUSAN"),
+			'id_user'=>$this->session->userdata("ID_USER"),
 			'nama'=>$p['nama'],
 			'total'=>$p['total'],
 			'tahun'=>date("Y"),
@@ -102,7 +113,9 @@ class Usulan extends CI_Controller {
 		}
 		$p=$this->input->post();
 		$p['id_jurusan']=$this->session->userdata("ID_JURUSAN");
-		$p['id_user']=$this->session->userdata("ID_USER");
+		$p['id_user']=$this->session->userdata("ID_USER");	
+		
+		
 		$p['ref']=$finfo['file_name'];
 		$lokasi = $this->m_lokasi->getIdLokasiByName($p['id_jurusan'],$p['lokasi']);
 		$kategori = $this->m_kategori->getKategoriByName($p['kategori']);
@@ -123,6 +136,7 @@ class Usulan extends CI_Controller {
 		}else{
 			$p['data_ahli']=0;
 		}
+		
 		$this->m_alat->saveAlat($p);
 	}
 
@@ -138,7 +152,13 @@ class Usulan extends CI_Controller {
 			$rev=$curr;
 		}
 		$usulan = $this->m_usulan->getUsulanByIdUsulan($p);
-		$alat = $this->m_alat->getAlatByIdUsulan($usulan['ID_USULAN'],$rev);
+		if($this->session->userdata("ID_JENIS_USER")==3){
+			$alat = $this->m_alat->getAlatByIdUsulanAndFinal($usulan['ID_USULAN'],$rev);
+			$data['totalFinal']=count($alat);
+		}else{
+			$alat = $this->m_alat->getAlatByIdUsulan($usulan['ID_USULAN'],$rev);
+			$data['totalFinal']=1;
+		}
 		$resKategori=$this->m_kategori->getAllKategori();
 		$resLokasi=$this->m_lokasi->getLokasiByIdJurusan($id);
 		$lokasi=array();
@@ -160,7 +180,7 @@ class Usulan extends CI_Controller {
 		}
 
 		
-		$res[0] = array('NAMA ALAT', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI','PRIORITAS','KATEGORI','KONFIRMASI');
+		$res[0] = array('NAMA ALAT', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI','PRIORITAS','KATEGORI','KONFIRMASI','PIC');
 		
 		foreach($alat as $a){
 			if($a['DATA_AHLI']==1){
@@ -174,12 +194,12 @@ class Usulan extends CI_Controller {
 				$link = "";
 			}
 			
-			$res[]=array($a['NAMA_ALAT'], $a['SPESIFIKASI'], $a['SETARA'], $a['SATUAN'], $a['JUMLAH_ALAT'], $a['HARGA_SATUAN'], $a['JUMLAH_ALAT']*$a['HARGA_SATUAN'], $lokasi[$a['ID_LOKASI']],$a['JUMLAH_DISTRIBUSI'],$link." <input name='file[]' type='file'>",$ahli,$a['PRIORITY'],$kategori[$a['ID_KATEGORI']],$a['KONFIRMASI']);
+			$res[]=array($a['NAMA_ALAT'], $a['SPESIFIKASI'], $a['SETARA'], $a['SATUAN'], $a['JUMLAH_ALAT'], $a['HARGA_SATUAN'], $a['JUMLAH_ALAT']*$a['HARGA_SATUAN'], $lokasi[$a['ID_LOKASI']],$a['JUMLAH_DISTRIBUSI'],$link." <input name='file[]' type='file'>",$ahli,$a['PRIORITY'],$kategori[$a['ID_KATEGORI']],$a['KONFIRMASI'],$a['NAMA_PEGAWAI']);
 			
 		}
 		
 		for($i=0;$i<9;$i++){
-			$res[]=array('', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'','','');
+			$res[]=array('', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'','','','');
 		}
 		
 		//print_r($res);
@@ -290,6 +310,10 @@ class Usulan extends CI_Controller {
 		
 	}
 
+	public function clearFinal(){
+		$this->m_alat->clearFinal($p['id_jurusan']);
+	}
+
 	public function updateAlat(){
 		//$data="[[\"NAMA BARANG\",\"SPESIFIKASI\",\"SETARA\",\"SATUAN\",\"JUMLAH ALAT\",\"HARGA SATUAN\",\"TOTAL (Rp)\",\"LOKASI\",\"JUMLAH DISTRIBUSI\",\"REFERENSI TERKAIT\",\"DATA AHLI\"],[\"barang\",\"spek\",\"setara\",\"Set\",18,50000,900000,\"RSG\",10,\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"<input type='file'>\",\"<input type='checkbox'>\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]";
 		$config['upload_path']   =   "assets/referensi";
@@ -305,7 +329,12 @@ class Usulan extends CI_Controller {
 		}
 		$p=$this->input->post();
 		$p['id_jurusan']=$this->session->userdata("ID_JURUSAN");
-		$p['id_user']=$this->session->userdata("ID_USER");
+		if($p['pic']==""){
+			$p['id_user']=$this->session->userdata("ID_USER");	
+		}else{
+			$id_user=$this->m_pegawai->getUserIdByName($p['pic']);
+			$p['id_user']=$id_user['ID_USER'];
+		}
 		$p['ref']=$finfo['file_name'];
 		$lokasi = $this->m_lokasi->getIdLokasiByName($p['id_jurusan'],$p['lokasi']);
 		$kategori = $this->m_kategori->getKategoriByName($p['kategori']);
@@ -325,6 +354,10 @@ class Usulan extends CI_Controller {
 		}else{
 			$p['data_ahli']=0;
 		}
+		$p['is_final']=0;
+		if($this->session->userdata("ID_JENIS_USER")==3){
+			$p['is_final']=1;
+		}
 		$this->m_usulan->updateUsulanById($p);
 		$this->m_alat->saveUpdateAlat($p);
 	}
@@ -333,6 +366,16 @@ class Usulan extends CI_Controller {
 	public function revisi($id){
 		$data['revisi'] = $this->m_alat->getAllRevisiByIdUsulan($id);
 		$this->load->view("usulan/revisi_view",$data);
+	}
+
+	public function updateFinal(){
+		$p=$this->input->post();
+		$p['id_user']=$this->session->userdata("ID_USER");
+		$p['id_jurusan']=$this->session->userdata("ID_JURUSAN");
+		$p['id_jenis_user']=$this->session->userdata("ID_JENIS_USER");
+		$p['revisi_ke']=$p['revisi']-1;
+
+		$this->m_alat->updateFinal($p);
 	}
 
 }

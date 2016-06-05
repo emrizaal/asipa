@@ -197,8 +197,6 @@
         contentType: false,
         processData: false,
         success : function(aw){
-          console.log("adasd");
-          console.log(aw);
 
           myFormData.set('id_usulan',aw);
           for(var i=1;i<rowUsulan.length;i++){
@@ -407,7 +405,7 @@
           return cellProperties;
         },
         afterChange : function(changes, source){
-
+          console.log(changes);
           if(changes != null){
             var row = changes[0][0];
             var col = changes[0][1];

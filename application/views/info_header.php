@@ -3,8 +3,30 @@ $sess=$this->session->userdata();
 $status="";
 if($sess['ID_JENIS_USER']==1){
     if($sess['PROGRESS']){
-        if($sess['PROGRESS'][0]['STATUS']==11){
-            $status = "Sudah Mengajukan Usulan <a href='".base_url()."Usulan/DetailUsulan/".$sess['PROGRESS'][0]['ID_USULAN']."/".$sess['PROGRESS'][0]['REVISI_KE']."'>(Lihat)</a>";
+        if($sess['PROGRESS']['STATUS']==11){
+            $status = "Sudah Mengajukan Usulan <a href='".base_url()."Usulan/DetailUsulan/".$sess['PROGRESS']['ID_USULAN']."/".$sess['PROGRESS']['REVISI_KE']."'>(Lihat)</a>";
+        }else{
+            $status = "Belum Mengajukan Usulan";    
+        }
+    }else{
+        $status = "Belum Mengajukan Usulan";
+    }
+}else if($sess['ID_JENIS_USER']==2){
+    if($sess['PROGRESS']){
+        if($sess['PROGRESS']['STATUS']==22){
+            $status = "Sudah Mengajukan Usulan <a href='".base_url()."Usulan/DetailUsulan/".$sess['PROGRESS']['ID_USULAN']."/".$sess['PROGRESS']['REVISI_KE']."'>(Lihat)</a>";
+        }else{
+            $status = "Belum Mengajukan Usulan";
+        }
+    }else{
+        $status = "Belum Mengajukan Usulan";
+    }
+}else if($sess['ID_JENIS_USER']==3){
+    if($sess['PROGRESS']){
+        if($sess['PROGRESS']['STATUS']==3){
+            $status = "Sudah Mengajukan Usulan <a href='".base_url()."Usulan/DetailUsulan/".$sess['PROGRESS']['ID_USULAN']."/".$sess['PROGRESS']['REVISI_KE']."'>(Lihat)</a>";
+        }else{
+            $status = "Belum Mengajukan Usulan";
         }
     }else{
         $status = "Belum Mengajukan Usulan";
