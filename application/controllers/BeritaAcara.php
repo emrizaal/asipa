@@ -7,11 +7,12 @@ class BeritaAcara extends CI_Controller {
 		parent::__construct();
 		$this->load->model("m_kontrak");
 		$this->load->model("m_pengelompokan");
+		$this->load->model("m_beritaacara");
 	}
 
 	public function index(){
 		$this->load->view('top');
-		$data['paket']='';
+		$data['paket']=$this->m_beritaacara->getAllDataPaket();
 		$this->load->view("berita_acara/view",$data);
 		$this->load->view('bottom');
 	}

@@ -11,7 +11,7 @@ class Kontrak extends CI_Controller {
 
 	public function index(){
 		$this->load->view('top');
-		$data['paket']=$this->m_pengelompokan->getAllPengelompokanForKontrak();
+		$data['paket']=$this->m_kontrak->getAllDataPaket();
 		$this->load->view("kontrak/kontrak_view",$data);
 		$this->load->view('bottom');
 	}
@@ -19,8 +19,9 @@ class Kontrak extends CI_Controller {
 	//Menampilkan detail dari dokumen pengelompokan berdasarkan id paket (pengelompokan)
 	public function detail($id){
 		$this->load->view('top');
-		$data['paket']=$this->m_pengelompokan->getPengelompokanById($id);
-		$data['kontrak']=$this->m_kontrak->getKontrakByIdPaket($id);
+		$data['paket']=$this->m_kontrak->getAllDataPaketById($id);
+		$data['kontrak']=$this->m_kontrak->getKontrakById($id);
+		$data['penyedia']=$this->m_kontrak->getPenyediaById($id);
 		$this->load->view("kontrak/kontrak_detail",$data);
 		$this->load->view('bottom');
 	}
@@ -34,7 +35,22 @@ class Kontrak extends CI_Controller {
 	public function editKontrak($id){
 
 	}
+	//Save Kontrak
+	public function savePenyedia(){
+		$penyedia = explode("/", $this->input->post('penyedia'));
+		$data = array(
+			'PENYEDIA' => $penyedia[3],
+			'WAKTU_PENGADAAN' => $this->input->post('hariPengerjaan').'/'.$this->input->post('jenisHari'),
+			);
 
+		$id = $this->input->post('id_paket');
+		$this->m_kontrak->savePenyedia($id,$data);
+
+		
+
+		redirect($_SERVER['HTTP_REFERER']);
+
+	}
 	//Save Kontrak
 	public function saveKontrak(){
 		$config['upload_path']   =   "assets/kontrak";
@@ -53,6 +69,17 @@ class Kontrak extends CI_Controller {
 		$p['file'] = $finfo['file_name'];
 		$p['id_user']=$this->session->userdata("ID_USER");
 		$this->m_kontrak->saveKontrak($p);
+
+		$id = $this->input->post('id_paket');
+		$dataProgress = array(
+			'ID_PAKET'=>$id,
+			'ID_USER'=> $this->session->userdata('ID_USER'),
+			'ID_FASe'=> '4',
+			'STATUS'=>'10',
+			'ID_JENIS_USER'=> $this->session->userdata('ID_JENIS_USER'),
+			);
+		$this->m_kontrak->saveProgressKontrak($dataProgress);
+
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 

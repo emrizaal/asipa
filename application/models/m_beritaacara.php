@@ -7,14 +7,7 @@ class M_kontrak extends CI_Model {
 	}
 	function getAllDataPaket(){
 		$query = $this->db->query("SELECT * 
-			from paket p
-			inner join (
-				select *,pp.ID_USER AS idUSr,pp.`STATUS` AS sts from progress_paket pp 
-				WHERE pp.`STATUS` IN (SELECT ppp.STATUS FROM progress_paket ppp WHERE ppp.`STATUS` BETWEEN '9' and '10' AND ppp.ID_PAKET = pp.ID_PAKET ORDER BY ppp.STATUS DESC)
-				ORDER BY pp.TANGGAL desc 
-				) r
-		on r.ID_PAKET = p.ID_PAKET
-		group by r.ID_PAKET")->result_array();
+			from paket p WHERE p.")->result_array();
 		return $query;
 	}
 	function getAllDataPaketById($id){
@@ -22,18 +15,14 @@ class M_kontrak extends CI_Model {
 			from paket p
 			inner join (
 				select *,pp.ID_USER AS idUSr,pp.`STATUS` AS sts from progress_paket pp 
-				WHERE pp.`STATUS` IN (SELECT ppp.STATUS FROM progress_paket ppp WHERE ppp.`STATUS` BETWEEN '9' and '10' AND ppp.ID_PAKET = pp.ID_PAKET ORDER BY ppp.STATUS DESC) AND pp.ID_PAKET = $id
+				WHERE pp.STATUS = 9
 				ORDER BY pp.TANGGAL desc 
 				) r
-		on r.ID_PAKET = p.ID_PAKET
-		group by r.ID_PAKET")->row_array();
+		on r.ID_PAKET = p.ID_PAKET AND p.ID_PAKET = '$id'
+		group by r.ID_PAKET AND r.ID_FASE = '3'")->row_array();
 		return $query;
 	}
 
-	function saveProgressKontrak($data){
-		$this->db->insert('progress_paket',$data);
-		return 1;
-	}
 	function getKontrakById($id){
 		$query = $this->db->query("SELECT * from kontrak where ID_PAKET= '$id'")->result_array();
 		return $query;

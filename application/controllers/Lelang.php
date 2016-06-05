@@ -11,6 +11,7 @@ class Lelang extends CI_Controller {
 	public function index(){
 		$this->load->view('top');
 		$data['lelang']=$this->m_lelang->getAllLelang();
+		$data['timpenerima']=$this->m_timPenerimaan->getAllTimPenerimaan();
 		$this->load->view("lelang/lelang_view",$data);
 		$this->load->view('bottom');
 	}
@@ -33,10 +34,28 @@ class Lelang extends CI_Controller {
 		if($p['status']==8){
 			$this->m_lelang->updateLelangNormal($p);
 		}else if($p['status']==9){
-			$this->m_lelang->updateLelangSukses($p);
+			$data = array(
+				'ID_PAKET'=>$p['id_paket'],
+				'ID_USER'=> $this->session->userdata('ID_USER'),
+				'ID_FASe'=> '3',
+				'STATUS'=>'9',
+				'ID_JENIS_USER'=> $this->session->userdata('ID_JENIS_USER'),
+
+				);
+			$this->m_lelang->updateLelangSukses($p,$data);
 		}else if($p['status']==-9){
-			$this->m_lelang->updateLelangGagal($p);
+			$data = array(
+				'ID_PAKET'=>$p['id_paket'],
+				'ID_USER'=> $this->session->userdata('ID_USER'),
+				'ID_FASe'=> '3',
+				'STATUS'=>'-9',
+				'ID_JENIS_USER'=> $this->session->userdata('ID_JENIS_USER'),
+
+				);
+
+			$this->m_lelang->updateLelangGagal($p,$data);
 		}
+		$this->session->set_flashdata('data', 'Data Berhasil Dimasukkan');
 		redirect("Lelang");
 	}
 

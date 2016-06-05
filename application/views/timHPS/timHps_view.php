@@ -146,15 +146,15 @@ $this->load->view("info_header");
                   <table width="100%" style="margin-top: 40px;margin-bottom:30px;">
                     <tr>
                       <td style="vertical-align: top;">
-                        <fieldset class="col-md-11" style="border: 1px solid #ccc;padding-bottom: 1%;">
-                          <legend> Data Pegawai </legend>
+                        <legend> Data Pegawai </legend>
+                        <fieldset class="col-md-11" style="border: 1px solid #ccc;padding-bottom: 1%;height: 150px;overflow: auto;">
                           <?php 
                           foreach($pegawai as $pe){
                             ?>
                             <div class="checkbox3 checkbox-check addcheck">
                               <input type="checkbox" id="checkbox-<?=$pe['NIP']?>" class="dataPg" value="<?=$pe['NAMA_PEGAWAI']?>" da="<?=$pe['NIP']?>">
                               <label for="checkbox-<?=$pe['NIP']?>">
-                                <?=$pe['NAMA_PEGAWAI']?>
+                                <?=$pe['NAMA_PEGAWAI']?> <?= ($pe['HPS_CERTIFIED']=='1')?'<strong>(Certified)</strong>':''?>
                               </label>
                             </div>
                             <?php
@@ -232,7 +232,7 @@ $this->load->view("info_header");
               <table width="100%" style="margin-top: 40px;margin-bottom:30px;">
                 <tr>
                   <td style="vertical-align: top;">
-                    <fieldset class="col-md-11" style="border: 1px solid #ccc;padding-bottom: 1%;">
+                    <fieldset class="col-md-11" style="border: 1px solid #ccc;padding-bottom: 1%;height: 50%;overflow: auto;">
                       <legend> Data Pegawai </legend>
                       <div class="checkbox3 checkbox-check">
                         <input type="checkbox" id="checkbox-1E" class="dataPgE" value="Agus" da="1">
