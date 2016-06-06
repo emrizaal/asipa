@@ -24,36 +24,39 @@
               </div>
               <div class="card-body">
                 <div class="row">
+                  <?// print_r($p)?>
                   <div class="col-md-7">
                     <div class="row">
+
                       <span class="col-md-3" style="margin-bottom:5px"><b>No. Dokumen : </b></span>
-                      <span class="col-md-3" style="margin-bottom:5px"> HPS-1?></span>
+                      <span class="col-md-3" style="margin-bottom:5px"> PAKET-<?=$p['ID_PAKET']?>/<?=$p['TAHUN_ANGGARAN']?></span>
 
                       <span class="col-md-3" style="margin-bottom:5px"><b> Total Anggaran :</b></span>
-                      <span class="col-md-3" style="margin-bottom:5px"> 20000000</span>
+                      <span class="col-md-3" style="margin-bottom:5px"> Rp. <?=number_format($p['TOTAL_ANGGARAN'],'0',',','.')?></span>
                     </div>
 
                     <div class="row">
                       <span class="col-md-3" style="margin-bottom:5px"><b>Tahun : </b></span>
-                      <span class="col-md-3" style="margin-bottom:5px"> 2001></span>
+                      <span class="col-md-3" style="margin-bottom:5px"> <?=$p['TAHUN_ANGGARAN']?></span>
 
                       <span class="col-md-3" style="margin-bottom:5px"><b> Tanggal Dibuat :</b></span>
-                      <span class="col-md-3" style="margin-bottom:5px"> 12 Mei 2001></span>
+                      <span class="col-md-3" style="margin-bottom:5px"> <? $tgl = explode(" ", $p['TANGGAL_DIBUAT']); echo $tgl[0];?></span>
                     </div>
 
                     <div class="row">
                       <span class="col-md-3" style="margin-bottom:5px"><b>Nama Paket  : </b></span>
-                      <span class="col-md-3" style="margin-bottom:5px"> Paket A</span>
+                      <span class="col-md-3" style="margin-bottom:5px"> <?=$p['NAMA_PAKET']?></span>
 
                       <span class="col-md-3" style="margin-bottom:5px"><b> Last Update :</b></span>
-                      <span class="col-md-3" style="margin-bottom:5px"> 12 Juni 2001</span>
+                      <span class="col-md-3" style="margin-bottom:5px"> <? $tgl = explode(" ", $p['LAST_UPDATE']); echo $tgl[0];?></span>
                     </div>
 
                   </div>
 
                 </div>
-                
-                
+                <?
+                $maxTgl = $this->m_beritaacara->cekTglPenerimaan($p['ID_PAKET']);
+                ?>
                 <table class="table table-stripped table-bordered table-hover">
                   <tr class="active">
                     <th rowspan="2">Nama Barang</th>
@@ -61,61 +64,75 @@
                     <th rowspan="2">Setara</th>
                     <th rowspan="2">Satuan</th>
                     <th rowspan="2">Jumlah</th>
-                    <th colspan="4"  style="text-align:center"> Pemeriksaan</th>
+                    <th colspan="<?= ($maxTgl['c']!=0)?$maxTgl['c']*2:'2'?>"  style="text-align:center"> Pemeriksaan</th>
                     <th rowspan="2">Jumlah Penerimaan</th>
                     <th rowspan="2">Aksi</th>
                   </tr>
                   <tr class="active">
+                    <?for ($i=0; $i < $maxTgl['c']; $i++) { ?>
                     <th style="border-left: 2px solid #ccc;">Tanggal</th >
                       <th>Jumlah</th>
-                      <th style="border-left: 2px solid #ccc;">Tanggal</th>
+                      <? }  
+                      if($maxTgl['c'] == 0) {?>
+                       <th style="border-left: 2px solid #ccc;">Tanggal</th >
                       <th>Jumlah</th>
+                      <? } ?>
+
                     </tr>
-                    <tr>
-                     <td>-</td>
-                     <td>-</td>
-                     <td>-</td>
-                     <td>-</td>
-                     <td>12</td>
-                     <td style="border-left: 2px solid #ccc;">
-                      <a href="#" data-toggle="tooltip" data-placement="left" data-html="true" title="Ket : Test">10 Jun 2016 </a></td>
-                      <td>4</td>
-                      <td style="border-left: 2px solid #ccc;">
-                       <a href="#" data-toggle="tooltip" data-placement="left" data-html="true" title="Ket : -">10 Jun 2016 </a></td>
-                       <td>4</td>
-                       <td>8</td>
-                       <td><a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalAddPenerimaan"><i class="fa fa-plus"></i> Tambah </a></td>
-                     </tr>
-                     <tr>
-                       <td>-</td>
-                       <td>-</td>
-                       <td>-</td>
-                       <td>-</td>
-                       <td>12</td>
-                       <td  style="border-left: 2px solid #ccc;">
-                         <a href="#" data-toggle="tooltip" data-placement="left" data-html="true" title="Ket : -">
-                           10 May 2016
-                         </a></td>
-                         <td>3</td>
-                         <td style="border-left: 2px solid #ccc;">-</td>
-                         <td>-</td>
-                         <td>10</td>
-                         <td><a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalAddPenerimaan"><i class="fa fa-plus"></i> Tambah </a></td>
-                       </tr>
-                     </table>
-                     
+                    <?
+                    foreach ($alat as $a) {
+                      $tanggalPemeriksaan = $this->m_beritaacara->getTglPenerimaanByIdAlat($a['ID_ALAT']);
+                      $jm = 0;
+                      $c = 0;
+                      ?>
+                      <tr>
+                        <td><?=$a['NAMA_ALAT']?></td>
+                        <td><?=$a['SPESIFIKASI']?></td>
+                        <td><?=$a['SETARA']?></td>
+                        <td><?=$a['SATUAN']?></td>
+                        <td><?=$a['JUMLAH_ALAT']?></td>
+                        <? foreach ($tanggalPemeriksaan as $t) {?>
+                        <td style="border-left: 2px solid #ccc;">
+                          <a href="#" data-toggle="tooltip" data-placement="left" data-html="true" title="Ket : <?= $t['KETERANGAN']?>">
+                            <? $tgl = explode(" ", $t['TANGGAL_PENERIMAAN']); echo $tgl[0];?>
+                          </a>
+                        </td>
+                        <td ><?=$t['JUMLAH']?></td>
+                        <? 
+                        $jm += $t['JUMLAH']; 
+                        $c++;
+                      }
 
-                   </div>
-                 </div>
-               </div>
-             </div>
 
-           </div>
-         </div>
-       </div>
-     </div>
-     <!-- modal add tanggal pemeriksaan -->
-     <div class="modal fade modal-info" id="modalAddPenerimaan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                      if($c < $maxTgl['c']){
+                        $mx = $maxTgl['c'] - $c;
+                        for ($i=0; $i < $mx; $i++) { ?>
+                        <td style="border-left: 2px solid #ccc;"> - </td>
+                        <td> - </td>
+                        <? }}
+                        if($maxTgl['c'] == 0) {?>
+                        <td style="border-left: 2px solid #ccc;"> - </td>
+                        <td> - </td>
+                        <? } ?>
+                        <td> <?= $jm ?> </td>
+                        <td><a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalAddPenerimaan" onclick="setAddPenerimaan('<?=$a['ID_ALAT']?>','<?=$p['ID_TEAM_PENERIMA']?>','<?=$p['ID_PAKET']?>')"><i class="fa fa-plus"></i> Tambah </a></td>
+
+                      </tr>
+                      <?}?>
+                    </table>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- modal add tanggal pemeriksaan -->
+    <div class="modal fade modal-info" id="modalAddPenerimaan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -125,12 +142,10 @@
           <div class="modal-body">
             <div class="card">
              <div class="card-body"  style="padding: 0px 20px !important;">
-              <form enctype="multipart/form-data" action="<?=base_url()?>Kontrak/saveKontrak" method="POST">
-                <input type="hidden" name="id_paket">
-                <div class="sub-title">Tanggal Penerimaan</div>
-                <div>
-                  <input type="text" name="tgl" class="form-control datepicker">
-                </div>
+              <form enctype="multipart/form-data" action="<?=base_url()?>BeritaAcara/saveBAPP" method="POST">
+                <input type="hidden" name="id_alat" id="id_alat">
+                <input type="hidden" name="id_tim" id="id_tim">
+                <input type="hidden" name="id_paket" id="id_paket">
                 <div class="sub-title">Jumlah Barang</div>
                 <div>
                   <input type="text" name="jml" class="form-control">
@@ -151,4 +166,12 @@
     </div>
   </div>
 
- <!-- end add tanggal pemeriksaan -->
+  <!-- end add tanggal pemeriksaan -->
+  <script type="text/javascript">
+    function setAddPenerimaan(a,b,c) {
+      document.getElementById('id_alat').value = a;
+      document.getElementById('id_tim').value = b;
+      document.getElementById('id_paket').value = c;
+    }
+
+  </script>

@@ -9,12 +9,10 @@ class Pencatatan extends CI_Controller {
 	}
 
 	public function index(){
-		$id_jenis = $this->session->userdata('ID_JENIS_USER');
 		$this->load->view('top');
-		$this->load->view('pencatatan/pencatatan_view');
+		$data['paket']=$this->m_pencatatan->getAllDataPaket();
+		$this->load->view("pencatatan/pencatatan_view",$data);
 		$this->load->view('bottom');
-		
-
 	}
 	public function Detail($id){
 		$id_jenis = $this->session->userdata('ID_JENIS_USER');

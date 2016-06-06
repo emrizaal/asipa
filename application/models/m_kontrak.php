@@ -34,6 +34,10 @@ class M_kontrak extends CI_Model {
 		$this->db->insert('progress_paket',$data);
 		return 1;
 	}
+	function cekProgressKontrak($id){
+		$ret = $this->db->query("SELECT * FROM progress_paket WHERE ID_PAKET = $id AND ID_FASE = 4")->num_rows();
+		return $ret;
+	}
 	function getKontrakById($id){
 		$query = $this->db->query("SELECT * from kontrak where ID_PAKET= '$id'")->result_array();
 		return $query;
