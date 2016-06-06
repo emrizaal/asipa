@@ -5,35 +5,43 @@ class M_pencatatan extends CI_Model {
 	function m_pencatatan(){
 		parent::__construct();
 	}
-	function getAllDataPaket(){
-		$query = $this->db->query("SELECT * 
-			from paket p
-			inner join (
-				select *,pp.ID_USER AS idUSr,pp.`STATUS` AS sts from progress_paket pp 
-				WHERE pp.`STATUS` IN (SELECT ppp.STATUS FROM progress_paket ppp WHERE ppp.`STATUS` BETWEEN '13' and '14' AND ppp.ID_PAKET = pp.ID_PAKET ORDER BY ppp.`STATUS` DESC)
-				ORDER BY pp.TANGGAL desc 
-				) r
-		on r.ID_PAKET = p.ID_PAKET
-		group by r.ID_PAKET")->result_array();
+	function getDataAlatById($id,$idj){
+		$query = $this->db->query("SELECT * FROM alat a WHERE a.ID_PAKET = $id AND ID_JURUSAN = $idj")->result_array();	
 		return $query;
 	}
-	function getAllJumlahAlatByIdPaket($id){
-		$res = $this->db->query('SELECT SUM(JUMLAH_ALAT) AS maxAlat FROM alat WHERE ID_PAKET = '.$id.'')->row_array();
-		return $res;
+	function getAllDataPaket($id){
+		$query = $this->db->query("SELECT * FROM progress_paket pp,paket p WHERE  pp.`STATUS` BETWEEN '13' and '14' AND p.ID_PAKET = pp.ID_PAKET AND pp.ID_PAKET IN ((SELECT ID_PAKET FROM alat WHERE ID_JURUSAN = $id AND ID_PAKET != ''))")->result_array();
+		return $query;
 	}
-	function getAllJumlahPenerimaanAlatByIdPaket($id){
-		$res = $this->db->query('SELECT SUM(JUMLAH) AS maxTrmAlat FROM penerimaan WHERE ID_PAKET = '.$id.'')->row_array();
-		return $res;
+	function GetPaketById($id){
+		$ret = $this->db->query("SELECT * FROM paket WHERE ID_PAKET = $id")->row_array();
+		return $ret;
 	}
-	function getStatusKonfirmasiByIdPaket($id){
-		$res = $this->db->query('SELECT COUNT(STATUS_KONFIRMASI) AS c FROM penerimaan WHERE STATUS_KONFIRMASI IN (0) AND ID_PAKET = '.$id.'')->row_array();
-		return $res;
+	function saveNoInvent($id,$data){
+		$this->db->where('ID_ALAT',$id);
+		$this->db->update('alat',$data);
 	}
-	function confirmSPM($id,$data){
-		$this->db->where('ID_PAKET',$id);
-		$this->db->update('paket',$data);
-		return 1;
+	function getPaketByIdAlat($id){
+		$query = $this->db->query("SELECT a.ID_ALAT FROM alat a WHERE a.ID_ALAT = $id")->row_array();	
+		return $query;
 	}
+	// function getAllJumlahAlatByIdPaket($id){
+	// 	$res = $this->db->query('SELECT SUM(JUMLAH_ALAT) AS maxAlat FROM alat WHERE ID_PAKET = '.$id.'')->row_array();
+	// 	return $res;
+	// }
+	// function getAllJumlahPenerimaanAlatByIdPaket($id){
+	// 	$res = $this->db->query('SELECT SUM(JUMLAH) AS maxTrmAlat FROM penerimaan WHERE ID_PAKET = '.$id.'')->row_array();
+	// 	return $res;
+	// }
+	// function getStatusKonfirmasiByIdPaket($id){
+	// 	$res = $this->db->query('SELECT COUNT(STATUS_KONFIRMASI) AS c FROM penerimaan WHERE STATUS_KONFIRMASI IN (0) AND ID_PAKET = '.$id.'')->row_array();
+	// 	return $res;
+	// }
+	// function confirmSPM($id,$data){
+	// 	$this->db->where('ID_PAKET',$id);
+	// 	$this->db->update('paket',$data);
+	// 	return 1;
+	// }
 
 }
 
