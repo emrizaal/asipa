@@ -11,6 +11,12 @@ class M_kategori extends CI_Model {
 		return $query;
 	}
 
+	//Mengambil data kategori beserta paketnya
+	function getAllKategoriWithPaket($tahun){
+		$query = $this->db->query("SELECT *,kategori.ID_KATEGORI as ID_KAT from kategori left join paket on paket.ID_KATEGORI = kategori.ID_KATEGORI")->result_array();
+		return $query;
+	}
+
 	function getMaxRevisi($id){
 		$query = $this->db->query("SELECT MAX(REVISI) as m from alat where ID_USULAN='$id'")->row_array();
 		return $query;

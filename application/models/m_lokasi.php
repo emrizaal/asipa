@@ -17,6 +17,12 @@ class M_lokasi extends CI_Model {
 		$query = $this->db->query("SELECT ID_LOKASI from lokasi where ID_JURUSAN='$id' AND NAMA_LOKASI = '$name'")->row_array();
 		return $query;	
 	}
+
+	//Mengambil semua lokasi
+	function getAllLokasi(){
+		$query = $this->db->query("SELECT * from lokasi")->result_array();
+		return $query;
+	}
 }
 
 ?>

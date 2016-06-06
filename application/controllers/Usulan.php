@@ -217,7 +217,7 @@ class Usulan extends CI_Controller {
 		}
 	}
 
-	//Menampilkan detail usulan
+	//Menampilkan detail usulan verifikasi
 	public function detailUsulanVerifikasi($p,$idUser){
 		$curr=-1;
 		$id_jenis = $this->session->userdata('ID_JENIS_USER');

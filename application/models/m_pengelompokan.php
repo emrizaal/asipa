@@ -16,29 +16,43 @@ class M_pengelompokan extends CI_Model {
 		return $query;
 	}
 
+	//Mengambil data paket berdasarkan TimHPS
+	function getPengelompokanByTim($id){
+		$query = $this->db->query("SELECT * from paket,team_hps where team_hps.ID_USER = '$id' AND paket.ID_TEAM_HPS = team_hps.ID_TEAM_HPS")->result_array();
+		return $query;
+	}
+
 	function getAllPengelompokanForKontrak(){
 		$query = $this->db->query("SELECT * from paket where STATUS in (9)")->result_array();
 		return $query;
 	}
 
-	function savePengelompokan($id,$tahun,$p){
+	function savePengelompokan($p){
 		$query = $this->db->query("INSERT into paket(
 			ID_USER,
+			ID_TEAM_HPS,
 			NAMA_PAKET,
-			TAHUN_ANGGARAN
+			TANGGAL_DIBUAT,
+			TAHUN_ANGGARAN,
+			TOTAL_ANGGARAN,
+			ID_KATEGORI
 			) values(
-			'$id',
+			'$p[id_user]',
+			'$p[tim]',
 			'$p[nama]',
-			'$tahun'
+			NOW(),
+			'$p[tahun_anggaran]',
+			'$p[total]',
+			'$p[kategori]'
 			)");
-		return $query;
+		return $this->db->insert_id();
 	}
 
 	function updatePengelompokan($p){
 		$query = $this->db->query("UPDATE paket set 
 			NAMA_PAKET='$p[nama]',
 			LAST_UPDATE=NOW() 
-			where ID_PAKET = '$p[id]'
+			where ID_PAKET = '$p[id_paket]'
 			");
 		return $query;
 	}

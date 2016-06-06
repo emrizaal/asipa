@@ -155,7 +155,11 @@
                                 </li> -->
                                 <li>
                                     <div class="profile-info">
-                                        <h4 class="username"><?=$this->m_data->getDataFromTblWhere('pegawai', 'NIP', $nip)->row()->NAMA_PEGAWAI?></h4>
+                                        <h4 class="username">
+                                        <?php if($this->session->userdata("ID_JENIS_USER")!=6){ ?>
+                                        <?=$this->m_data->getDataFromTblWhere('pegawai', 'NIP', $nip)->row()->NAMA_PEGAWAI?>
+                                        <?php } ?>
+                                        </h4>
                                         <p><?=$this->session->userdata('EMAIL')?></p>
                                         <div class="btn-group margin-bottom-2x" role="group">
                                             <button type="button" class="btn btn-default"><i class="fa fa-user"></i> Profile</button>
@@ -202,7 +206,7 @@
                             </a>
                         </li>
                         <? } ?>
-                        <? if($id_jenis==1 || $id_jenis==2 || $id_jenis==3 || $id_jenis==4 || $id_jenis==5 || $id_jenis==6){ ?>
+                        <? if($id_jenis==1 || $id_jenis==2 || $id_jenis==3 || $id_jenis==4){ ?>
                         <li class="list <?= ($this->uri->segment(1)=='Usulan')?'active':''; ?>">
                             <a href="<?=base_url()?>Usulan">
                                 <? if($id_jenis==6 || $id_jenis==5){ ?>
@@ -246,6 +250,13 @@
                         <li class="list <?= ($this->uri->segment(1)=='TimHPS')?'active':''; ?>">
                             <a href="<?=base_url()?>TimHPS">
                                 <span class="icon fa fa-file-o"></span><span class="title">Tim HPS</span>
+                            </a>
+                        </li>   
+                        <? } ?>
+                        <? if($id_jenis==6){ ?>    
+                        <li class="list <?= ($this->uri->segment(1)=='HPS')?'active':''; ?>">
+                            <a href="<?=base_url()?>HPS">
+                                <span class="icon fa fa-file-o"></span><span class="title">HPS</span>
                             </a>
                         </li>   
                         <? } ?>
