@@ -58,6 +58,7 @@ class Pengelompokan extends CI_Controller {
 	public function getPaketByIdKategori($kat){
 		$data['tim']=$this->m_timHps->getAllTimHps();
 		$data['kat'] = $this->m_alat->getAlatByIdKategori($kat);
+		$data['paket']=$this->m_alat->getPaketAlatByIdKategori($kat);
 		$this->load->view("pengelompokan/detail_pengelompokan_view",$data);
 	}
 

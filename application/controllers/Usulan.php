@@ -311,7 +311,9 @@ class Usulan extends CI_Controller {
 	}
 
 	public function clearFinal(){
-		$this->m_alat->clearFinal($p['id_jurusan']);
+		if($this->session->userdata("ID_JENIS_USER")==3){
+			$this->m_alat->clearFinal($this->session->userdata("ID_JURUSAN"));
+		}
 	}
 
 	public function updateAlat(){

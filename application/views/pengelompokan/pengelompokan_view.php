@@ -77,7 +77,7 @@ $this->load->view("info_header");
                                     </div>
                                     <div class="modal-footer">
 
-                                      <button type="submit" class="btn btn-success">Simpan</button>
+                                      <button type="submit" class="btn btn-success">Update</button>
                                     </form>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                                   </div>
@@ -108,7 +108,7 @@ $this->load->view("info_header");
                                  </div>
                                </div>
                                <div class="modal-footer">
-                                <button type="submit" class="btn btn-success">Simpan</button>
+                                <button type="submit" class="btn btn-success">Update</button>
                               </form>
                               <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                             </div>

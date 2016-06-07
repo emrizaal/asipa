@@ -37,7 +37,12 @@ class M_alat extends CI_Model {
 	}
 
 	function getAlatByIdKategori($kat){
-		$query = $this->db->query("SELECT * from alat,lokasi,jurusan where alat.ID_LOKASI=lokasi.ID_LOKASI AND jurusan.ID_JURUSAN = alat.ID_JURUSAN AND IS_FINAL = 1 AND ID_KATEGORI = '$kat'")->result_array();
+		$query = $this->db->query("SELECT * from alat,lokasi,jurusan,progress_paket,paket where progress_paket.STATUS = 3 AND (progress_paket.ID_USULAN = alat.ID_USULAN AND progress_paket.REVISI_KE = alat.REVISI) AND alat.ID_LOKASI=lokasi.ID_LOKASI AND jurusan.ID_JURUSAN = alat.ID_JURUSAN AND alat.ID_KATEGORI = '$kat' AND alat.ID_PAKET is null")->result_array();
+		return $query;
+	}
+
+	function getPaketAlatByIdKategori($kat){
+		$query = $this->db->query("SELECT * from paket,alat,lokasi,jurusan where paket.ID_PAKET = alat.ID_PAKET AND lokasi.ID_LOKASI = alat.ID_LOKASI AND jurusan.ID_JURUSAN = alat.ID_JURUSAN AND paket.ID_KATEGORI = '$kat'")->result_array();
 		return $query;
 	}
 

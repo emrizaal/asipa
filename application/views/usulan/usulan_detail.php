@@ -125,7 +125,7 @@
                 <form method="POST" action="<?=base_url()?>Progress/saveProgressUsulan"/>
                   <input type="hidden" name="id_usulan" value="<?=$usulan['ID_USULAN']?>">
                   <input type="hidden" name="revisi_ke" value="<?=$curr?>">
-                  <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp;Kirim Ajuan</button>
+                  <button id="btnKirimAjuan" type="submit" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp;Kirim Ajuan</button>
                 </form>
                 <?php }else{
                   ?>
@@ -202,7 +202,18 @@
 <script type="text/javascript" src="<?=base_url()?>assets/handsontable/plugins/editRow/editRow.js"></script>
 
 <script>
+  function cekPagu(){
+    var pagu = parseInt($(".pagu_alat").text());
+
+    if(pagu<0){
+      $("#btnKirimAjuan").attr("disabled","disabled");
+    }else{
+      $("#btnKirimAjuan").removeAttr("disabled");
+    }
+  }
+
   $(document).ready(function () {
+    cekPagu();
 
     $(".revisi").change(function(){
       window.location.href = "<?=base_url()?>Usulan/DetailUsulan/<?=$usulan['ID_USULAN']?>/"+$(".revisi").val();
@@ -376,7 +387,8 @@ $("#btnKonfirm").click(function(e){
       })
     }
   }
-}); 
+});
+
 
 $("#btnAccept").click(function(e){
   var rowUsulan = $("#dataTable").handsontable("getData");
@@ -536,7 +548,8 @@ $("#btnAccept").click(function(e){
     columns: [
     {
       width:200,
-      renderer:"html"
+      renderer:"html",
+      isActive:false
     },
     {
       width:200,
@@ -623,7 +636,7 @@ $("#btnAccept").click(function(e){
           return cellProperties;
         },
         afterChange : function(changes, source){
-
+          
           if(changes != null){
             var row = changes[0][0];
             var col = changes[0][1];
@@ -638,6 +651,7 @@ $("#btnAccept").click(function(e){
 
             if(qty != 0 || harga != 0){
               ht.setDataAtCell(row, 6, qty*harga); 
+
             }  
           }
 
