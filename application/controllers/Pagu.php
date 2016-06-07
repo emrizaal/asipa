@@ -43,7 +43,8 @@ class Pagu extends CI_Controller {
 			$data=array(
 				'id_jurusan'=>$key,
 				'pagu'=>$a,
-				'tahun_anggaran'=>date("Y")
+				'tahun_anggaran'=>date("Y"),
+				'tanggal_mulai'=>date('Y-m-d'),
 				);
 			$this->m_pagu->savePagu($data);
 		}
@@ -57,7 +58,7 @@ class Pagu extends CI_Controller {
 			$data=array(
 				'id_jurusan'=>$key,
 				'pagu'=>$a,
-				'tahun_anggaran'=>date("Y")
+				'tahun_anggaran'=>date("Y"),
 				);
 			$this->m_pagu->updatePagu($data);
 		}

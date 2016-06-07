@@ -83,7 +83,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url');
+$autoload['helper'] = array('url','tgl_indo');
 
 /*
 | -------------------------------------------------------------------
@@ -126,4 +126,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('m_site','m_data','m_timHps','m_timPenerimaan','m_kontrak','m_lelang','m_beritaacara','m_alat','m_spm','m_pencatatan');
+$autoload['model'] = array('m_pagu','m_site','m_data','m_timHps','m_timPenerimaan','m_kontrak','m_lelang','m_beritaacara','m_alat','m_spm','m_pencatatan');

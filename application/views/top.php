@@ -27,7 +27,7 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/themes/flat-blue.css">
     <style type="text/css">
-     .navbar {
+       .navbar {
         padding-left: 0px;
     }
     .navbar .navbar-breadcrumb > li {
@@ -82,7 +82,7 @@
     }
 </style>
 </head>
-<body class="flat-blue">
+<body class="flat-blue"  onload="startTime()">
     <div class="app-containers">
         <div class="row content-container">
             <nav class="navbar navbar-default navbar-fixed-top navbar-top">
@@ -92,7 +92,7 @@
                             <i class="fa fa-bars icon"></i>
                         </button>
                         <ol class="breadcrumb navbar-breadcrumb" style="background: url(<?php echo base_url()?>/assets/img/opl.png) no-repeat;background-size: contain;padding-left: 70px;">
-                        <li class="active">Sistem Informasi Pengadaan Alat</li>
+                            <li class="active">Sistem Informasi Pengadaan Alat</li>
                         </ol>
                         <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                             <i class="fa fa-th icon"></i>
@@ -128,14 +128,14 @@
                                             </a>
                                             <a href="#">
                                                 <li class="list-group-item message">
-                                                 Lihat Semua
-                                             </li>
-                                         </a>
-                                     </ul>
-                                 </li>
-                             </ul>
-                         </li>
-                         <li class="dropdown profile">
+                                                   Lihat Semua
+                                               </li>
+                                           </a>
+                                       </ul>
+                                   </li>
+                               </ul>
+                           </li>
+                           <li class="dropdown profile">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="
                             line-height: 25px;
                             padding-top: 10px;
@@ -156,9 +156,9 @@
                                 <li>
                                     <div class="profile-info">
                                         <h4 class="username">
-                                        <?php if($this->session->userdata("ID_JENIS_USER")!=6){ ?>
-                                        <?=$this->m_data->getDataFromTblWhere('pegawai', 'NIP', $nip)->row()->NAMA_PEGAWAI?>
-                                        <?php } ?>
+                                            <?php if($this->session->userdata("ID_JENIS_USER")!=6){ ?>
+                                            <?=$this->m_data->getDataFromTblWhere('pegawai', 'NIP', $nip)->row()->NAMA_PEGAWAI?>
+                                            <?php } ?>
                                         </h4>
                                         <p><?=$this->session->userdata('EMAIL')?></p>
                                         <div class="btn-group margin-bottom-2x" role="group">
@@ -185,120 +185,123 @@
                                 <i class="fa fa-times icon"></i>
                             </button>
                         </div>
-                        <ul class="nav navbar-nav" style="font-size: 20px;">
-                            <li class="list <?= ($this->uri->segment(1)=='Dashboard')?'active':''; ?>">
-                                <a href="<?=base_url()?>Dashboard">
-                                    <span class="icon fa fa-tachometer"></span><span class="title">Dashboard 
-                                </span>
-                            </a>
-                        </li>
-                        <? if($id_jenis==4){ ?>
-                        <li class="list <?= ($this->uri->segment(1)=='Pagu')?'active':''; ?>">
-                            <a href="<?=base_url()?>Pagu">
-                                <span class="icon fa fa-money"></span><span class="title">Pagu</span>
-                            </a>
-                        </li>
-                        <? } ?>
-                        <? if($id_jenis==5){ ?>
-                        <li class="list <?= ($this->uri->segment(1)=='Pengelompokan')?'active':''; ?>">
-                            <a href="<?=base_url()?>Pengelompokan">
-                                <span class="icon fa fa-file-o"></span><span class="title">Pengelompokan</span>
-                            </a>
-                        </li>
-                        <? } ?>
-                        <? if($id_jenis==1 || $id_jenis==2 || $id_jenis==3 || $id_jenis==4){ ?>
-                        <li class="list <?= ($this->uri->segment(1)=='Usulan')?'active':''; ?>">
-                            <a href="<?=base_url()?>Usulan">
-                                <? if($id_jenis==6 || $id_jenis==5){ ?>
-                                <span class="icon fa fa-file-o"></span><span class="title">Dokumen Paket</span>
-                                <?}else{?>
-                                <span class="icon fa fa-file-o"></span><span class="title">Usulan</span>
-                                <?}?>
-                            </a>
-                        </li>
-                        <? } ?>
-                        <? if($id_jenis==1){ ?>
-                        <li class="list <?= ($this->uri->segment(1)=='Pencatatan')?'active':''; ?>">
-                            <a href="<?=base_url()?>Pencatatan">
-                                <span class="icon fa fa-pencil"></span><span class="title">Pencatatan</span>
-                            </a>
-                        </li>
-                        <? } ?>
 
-                        <? if($id_jenis==7){ ?>
-                        <li class="list <?= ($this->uri->segment(1)=='Lelang')?'active':''; ?>">
-                            <a href="<?=base_url()?>Lelang">
-                                <span class="icon fa fa-file-o"></span><span class="title">Lelang</span>
-                            </a>
-                        </li>
-                        <? } ?>
-                        <? if($id_jenis==5){ ?>
-                        <li class="list <?= ($this->uri->segment(1)=='Kontrak')?'active':''; ?>">
-                            <a href="<?=base_url()?>Kontrak">
-                                <span class="icon fa fa-file-o"></span><span class="title">Kontrak</span>
-                            </a>
-                        </li>    
-                        <? } ?>
-                        <? if($id_jenis==8){ ?>
-                        <li class="list <?= ($this->uri->segment(1)=='BeritaAcara')?'active':''; ?>">
-                            <a href="<?=base_url()?>BeritaAcara">
-                                <span class="icon fa fa-file-o"></span><span class="title">Berita Acara</span>
-                            </a>
-                        </li> 
-                        <? } ?>
-                        <? if($id_jenis==5){ ?>    
-                        <li class="list <?= ($this->uri->segment(1)=='TimHPS')?'active':''; ?>">
-                            <a href="<?=base_url()?>TimHPS">
-                                <span class="icon fa fa-file-o"></span><span class="title">Tim HPS</span>
-                            </a>
-                        </li>   
-                        <? } ?>
-                        <? if($id_jenis==6){ ?>    
-                        <li class="list <?= ($this->uri->segment(1)=='HPS')?'active':''; ?>">
-                            <a href="<?=base_url()?>HPS">
-                                <span class="icon fa fa-file-o"></span><span class="title">HPS</span>
-                            </a>
-                        </li>   
-                        <? } ?>
-                        <? if($id_jenis==9){ ?>    
-                        <li class="list <?= ($this->uri->segment(1)=='SPM')?'active':''; ?>">
-                            <a href="<?=base_url()?>SPM">
-                                <span class="icon fa fa-file-text"></span><span class="title">SPM</span>
-                            </a>
-                        </li>   
-                        <? } ?>
-                        <? if($id_jenis==10){ ?>  
-                        <li class="list <?= ($this->uri->segment(1)=='Performa')?'active':''; ?>">
-                            <a href="<?=base_url()?>Performa">
-                                <span class="icon fa fa-money"></span><span class="title">Performa Serapan</span>
-                            </a>
-                        </li>  
-                        <? } ?>  
-                        <? if($id_jenis==10){ ?>  
-                        <li class="list <?= ($this->uri->segment(1)=='TimPenerimaan')?'active':''; ?>">
-                            <a href="<?=base_url()?>TimPenerimaan">
-                                <span class="icon fa fa-file-o"></span><span class="title">Tim Penerimaan</span>
-                            </a>
-                        </li>  
-                        <? } ?>  
-                        <? if($id_jenis==99){ ?>  
-                        <li class="list <?= ($this->uri->segment(1)=='Jurusan')?'active':''; ?>">
-                            <a href="<?=base_url()?>Jurusan">
-                                <span class="icon fa fa-file-o"></span><span class="title">Data Jurusan</span>
-                            </a>
-                        </li>  
-                        <li class="list <?= ($this->uri->segment(1)=='Lokasi')?'active':''; ?>">
-                            <a href="<?=base_url()?>Lokasi">
-                                <span class="icon fa fa-file-o"></span><span class="title">Data Lokasi</span>
-                            </a>
-                        </li>  
-                        <li class="list <?= ($this->uri->segment(1)=='Pegawai')?'active':''; ?>">
-                            <a href="<?=base_url()?>Pegawai">
-                                <span class="icon fa fa-file-o"></span><span class="title">Data Pegawai</span>
-                            </a>
-                        </li>  
-                        <? } ?>  
-                        <!-- Dropdown-->
+                        <ul class="nav navbar-nav" style="font-size: 20px;">
+                           <? if($id_jenis==1 || $id_jenis==2 || $id_jenis==3){ ?>
+                           <li class="list <?= ($this->uri->segment(1)=='Dashboard')?'active':''; ?>">
+                            <a href="<?=base_url()?>Dashboard">
+                                <span class="icon fa fa-tachometer"></span><span class="title">Dashboard 
+                            </span>
+                        </a>
+                    </li>
+                    <?}?>
+                    <? if($id_jenis==4){ ?>
+                    <li class="list <?= ($this->uri->segment(1)=='Pagu')?'active':''; ?>">
+                        <a href="<?=base_url()?>Pagu">
+                            <span class="icon fa fa-money"></span><span class="title">Pagu</span>
+                        </a>
+                    </li>
+                    <? } ?>
+                    <? if($id_jenis==5){ ?>
+                    <li class="list <?= ($this->uri->segment(1)=='Pengelompokan')?'active':''; ?>">
+                        <a href="<?=base_url()?>Pengelompokan">
+                            <span class="icon fa fa-file-o"></span><span class="title">Pengelompokan</span>
+                        </a>
+                    </li>
+                    <? } ?>
+                    <? if($id_jenis==1 || $id_jenis==2 || $id_jenis==3 || $id_jenis==4){ ?>
+                    <li class="list <?= ($this->uri->segment(1)=='Usulan')?'active':''; ?>">
+                        <a href="<?=base_url()?>Usulan">
+                            <? if($id_jenis==6 || $id_jenis==5){ ?>
+                            <span class="icon fa fa-file-text-o"></span><span class="title">Dokumen Paket</span>
+                            <?}else{?>
+                            <span class="icon fa fa-file-text-o"></span><span class="title">Usulan</span>
+                            <?}?>
+                        </a>
+                    </li>
+                    <? } ?>
+                    <? if($id_jenis==1){ ?>
+                    <li class="list <?= ($this->uri->segment(1)=='Pencatatan')?'active':''; ?>">
+                        <a href="<?=base_url()?>Pencatatan">
+                            <span class="icon fa fa-pencil"></span><span class="title">Pencatatan</span>
+                        </a>
+                    </li>
+                    <? } ?>
+
+                    <? if($id_jenis==7){ ?>
+                    <li class="list <?= ($this->uri->segment(1)=='Lelang')?'active':''; ?>">
+                        <a href="<?=base_url()?>Lelang">
+                            <span class="icon fa fa-file-o"></span><span class="title">Lelang</span>
+                        </a>
+                    </li>
+                    <? } ?>
+                    <? if($id_jenis==5){ ?>
+                    <li class="list <?= ($this->uri->segment(1)=='Kontrak')?'active':''; ?>">
+                        <a href="<?=base_url()?>Kontrak">
+                            <span class="icon fa fa-file-o"></span><span class="title">Kontrak</span>
+                        </a>
+                    </li>    
+                    <? } ?>
+                    <? if($id_jenis==8){ ?>
+                    <li class="list <?= ($this->uri->segment(1)=='BeritaAcara')?'active':''; ?>">
+                        <a href="<?=base_url()?>BeritaAcara">
+                            <span class="icon fa fa-file-o"></span><span class="title">Berita Acara</span>
+                        </a>
+                    </li> 
+                    <? } ?>
+                    <? if($id_jenis==5){ ?>    
+                    <li class="list <?= ($this->uri->segment(1)=='TimHPS')?'active':''; ?>">
+                        <a href="<?=base_url()?>TimHPS">
+                            <span class="icon fa fa-file-o"></span><span class="title">Tim HPS</span>
+                        </a>
+                    </li>   
+                    <? } ?>
+                    <? if($id_jenis==6){ ?>    
+                    <li class="list <?= ($this->uri->segment(1)=='HPS')?'active':''; ?>">
+                        <a href="<?=base_url()?>HPS">
+                            <span class="icon fa fa-file-o"></span><span class="title">HPS</span>
+                        </a>
+                    </li>   
+                    <? } ?>
+                    <? if($id_jenis==9){ ?>    
+                    <li class="list <?= ($this->uri->segment(1)=='SPM')?'active':''; ?>">
+                        <a href="<?=base_url()?>SPM">
+                            <span class="icon fa fa-file-text"></span><span class="title">SPM</span>
+                        </a>
+                    </li>   
+                    <? } ?>
+                    <? if($id_jenis==10){ ?>  
+                    <li class="list <?= ($this->uri->segment(1)=='Performa')?'active':''; ?>">
+                        <a href="<?=base_url()?>Performa">
+                            <span class="icon fa fa-money"></span><span class="title">Performa Serapan</span>
+                        </a>
+                    </li>  
+                    <? } ?>  
+                    <? if($id_jenis==10){ ?>  
+                    <li class="list <?= ($this->uri->segment(1)=='TimPenerimaan')?'active':''; ?>">
+                        <a href="<?=base_url()?>TimPenerimaan">
+                            <span class="icon fa fa-file-o"></span><span class="title">Tim Penerimaan</span>
+                        </a>
+                    </li>  
+                    <? } ?>  
+                    <? if($id_jenis==99){ ?>  
+                    <li class="list <?= ($this->uri->segment(1)=='Jurusan')?'active':''; ?>">
+                        <a href="<?=base_url()?>Jurusan">
+                            <span class="icon fa fa-file-o"></span><span class="title">Data Jurusan</span>
+                        </a>
+                    </li>  
+                    <li class="list <?= ($this->uri->segment(1)=='Lokasi')?'active':''; ?>">
+                        <a href="<?=base_url()?>Lokasi">
+                            <span class="icon fa fa-file-o"></span><span class="title">Data Lokasi</span>
+                        </a>
+                    </li>  
+                    <li class="list <?= ($this->uri->segment(1)=='Pegawai')?'active':''; ?>">
+                        <a href="<?=base_url()?>Pegawai">
+                            <span class="icon fa fa-file-o"></span><span class="title">Data Pegawai</span>
+                        </a>
+                    </li>  
+                    <? } ?>  
+                    <!-- Dropdown-->
                            <!--  <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#component-example">
                                     <span class="icon fa fa-cubes"></span><span class="title">Components</span>

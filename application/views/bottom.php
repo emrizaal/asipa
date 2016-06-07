@@ -1,7 +1,7 @@
  <footer class="app-footer">
-    <div class="wrapper">
-        <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
-    </div>
+  <div class="wrapper">
+    <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
+  </div>
 </footer>
 <!-- Javascript Libs -->
 <script type="text/javascript" src="<?=base_url()?>assets/lib/js/jquery.min.js"></script>
@@ -19,16 +19,17 @@
 <!-- Javascript -->
 <script type="text/javascript" src="<?=base_url()?>assets/js/app.js"></script>
 <script>
-    $(document).ready(function(){  
-    $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})   
-      $('.datepicker').datepicker({       
-        format:'dd M yyyy' , 
-        autoclose: true,
-        orientation: 'bottom'    
-    }); 
-  });
+  $(document).ready(function(){  
+  
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })   
+  $('.datepicker').datepicker({       
+    format:'dd M yyyy' , 
+    autoclose: true,
+    orientation: 'bottom'    
+  }); 
+});
 </script>
 
 

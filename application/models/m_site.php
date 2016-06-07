@@ -16,6 +16,22 @@ class M_site extends CI_Model {
 		$query = $this->db->query("SELECT ID_LOKASI from lokasi where ID_JURUSAN='$id' AND NAMA_LOKASI = '$name'")->row_array();
 		return $query;	
 	}
+
+	function getStartDate($thn){
+		$date = $this->db->query("SELECT TANGGAL_MULAI AS tgl FROM pagu WHERE TAHUN_ANGGARAN = $thn")->row();
+		return $date->tgl;
+	}
+
+	function getDeadline(){
+		$date = $this->db->query("SELECT *  FROM deadline")->result_array();
+		return $date;
+	}
+
+	function getFase($thn){
+		return 1;
+	}
+
+	
 }
 
 ?>
