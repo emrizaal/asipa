@@ -45,9 +45,6 @@ class Kontrak extends CI_Controller {
 
 		$id = $this->input->post('id_paket');
 		$this->m_kontrak->savePenyedia($id,$data);
-
-		
-
 		redirect($_SERVER['HTTP_REFERER']);
 
 	}
@@ -71,15 +68,17 @@ class Kontrak extends CI_Controller {
 		$this->m_kontrak->saveKontrak($p);
 
 		$id = $this->input->post('id_paket');
-		$dataProgress = array(
-			'ID_PAKET'=>$id,
-			'ID_USER'=> $this->session->userdata('ID_USER'),
-			'ID_FASe'=> '4',
-			'STATUS'=>'10',
-			'ID_JENIS_USER'=> $this->session->userdata('ID_JENIS_USER'),
-			);
-		$this->m_kontrak->saveProgressKontrak($dataProgress);
-
+		// $cekProgress = $this->m_kontrak->cekProgressKontrak($id);
+		// if($cekProgress==0){
+			$dataProgress = array(
+				'ID_PAKET'=>$id,
+				'ID_USER'=> $this->session->userdata('ID_USER'),
+				'ID_FASe'=> '4',
+				'STATUS'=>'10',
+				'ID_JENIS_USER'=> $this->session->userdata('ID_JENIS_USER'),
+				);
+			$this->m_kontrak->saveProgressKontrak($dataProgress);
+		// }
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 

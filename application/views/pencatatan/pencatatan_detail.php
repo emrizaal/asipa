@@ -1,79 +1,91 @@
  <div class="app-container-slide">
-    <div class="container-fluid">
-        <div class="side-body padding-top"  style="padding-top:90px;">
+  <div class="container-fluid">
+    <div class="side-body padding-top"  style="padding-top:90px;">
 
-            <div class="row  no-margin-bottom">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title" style="width:100%">
-                                    <span class="title">Pencatatan</span>
+      <div class="row  no-margin-bottom">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title" style="width:100%">
+                  <span class="title">Pencatatan</span>
                   <a href="<?=site_url()?>Pencatatan" class="btn btn-primary pull-right"><i class="fa fa-chevron-left"></i> Kembali </a>
 
-                                </div>
-                            </div>
-                            <div class="card-body">
+                </div>
+              </div>
+              <div class="card-body">
 
- <div class="sub-title">Nomor Dokumen : USULAN/JTK/2016/2 </div>
-                <div>
- <table class="table table-bordered table-stripped table-hovered">
-        <tr class="active">
-          <th> Nama Alat </th>
-          <th> Spesifikasi </th>
-          <th> Setara </th>
-          <th> Satuan </th>
-          <th> Jumlah Alat </th>
-          <th> Harga Satuan </th>
-          <th> Total </th>
-          <th> Lokasi </th>
-          <th> Jumlah Distribusi </th>
-          <th> Referensi Terkait </th>
-          <th> Data Ahli </th>
-          <th> Tanggal Update </th>
-          <th> Nomor Inventaris </th>
-        </tr>
-        <tr>
-          <td> Hardisk External </td>
-          <td> 2TB Toshiba </td>
-          <td> Seagate </td>
-          <td> Buah </td>
-          <td> 5 </td>
-          <td> <?=number_format(1000000,'0',',','.')?> </td>
-          <td> <?=number_format(5000000,'0',',','.')?> </td>
-          <td> Ruang Dosen </td>
-          <td> 5</td>
-          <td> <a href="#" target="_blank"> file.png </a></td>
-          <td> <input type="checkbox" checked disabled=""></td>
-          <td> 20 May 2013</td>
-          <td> <input type="text" class="form-control no_inven1" style="width:100%"></td>
-          <td> <button class="btn btn-success btn_inven1" >Simpan</button></td>
-        </tr>
-        <tr>
-          <td> Hardisk internal </td>
-          <td> 2TB WD </td>
-          <td> Seagate </td>
-          <td> Buah </td>
-          <td> 5 </td>
-          <td> <?=number_format(1000000,'0',',','.')?> </td>
-          <td> <?=number_format(5000000,'0',',','.')?> </td>
-          <td> Ruang Dosen </td>
-          <td> 5</td>
-          <td> <a href="#" target="_blank"> file.png </a></td>
-          <td> <input type="checkbox" checked disabled=""></td>
-          <td> 20 May 2013</td>
-          <td> 1209-1230902012-AF</td>
-          <td> <button class="btn btn-warning btn_inven1" >Edit</button></td>
-        </tr>
-      </table>
+               <div class="sub-title">Nomor Dokumen : PAKET-<?=$paket['ID_PAKET']?>/<?=$paket['TAHUN_ANGGARAN']?></div>
+               <div>
+                 <table class="table table-bordered table-stripped table-hovered">
+                  <tr class="active">
+                    <th> Nama Alat </th>
+                    <th> Spesifikasi </th>
+                    <th> Setara </th>
+                    <th> Satuan </th>
+                    <th> Jumlah Alat </th>
+                    <th> Harga Satuan </th>
+                    <th> Total </th>
+                    <th> Lokasi </th>
+                    <th> Jumlah Distribusi </th>
+                    <th> Referensi Terkait </th>
+                    <th> Data Ahli </th>
+                    <th> Tanggal Update </th>
+                    <th> Nomor Inventaris </th>
+                  </tr>
+                  <?
+                  // print_r($alat);
+                  foreach ($alat as $p) {?>
+                  <tr>
+                    <td> <?=$p['NAMA_ALAT']?> </td>
+                    <td> <?=$p['SPESIFIKASI']?> </td>
+                    <td> <?=$p['SETARA']?> </td>
+                    <td> <?=$p['SATUAN']?> </td>
+                    <td> <?=$p['JUMLAH_ALAT']?> </td>
+                    <td> <?=number_format($p['HARGA_SATUAN'],'0',',','.')?> </td>
+                    <td> <?=number_format($p['HARGA_SATUAN']*$p['JUMLAH_ALAT'],'0',',','.')?> </td>
+                    <td> <?=$this->m_data->getDataMultiWhere('LOKASI', array('ID_JURUSAN'=>$p['ID_JURUSAN'],'ID_LOKASI'=>$p['ID_LOKASI']))->row()->NAMA_LOKASI ?> </td>
+                    <td> <?=$p['JUMLAH_DISTRIBUSI']?> </td>
+                    <td> <a href="<?=site_url()?>assets/referensi/<?=$p['REFERENSI_TERKAIT']?>" target="_blank">  <?=$p['REFERENSI_TERKAIT']?> </a></td>
+                    <td> <input type="checkbox" <?=($p['DATA_AHLI']==1)?'checked':'';?> disabled></td>
+                    <td> <?=$p['TANGGAL_UPDATE']?></td>
+                    <td class="td<?=$p['ID_ALAT']?>"> <?=($p['NO_INVENTARIS']=='')?'<input type="text" class="form-control no_inven'.$p['ID_ALAT'].'" style="width:100%">':'<span class="no_inven_span'.$p['ID_ALAT'].'">'.$p['NO_INVENTARIS'].'</span>'?></td>
+                    <td class="td_b<?=$p['ID_ALAT']?>"> <?='<span style="display:none;">'.$p['ID_ALAT'].'</span>';?><?=($p['NO_INVENTARIS']=='')?'<button class="btn btn-success btn_inven" onclick=\'saveNoInvent("'.$p['ID_ALAT'].'");\'>Simpan</button>':'<button class="btn btn-warning btn_edit_inven" >Edit</button>'?></td>
+                  </tr>
+                  <?}?>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
 
-       </div>
-                         </div>
-                     </div>
-                 </div>
+    </div>
+  </div>
+</div>
+</div> 
+<script type="text/javascript" src="<?=base_url()?>assets/lib/js/jquery.min.js"></script>
 
-             </div>
-         </div>
-     </div>
- </div> 
+<script type="text/javascript">
+ function saveNoInvent(idalat){
+   var data = $('.no_inven'+idalat).val();
+    $.ajax({
+      url: '<?=base_url()?>Pencatatan/addNoInvent',
+      type: "POST",
+      data: {id:idalat,data:data},
+      success : function(res){
+        window.location.reload();
+      }
+    })
+ }
+
+  $(document).ready(function(){
+   $('.btn_edit_inven').click(function(){
+    var idalat = $(this).prev().text();
+    var data = $('.no_inven_span'+idalat).text();
+    $('.td'+idalat).html('<input type="text" class="form-control no_inven'+idalat+'" style="width:100%" value="'+data+'">');
+    $('.td_b'+idalat).html('<span style="display:none;">'+idalat+'</span><button class="btn btn-success btn_inven" onclick="saveNoInvent('+idalat+')">Simpan</button>');
+  });
+ });
+</script>
