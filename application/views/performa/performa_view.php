@@ -52,6 +52,7 @@
 </footer>
 <!-- Javascript Libs -->
 <script type="text/javascript" src="<?=base_url()?>assets/lib/js/jquery.min.js"></script>
+
 <script type="text/javascript" src="<?=base_url()?>assets/lib/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/lib/js/Chart.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/lib/js/bootstrap-switch.min.js"></script>
