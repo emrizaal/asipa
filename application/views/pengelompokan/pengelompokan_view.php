@@ -49,9 +49,8 @@ $this->load->view("info_header");
                                         </td>
                                         <td>
                                           <a onClick="getPaketByIdKategori(<?=$k['ID_KAT']?>)" class="btn btn-primary" data-toggle="modal" data-target="#modalLihatPengelompokan"><i class="fa fa-search"></i> Lihat </a>
-                                           <!--  <a class="btn btn-warning" onclick="editPengelompokan('<?= $p['NAMA_PAKET'] ?>','<?= $p['ID_PAKET'] ?>')"
-                                            data-toggle="modal" data-target="#modalEditPengelompokan"><i class="fa fa-pencil"></i> Edit</a>
-                                            Export | Revisi -->
+                                          <a <?=empty($k['ID_PAKET']) ? 'disabled' : ''?> onClick="getPaketByIdKategori(<?=$k['ID_KAT']?>)" class="btn btn-info" data-toggle="modal" data-target="#modalLihatPengelompokan"><i class="fa fa-check"></i> Ajukan </a>
+                                           
                                           </td>
                                         </tr>
                                         <?php 

@@ -32,17 +32,17 @@ class M_alat extends CI_Model {
 	}
 
 	function getAlatByIdUsulanAndFinal($id,$max){
-		$query = $this->db->query("SELECT *,(SELECT NAMA_PEGAWAI from pegawai,user where pegawai.NIP = user.NIP AND alat.ID_USER = user.ID_USER) as NAMA_PEGAWAI from alat where ID_USULAN ='$id' AND REVISI='$max[m]' OR IS_FINAL=1")->result_array();
+		$query = $this->db->query("SELECT *,(SELECT NAMA_PAKET from paket where paket.ID_PAKET = alat.ID_PAKET) as NAMA_PAKET,(SELECT NAMA_PEGAWAI from pegawai,user where pegawai.NIP = user.NIP AND alat.ID_USER = user.ID_USER) as NAMA_PEGAWAI from alat where ID_USULAN ='$id' AND REVISI='$max[m]' OR IS_FINAL=1")->result_array();
 		return $query;	
 	}
 
 	function getAlatByIdKategori($kat){
-		$query = $this->db->query("SELECT * from alat,lokasi,jurusan,progress_paket,paket where progress_paket.STATUS = 3 AND (progress_paket.ID_USULAN = alat.ID_USULAN AND progress_paket.REVISI_KE = alat.REVISI) AND alat.ID_LOKASI=lokasi.ID_LOKASI AND jurusan.ID_JURUSAN = alat.ID_JURUSAN AND alat.ID_KATEGORI = '$kat' AND alat.ID_PAKET is null")->result_array();
+		$query = $this->db->query("SELECT * from alat,lokasi,jurusan,progress_paket,paket where progress_paket.STATUS = 3 AND (progress_paket.ID_USULAN = alat.ID_USULAN AND progress_paket.REVISI_KE = alat.REVISI) AND alat.ID_LOKASI=lokasi.ID_LOKASI AND jurusan.ID_JURUSAN = alat.ID_JURUSAN AND alat.ID_PAKET = paket.ID_PAKET AND paket.ID_KATEGORI = '$kat'")->result_array();
 		return $query;
 	}
 
 	function getPaketAlatByIdKategori($kat){
-		$query = $this->db->query("SELECT * from paket,alat,lokasi,jurusan where paket.ID_PAKET = alat.ID_PAKET AND lokasi.ID_LOKASI = alat.ID_LOKASI AND jurusan.ID_JURUSAN = alat.ID_JURUSAN AND paket.ID_KATEGORI = '$kat'")->result_array();
+		$query = $this->db->query("SELECT * from alat,lokasi,jurusan where lokasi.ID_LOKASI = alat.ID_LOKASI AND jurusan.ID_JURUSAN = alat.ID_JURUSAN AND alat.ID_KATEGORI = '$kat' AND alat.IS_FINAL = 1 AND ID_PAKET is null")->result_array();
 		return $query;
 	}
 
@@ -71,7 +71,8 @@ class M_alat extends CI_Model {
 			REFERENSI_TERKAIT,
 			DATA_AHLI,
 			PRIORITY,
-			ID_KATEGORI
+			ID_KATEGORI,
+			IS_FINAL
 			)values(
 			NOW(),
 			'$p[id_jurusan]',
@@ -89,56 +90,104 @@ class M_alat extends CI_Model {
 			'$p[ref]',
 			'$p[data_ahli]',
 			'$p[prioritas]',
-			'$p[kategori]'
+			'$p[kategori]',
+			'$p[is_final]'
 			)");
 		return $query;
 	}
 
 	function saveUpdateAlat($p){
 		if($p['ref']==""){
-			$query = $this->db->query("INSERT INTO alat(
-				TANGGAL_UPDATE,
-				ID_JURUSAN,
-				ID_USER,
-				ID_LOKASI,
-				ID_FASE,
-				ID_USULAN,
-				NAMA_ALAT,
-				SPESIFIKASI,
-				SETARA,
-				SATUAN,
-				JUMLAH_ALAT,
-				HARGA_SATUAN,
-				JUMLAH_DISTRIBUSI,
-				REVISI,
-				DATA_AHLI,
-				PRIORITY,
-				ID_KATEGORI,
-				KONFIRMASI,
-				IS_FINAL
-				)values(
-				NOW(),
-				'$p[id_jurusan]',
-				'$p[id_user]',
-				'$p[id_lokasi]',
-				'1',
-				'$p[id_usulan]',
-				'$p[nama_alat]',
-				'$p[spesifikasi]',
-				'$p[setara]',
-				'$p[satuan]',
-				'$p[jumlah_alat]',
-				'$p[harga_satuan]',
-				'$p[jumlah_distribusi]',
-				'$p[revisi]',
-				'$p[data_ahli]',
-				'$p[prioritas]',
-				'$p[kategori]',
-				'$p[konfirmasi]',
-				'$p[is_final]'
-				)");
+			if($p['paket']==""){
+				$query = $this->db->query("INSERT INTO alat(
+					TANGGAL_UPDATE,
+					ID_JURUSAN,
+					ID_USER,
+					ID_LOKASI,
+					ID_FASE,
+					ID_USULAN,
+					NAMA_ALAT,
+					SPESIFIKASI,
+					SETARA,
+					SATUAN,
+					JUMLAH_ALAT,
+					HARGA_SATUAN,
+					JUMLAH_DISTRIBUSI,
+					REVISI,
+					DATA_AHLI,
+					PRIORITY,
+					ID_KATEGORI,
+					KONFIRMASI,
+					IS_FINAL
+					)values(
+					NOW(),
+					'$p[id_jurusan]',
+					'$p[id_user]',
+					'$p[id_lokasi]',
+					'1',
+					'$p[id_usulan]',
+					'$p[nama_alat]',
+					'$p[spesifikasi]',
+					'$p[setara]',
+					'$p[satuan]',
+					'$p[jumlah_alat]',
+					'$p[harga_satuan]',
+					'$p[jumlah_distribusi]',
+					'$p[revisi]',
+					'$p[data_ahli]',
+					'$p[prioritas]',
+					'$p[kategori]',
+					'$p[konfirmasi]',
+					'$p[is_final]'
+					)");
+			}else{
+				$query = $this->db->query("INSERT INTO alat(
+					TANGGAL_UPDATE,
+					ID_JURUSAN,
+					ID_USER,
+					ID_LOKASI,
+					ID_FASE,
+					ID_USULAN,
+					NAMA_ALAT,
+					SPESIFIKASI,
+					SETARA,
+					SATUAN,
+					JUMLAH_ALAT,
+					HARGA_SATUAN,
+					JUMLAH_DISTRIBUSI,
+					REVISI,
+					DATA_AHLI,
+					PRIORITY,
+					ID_KATEGORI,
+					KONFIRMASI,
+					IS_FINAL,
+					ID_PAKET
+					)values(
+					NOW(),
+					'$p[id_jurusan]',
+					'$p[id_user]',
+					'$p[id_lokasi]',
+					'1',
+					'$p[id_usulan]',
+					'$p[nama_alat]',
+					'$p[spesifikasi]',
+					'$p[setara]',
+					'$p[satuan]',
+					'$p[jumlah_alat]',
+					'$p[harga_satuan]',
+					'$p[jumlah_distribusi]',
+					'$p[revisi]',
+					'$p[data_ahli]',
+					'$p[prioritas]',
+					'$p[kategori]',
+					'$p[konfirmasi]',
+					'$p[is_final]',
+					'$p[paket]'
+					)");
+			}
 		}else{
-			$query = $this->db->query("INSERT INTO alat(
+			if($p['paket']==""){
+				$query = $this->db->query("INSERT INTO alat(
 				TANGGAL_UPDATE,
 				ID_JURUSAN,
 				ID_USER,
@@ -181,6 +230,54 @@ class M_alat extends CI_Model {
 				'$p[konfirmasi]',
 				'$p[is_final]'
 				)");
+			}else{
+				$query = $this->db->query("INSERT INTO alat(
+				TANGGAL_UPDATE,
+				ID_JURUSAN,
+				ID_USER,
+				ID_LOKASI,
+				ID_FASE,
+				ID_USULAN,
+				NAMA_ALAT,
+				SPESIFIKASI,
+				SETARA,
+				SATUAN,
+				JUMLAH_ALAT,
+				HARGA_SATUAN,
+				JUMLAH_DISTRIBUSI,
+				REFERENSI_TERKAIT,
+				REVISI,
+				DATA_AHLI,
+				PRIORITY,
+				ID_KATEGORI,
+				KONFIRMASI,
+				IS_FINAL,
+				ID_PAKET
+				)values(
+				NOW(),
+				'$p[id_jurusan]',
+				'$p[id_user]',
+				'$p[id_lokasi]',
+				'1',
+				'$p[id_usulan]',
+				'$p[nama_alat]',
+				'$p[spesifikasi]',
+				'$p[setara]',
+				'$p[satuan]',
+				'$p[jumlah_alat]',
+				'$p[harga_satuan]',
+				'$p[jumlah_distribusi]',
+				'$p[ref]',
+				'$p[revisi]',
+				'$p[data_ahli]',
+				'$p[prioritas]',
+				'$p[kategori]',
+				'$p[konfirmasi]',
+				'$p[is_final]',
+				'$p[paket]'
+				)");
+			}
+			
 		}
 		return $query;
 	}
@@ -281,7 +378,7 @@ class M_alat extends CI_Model {
 		return $query;
 	}
 	function updateKategoriAlat($kat,$id){
-		$query = $this->db->query("UPDATE alat set ID_PAKET = '$id' where IS_FINAL = '1' AND ID_KATEGORI = '$kat'");
+		$query = $this->db->query("UPDATE alat set ID_PAKET = '$id', REVISI_PAKET = '0' where IS_FINAL = '1' AND ID_KATEGORI = '$kat'");
 		return $query;
 	}
 

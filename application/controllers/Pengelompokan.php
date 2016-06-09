@@ -57,8 +57,14 @@ class Pengelompokan extends CI_Controller {
 
 	public function getPaketByIdKategori($kat){
 		$data['tim']=$this->m_timHps->getAllTimHps();
-		$data['kat'] = $this->m_alat->getAlatByIdKategori($kat);
+		$data['paket2'] = $this->m_alat->getAlatByIdKategori($kat);
 		$data['paket']=$this->m_alat->getPaketAlatByIdKategori($kat);
+		$kategori = $this->m_pengelompokan->getPengelompokanByKategori($kat);
+		$data['kategori']=array();
+		if(!empty($kategori)){
+			$data['kategori']=$kategori;
+		}
+		$data['paket']=array_merge($data['paket'],$data['paket2']);
 		$this->load->view("pengelompokan/detail_pengelompokan_view",$data);
 	}
 

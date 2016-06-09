@@ -11,8 +11,18 @@ class M_pengelompokan extends CI_Model {
 		return $query;
 	}
 
+	function getPengelompokanByKategori($kat){
+		$query = $this->db->query("SELECT * from paket,team_hps where ID_KATEGORI = '$kat' AND paket.ID_TEAM_HPS = team_hps.ID_TEAM_HPS")->row_array();
+		return $query;
+	}
+
 	function getAllPengelompokan(){
 		$query = $this->db->query("SELECT * from paket")->result_array();
+		return $query;
+	}
+
+	function getPengelompokanByName($name){
+		$query = $this->db->query("SELECT * from paket where NAMA_PAKET = '$name'")->row_array();
 		return $query;
 	}
 

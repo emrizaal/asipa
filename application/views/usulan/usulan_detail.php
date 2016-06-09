@@ -249,6 +249,7 @@
       myFormData.set('id_usulan',<?=$usulan['ID_USULAN']?>);
       myFormData.append('konfirmasi','');
       myFormData.append('pic','');
+      myFormData.append('paket','');
 
       $.ajax({
         url: '<?=base_url()?>Usulan/clearFinal',
@@ -287,6 +288,8 @@
           myFormData.set('kategori',rowUsulan[i][12]);
           myFormData.set('konfirmasi',rowUsulan[i][13]);
           myFormData.set('pic',rowUsulan[i][14]);
+          myFormData.set('paket',rowUsulan[i][15]);
+
           $.ajax({
             url: '<?=base_url()?>Usulan/updateAlat',
             type: "POST",
@@ -330,6 +333,8 @@ $("#btnKonfirm").click(function(e){
   myFormData.append('revisi',<?=$max['m']+1?>);
   myFormData.set('id_usulan',<?=$usulan['ID_USULAN']?>);
   myFormData.append('konfirmasi','');
+  myFormData.append('pic','');
+  myFormData.append('paket','');
 
   $.ajax({
     url: '<?=base_url()?>Progress/saveProgressKonfirmasi',
@@ -369,6 +374,9 @@ $("#btnKonfirm").click(function(e){
       myFormData.set('prioritas',rowUsulan[i][11]);
       myFormData.set('kategori',rowUsulan[i][12]);
       myFormData.set('konfirmasi',rowUsulan[i][13]);
+      myFormData.set('pic',rowUsulan[i][14]);
+      myFormData.set('paket',rowUsulan[i][15]);
+
       $.ajax({
         url: '<?=base_url()?>Usulan/updateAlat',
         type: "POST",
@@ -414,6 +422,8 @@ $("#btnAccept").click(function(e){
   myFormData.append('revisi',<?=$max['m']+1?>);
   myFormData.set('id_usulan',<?=$usulan['ID_USULAN']?>);
   myFormData.append('konfirmasi','');
+  myFormData.append('pic','');
+  myFormData.append('paket','');
 
   $.ajax({
     url: '<?=base_url()?>Progress/acceptUsulan',
@@ -453,6 +463,8 @@ $("#btnAccept").click(function(e){
       myFormData.set('prioritas',rowUsulan[i][11]);
       myFormData.set('kategori',rowUsulan[i][12]);
       myFormData.set('konfirmasi',rowUsulan[i][13]);
+      myFormData.set('pic',rowUsulan[i][14]);
+      myFormData.set('paket',rowUsulan[i][15]);
       $.ajax({
         url: '<?=base_url()?>Usulan/updateFinal',
         type: "POST",
@@ -479,7 +491,7 @@ $("#btnAccept").click(function(e){
 <script data-jsfiddle="excel1">
   var
   data1 = <?=$alat?>,
-  container1 = document.getElementById('dataTable'),
+  //container1 = document.getElementById('dataTable'),
   hot1;
 
   function firstRowRenderer(instance, td, row, col, prop, value, cellProperties) {
@@ -526,7 +538,8 @@ $("#btnAccept").click(function(e){
     {row: 0, col: 11, rowspan: 1, colspan: 1},
     {row: 0, col: 12, rowspan: 1, colspan: 1},
     {row: 0, col: 13, rowspan: 1, colspan: 1},
-    {row: 0, col: 14, rowspan: 1, colspan: 1}
+    {row: 0, col: 14, rowspan: 1, colspan: 1},
+    {row: 0, col: 15, rowspan: 1, colspan: 1}
     ],
     cell: [
     {row: 0, col: 0, className: "htCenter htMiddle"},
@@ -543,7 +556,8 @@ $("#btnAccept").click(function(e){
     {row: 0, col: 11, className: "htCenter htMiddle"},
     {row: 0, col: 12, className: "htCenter htMiddle"},
     {row: 0, col: 13, className: "htCenter htMiddle"},
-    {row: 0, col: 14, className: "htCenter htMiddle"}
+    {row: 0, col: 14, className: "htCenter htMiddle"},
+    {row: 0, col: 15, className: "htCenter htMiddle"}
     ],
     columns: [
     {
@@ -618,6 +632,10 @@ $("#btnAccept").click(function(e){
     {
       width:100,
       renderer:"html"
+    },
+    {
+      width:200,
+      renderer:"html"
     }
     ],
     cells: function (row, col, prop) {
@@ -636,7 +654,7 @@ $("#btnAccept").click(function(e){
           return cellProperties;
         },
         afterChange : function(changes, source){
-          
+
           if(changes != null){
             var row = changes[0][0];
             var col = changes[0][1];

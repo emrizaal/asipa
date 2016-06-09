@@ -12,6 +12,7 @@ class Usulan extends CI_Controller {
 		$this->load->model("m_kategori");
 		$this->load->model("m_progress");
 		$this->load->model("m_pegawai");
+		$this->load->model("m_pengelompokan");
 	}
 
 	public function index(){
@@ -136,6 +137,11 @@ class Usulan extends CI_Controller {
 		}else{
 			$p['data_ahli']=0;
 		}
+		if($this->session->userdata("ID_JENIS_USER")==3){
+			$p['is_final']=1;
+		}else{
+			$p['is_final']=0;
+		}
 		
 		$this->m_alat->saveAlat($p);
 	}
@@ -180,7 +186,7 @@ class Usulan extends CI_Controller {
 		}
 
 		
-		$res[0] = array('NAMA ALAT', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI','PRIORITAS','KATEGORI','KONFIRMASI','PIC');
+		$res[0] = array('NAMA ALAT', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI','PRIORITAS','KATEGORI','KONFIRMASI','PIC','PAKET');
 		
 		foreach($alat as $a){
 			if($a['DATA_AHLI']==1){
@@ -194,12 +200,12 @@ class Usulan extends CI_Controller {
 				$link = "";
 			}
 			
-			$res[]=array($a['NAMA_ALAT'], $a['SPESIFIKASI'], $a['SETARA'], $a['SATUAN'], $a['JUMLAH_ALAT'], $a['HARGA_SATUAN'], $a['JUMLAH_ALAT']*$a['HARGA_SATUAN'], $lokasi[$a['ID_LOKASI']],$a['JUMLAH_DISTRIBUSI'],$link." <input name='file[]' type='file'>",$ahli,$a['PRIORITY'],$kategori[$a['ID_KATEGORI']],$a['KONFIRMASI'],$a['NAMA_PEGAWAI']);
+			$res[]=array($a['NAMA_ALAT'], $a['SPESIFIKASI'], $a['SETARA'], $a['SATUAN'], $a['JUMLAH_ALAT'], $a['HARGA_SATUAN'], $a['JUMLAH_ALAT']*$a['HARGA_SATUAN'], $lokasi[$a['ID_LOKASI']],$a['JUMLAH_DISTRIBUSI'],$link." <input name='file[]' type='file'>",$ahli,$a['PRIORITY'],$kategori[$a['ID_KATEGORI']],$a['KONFIRMASI'],$a['NAMA_PEGAWAI'],$a['NAMA_PAKET']);
 			
 		}
 		
 		for($i=0;$i<9;$i++){
-			$res[]=array('', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'','','','');
+			$res[]=array('', '', '', '', '', '', '','','',"<input name='file[]' type='file'>",false,'','','','','');
 		}
 		
 		//print_r($res);
@@ -337,13 +343,21 @@ class Usulan extends CI_Controller {
 			$id_user=$this->m_pegawai->getUserIdByName($p['pic']);
 			$p['id_user']=$id_user['ID_USER'];
 		}
+
+		if($p['paket']==""){
+			$p['paket']="";
+		}else{
+			$vaket=$this->m_pengelompokan->getPengelompokanByName($p['paket']);
+			$p['paket']=$vaket['ID_PAKET'];
+		}
+
 		$p['ref']=$finfo['file_name'];
 		$lokasi = $this->m_lokasi->getIdLokasiByName($p['id_jurusan'],$p['lokasi']);
 		$kategori = $this->m_kategori->getKategoriByName($p['kategori']);
 		if(empty($lokasi)){
 			$p['id_lokasi']='';
 		}else{
-			$p['id_lokasi']=$lokasi['ID_LOKASI'];	
+			$p['id_lokasi']=$lokasi['ID_LOKASI'];
 		}
 		if(empty($kategori)){
 			$p['kategori']='';
