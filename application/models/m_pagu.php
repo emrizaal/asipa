@@ -14,7 +14,7 @@ class M_pagu extends CI_Model {
 
 	//Mengambil data pagu beserta jurusannya
 	function getPaguByPeriode($tahun){
-		$query = $this->db->query("SELECT * from pagu,jurusan where TAHUN_ANGGARAN = '$tahun' AND pagu.ID_JURUSAN= jurusan.ID_JURUSAN")->result_array();
+		$query = $this->db->query("SELECT * from pagu,jurusan where pagu.TAHUN_ANGGARAN = '$tahun' AND pagu.ID_JURUSAN= jurusan.ID_JURUSAN")->result_array();
 		return $query;
 	}
 
@@ -41,11 +41,13 @@ class M_pagu extends CI_Model {
 		$query = $this->db->query("INSERT into pagu(
 			ID_JURUSAN,
 			PAGU_ALAT,
-			TAHUN_ANGGARAN
+			TAHUN_ANGGARAN,
+			TANGGAL_MULAI
 			)values (
 				'$p[id_jurusan]',
 				'$p[pagu]',
-				'$p[tahun_anggaran]'
+				'$p[tahun_anggaran]',
+				'$p[tanggal_mulai]'
 			)");
 		return $query;
 	}

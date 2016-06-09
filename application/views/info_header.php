@@ -6,7 +6,7 @@ $startDate = $this->m_site->getStartDate(date('Y'));
 $fase = '-';
 $deadline = '-';
 if($startDate!=''){
-
+    $startDate = $startDate->tgl;
 // get Fase from date now
     $dateNow = date('Y-m-d');
     $setDiff=date_diff(date_create($startDate),date_create($dateNow));
@@ -16,8 +16,8 @@ $getDeadline = $this->m_site->getDeadline();
 $tot = 0;
 
 foreach ($getDeadline AS $g) {
-   $tot += $g['WAKTU_PELAKSANAAN'];
-   if($dif <= $tot){
+ $tot += $g['WAKTU_PELAKSANAAN'];
+ if($dif <= $tot){
     $fases = $g['ID_FASE'];
     break;
 }
@@ -26,7 +26,6 @@ foreach ($getDeadline AS $g) {
 $deadline = strtotime('+'.$tot.' day',strtotime($dateNow));
 $deadline = IndoTgl(date('Y-m-d', $deadline));
 $fase = $this->m_data->getDataFromTblWhere('fase','ID_FASE',$fases)->row()->NAMA_FASE;
-
 }
 
 $status="";
@@ -62,10 +61,16 @@ if($sess['ID_JENIS_USER']==1){
     }
 }else if($sess['ID_JENIS_USER']==4){
     $pagu=$this->m_pagu->getPaguByPeriode(date('Y'));
-    if($pagu[0]['TAHUN_ANGGARAN']){
-     $status = "<strong style='color:green'><span><i class='fa fa-check icon'></i></span></strong> Sudah Membuat Pagu";
- }else{
+    // print_r($pagu); die();
+    if(!empty($pagu)){
+        if($pagu[0]['TAHUN_ANGGARAN']){
+           $status = "<strong style='color:green'><span><i class='fa fa-check icon'></i></span></strong> Sudah Membuat Pagu";
+       }else{
+        $status = "<strong style='color:red'><span><i class='fa fa-exclamation-triangle icon'></i></span></strong> Belum Memasukkan Pagu";
+    }
+}else{
     $status = "<strong style='color:red'><span><i class='fa fa-exclamation-triangle icon'></i></span></strong> Belum Memasukkan Pagu";
+
 }
 }
 
@@ -81,7 +86,7 @@ box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 
         <div class="row  no-margin-bottom">
             <div class="col-xs-6 col-md-5">
-               <div class="alert alert-danger" role="alert" style="margin-bottom: 0px;padding: 5px;font-size: 15px;">
+             <div class="alert alert-danger" role="alert" style="margin-bottom: 0px;padding: 5px;font-size: 15px;">
                 <strong>Deadline : </strong> <?=$deadline?>
 
             </div>

@@ -27,7 +27,7 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/themes/flat-blue.css">
     <style type="text/css">
-       .navbar {
+     .navbar {
         padding-left: 0px;
     }
     .navbar .navbar-breadcrumb > li {
@@ -109,8 +109,23 @@
                                     <li class="title">
                                         Notifikasi <span class="badge pull-right">4</span>
                                     </li>
+                                    <? 
+                                    $startDate = $this->m_site->getStartDate(date('Y'));
+                                    $notifPagu = 0;
+                                    if($startDate!=""){
+                                        $notifPagu = 1;
+                                    }
+                                    ?>
                                     <li>
                                         <ul class="list-group notifications">
+                                            <?
+                                            if($notifPagu){?>
+                                            <a href="<?=site_url()?>">
+                                                <li class="list-group-item">
+                                                    <span class="badge">1</span> <i class="fa fa-money"></i> Pagu Telah Dibuat
+                                                </li>
+                                            </a>
+                                            <?}?>
                                             <a href="#">
                                                 <li class="list-group-item">
                                                     <span class="badge">1</span> <i class="fa fa-exclamation-circle icon"></i> Usulan Pengadaan
@@ -128,14 +143,14 @@
                                             </a>
                                             <a href="#">
                                                 <li class="list-group-item message">
-                                                   Lihat Semua
-                                               </li>
-                                           </a>
-                                       </ul>
-                                   </li>
-                               </ul>
-                           </li>
-                           <li class="dropdown profile">
+                                                 Lihat Semua
+                                             </li>
+                                         </a>
+                                     </ul>
+                                 </li>
+                             </ul>
+                         </li>
+                         <li class="dropdown profile">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="
                             line-height: 25px;
                             padding-top: 10px;
@@ -187,8 +202,8 @@
                         </div>
 
                         <ul class="nav navbar-nav" style="font-size: 20px;">
-                           <? if($id_jenis==1 || $id_jenis==2 || $id_jenis==3){ ?>
-                           <li class="list <?= ($this->uri->segment(1)=='Dashboard')?'active':''; ?>">
+                         <? if($id_jenis==1 || $id_jenis==2 || $id_jenis==3){ ?>
+                         <li class="list <?= ($this->uri->segment(1)=='Dashboard')?'active':''; ?>">
                             <a href="<?=base_url()?>Dashboard">
                                 <span class="icon fa fa-tachometer"></span><span class="title">Dashboard 
                             </span>

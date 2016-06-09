@@ -48,6 +48,8 @@ class Pagu extends CI_Controller {
 				);
 			$this->m_pagu->savePagu($data);
 		}
+		$konten = 'Data Pagu Telah Dimasukkan Pada '.IndoTgl(date('Y-m-d'));
+		SendSMS($konten,'08997150058','Pagu');
 		redirect("Pagu");
 	}
 

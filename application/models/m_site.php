@@ -19,7 +19,7 @@ class M_site extends CI_Model {
 
 	function getStartDate($thn){
 		$date = $this->db->query("SELECT TANGGAL_MULAI AS tgl FROM pagu WHERE TAHUN_ANGGARAN = $thn")->row();
-		return $date->tgl;
+		return $date;
 	}
 
 	function getDeadline(){
