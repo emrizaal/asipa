@@ -33,7 +33,7 @@
                    <td> Rp. <?=number_format(100000000,'0',',','.') ?> juta </td>
                    <td> Rp. <?=number_format(90000000,'0',',','.') ?> juta </td>
                    <td> <?= number_format(90,'2',',','.') ?> % </td>
-                   <td> <a href="#"> Lihat </a> </td>
+                   <td> <a href="<?=site_url()?>Performa/detailPaket"> Lihat </a> </td>
                   </tr>
                 </table>
               </div>
@@ -69,34 +69,51 @@
 
 <script src="<?=base_url()?>assets/highchart/js/highcharts.js"></script>
 <script src="<?=base_url()?>assets/highchart/js/modules/exporting.js"></script>
+<script src="<?=base_url()?>assets/highchart/js/modules/drilldown.js"></script>
 
 <script>
     $(document).ready(function(){  
        $(function () {
-    $('#container').highcharts({
+    // $('#container').highcharts({
+
+      var defaultTitle = "Performa Serapan Anggaran Tahun 2016";
+    var drilldownTitle = "Performa Serapan Anggaran Jurusan ";
+
+       var chart = new Highcharts.Chart({
+
       chart: {
-        type: 'column'
-      },
+            type: 'column',
+            renderTo: 'container',
+            events: {
+                drilldown: function(e) {
+                    chart.setTitle({ text: drilldownTitle + e.point.name });
+                },
+                drillup: function(e) {
+                    chart.setTitle({ text: defaultTitle });
+                }
+            }
+        },
       title: {
-        text: 'Performa Serapan Anggaran Tahun 2016'
+        text: defaultTitle
       },
       subtitle: {
         text: 'Pengadaan Alat POLBAN'
       },
       xAxis: {
-        categories: [
-        'Komputer &Informatika',
-        'Sipil',
-        'Mesin',
-        'Administrasi Niaga',
-        'Refrigerasi dan Tata Udara',
-        'Konversi Energi',
-        'Elektro',
-        'Kimia',
-        'Akuntansi',
-        'Bahasa Inggris',
-        'MKU',
-        ],
+        // categories: [
+        // 'Komputer &Informatika',
+        // 'Sipil',
+        // 'Mesin',
+        // 'Administrasi Niaga',
+        // 'Refrigerasi dan Tata Udara',
+        // 'Konversi Energi',
+        // 'Elektro',
+        // 'Kimia',
+        // 'Akuntansi',
+        // 'Bahasa Inggris',
+        // 'MKU',
+        // ],
+        type: 'category',
         crosshair: true
       },
       yAxis: {
@@ -121,14 +138,62 @@
       },
       series: [{
         name: 'Target',
-        data: [100,100,600,400,120,330,120,510,520,130,120]
+        data: [
+        {name:'Komputer & Informatika',y: 100, drilldown: '1t'},
+        {name:'Sipil',y: 100, drilldown: '1t'},
+        {name:'Mesin',y: 600, drilldown: '1t'},
+        {name:'Administrasi Niaga',y: 400, drilldown: '1t'},
+        {name:'Refrigerasi dan Tata Udara',y: 120, drilldown: '1t'},
+        {name:'Konversi Energi',y: 330, drilldown: '1t'},
+        {name:'Elektro',y: 120, drilldown: '1t'},
+        {name:'Kimia',y: 510, drilldown: '1t'},
+        {name:'Akuntansi',y: 120, drilldown: '1t'},
+        {name:'Bahasa Inggris',y: 130, drilldown: '1t'},
+        {name:'MKU',y: 120, drilldown: '1t'},
+        ]
+            // [100,100,600,400,120,330,120,510,520,130,120]
 
       },
       {
         name: 'Aktual',
-        data: [90,85,400,400,120,130,100,510,420,120,120]
+        data: [
+       {name:'Komputer & Informatika',y: 90, drilldown: '1a'},
+        {name:'Sipil',y: 85, drilldown: '1a'},
+        {name:'Mesin',y: 400, drilldown: '1a'},
+        {name:'Administrasi Niaga',y: 400, drilldown: '1a'},
+        {name:'Refrigerasi dan Tata Udara',y: 120, drilldown: '1a'},
+        {name:'Konversi Energi',y: 130, drilldown: '1a'},
+        {name:'Elektro',y: 100, drilldown: '1a'},
+        {name:'Kimia',y: 510, drilldown: '1a'},
+        {name:'Akuntansi',y: 420, drilldown: '1a'},
+        {name:'Bahasa Inggris',y: 120, drilldown: '1a'},
+        {name:'MKU',y: 120, drilldown: '1a'},
+        ]
+        // [90,85,400,400,120,130,100,510,420,120,120]
 
-      }]
+      }],
+         drilldown: {
+            series: [{
+                id: '1t',
+                name: 'Target',
+                data: [
+                    ['2016', 100],
+                    ['2015', 80],
+                    ['2014', 120],
+                    ['2013', 100]
+                ]
+            },
+            {
+                id: '1a',
+                name: 'Aktual',
+                data: [
+                    ['2016', 90],
+                    ['2015', 80],
+                    ['2014', 100],
+                    ['2013', 100]
+                ]
+            }]
+        }
     });
 });
 

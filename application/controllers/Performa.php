@@ -9,9 +9,15 @@ class Performa extends CI_Controller {
 
 	public function index(){
 		$this->load->view('top');
-		$data['lelang']='';
+		$data['paket']='';
 		$this->load->view("performa/performa_view",$data);
 		// $this->load->view('bottom');
+	}
+	public function detailPaket(){
+		$this->load->view('top');
+		$data['paket']='';
+		$this->load->view("performa/paket_detail",$data);
+		$this->load->view('bottom');
 	}
 
 
