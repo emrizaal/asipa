@@ -51,13 +51,13 @@
             </div>
             <div class="control-group ">
               <div class="controls">
-               <label class="label-jumlah" >Jumlah + Biaya Kirim </label> : 
+               <label class="label-jumlah" >Jumlah + Biaya Keuntungan </label> : 
                9900000
              </div>
            </div>
            <div class="control-group ">
             <div class="controls">
-              <label class="label-jumlah" >Jumlah + Biaya Kirim + Pajak </label> :
+              <label class="label-jumlah" >Jumlah + Biaya Keuntungan + Pajak </label> :
               10890000
             </div>
           </div>

@@ -30,7 +30,7 @@ $this->load->view("info_header");
                     <th>Status Lelang</th>
                     <th>Aksi</th>
                     <?php 
-                    // print_r($lelang);
+                    print_r($lelang);
                     foreach($lelang as $p){
                       ?>
                       <tr>

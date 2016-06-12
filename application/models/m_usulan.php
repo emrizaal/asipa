@@ -17,6 +17,17 @@ class M_usulan extends CI_Model {
 		return $query;
 	}
 
+	function getUsulanForFlow($id,$fase){
+		$query = $this->db->query("SELECT *,progress_paket.STATUS as STAT from progress_paket,usulan,jurusan where jurusan.ID_JURUSAN = usulan.ID_JURUSAN AND progress_paket.ID_JURUSAN = '$id' AND progress_paket.STATUS = '$fase' AND usulan.ID_USULAN = progress_paket.ID_USULAN AND ID_PROGRESS_PAKET = (SELECT MAX(ID_PROGRESS_PAKET) from progress_paket where progress_paket.ID_USULAN = usulan.ID_USULAN) group by progress_paket.ID_USULAN order by ID_PROGRESS_PAKET DESC")->result_array();
+		return $query;
+	}
+
+	// get data usulan final semua jurusan
+	function getUsulanFinalJurusan($fase){
+		$query = $this->db->query("SELECT *,progress_paket.STATUS as STAT from progress_paket,usulan,jurusan where jurusan.ID_JURUSAN = usulan.ID_JURUSAN AND progress_paket.STATUS = '$fase' AND usulan.ID_USULAN = progress_paket.ID_USULAN AND ID_PROGRESS_PAKET = (SELECT MAX(ID_PROGRESS_PAKET) from progress_paket where progress_paket.ID_USULAN = usulan.ID_USULAN) group by progress_paket.ID_USULAN order by ID_PROGRESS_PAKET DESC")->result_array();
+		return $query;
+	}
+
 	//Mengambil data usulan berdasarkan Id Usulan
 	function getUsulanByIdUsulan($id){
 		$query = $this->db->query("SELECT * from usulan,pagu where ID_USULAN = '$id' AND usulan.TAHUN_ANGGARAN = pagu.TAHUN_ANGGARAN")->row_array();

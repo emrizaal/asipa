@@ -104,13 +104,15 @@
                         </button>
                         <li class="dropdown danger">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ><i class="fa fa-exclamation-circle icon" style=" font-size: 25px;"></i> 
-                                <span style="font-size: 15px;font-weight: bold;">4</span></a>
+                                <span style="font-size: 15px;font-weight: bold;"></span></a>
                                 <ul class="dropdown-menu danger  animated fadeInDown" style="margin-top:10px">
                                     <li class="title">
-                                        Notifikasi <span class="badge pull-right">4</span>
+                                        Notifikasi <span class="badge pull-right"></span>
                                     </li>
                                     <? 
                                     $startDate = $this->m_site->getStartDate(date('Y'));
+
+
                                     $notifPagu = 0;
                                     if($startDate!=""){
                                         $notifPagu = 1;
@@ -122,49 +124,164 @@
                                             if($notifPagu){?>
                                             <a href="<?=site_url()?>">
                                                 <li class="list-group-item">
-                                                    <span class="badge">1</span> <i class="fa fa-money"></i> Pagu Telah Dibuat
+                                                    <span class="badge"></span> <i class="fa fa-money"></i> Pagu Telah Dibuat
                                                 </li>
                                             </a>
                                             <?}?>
-                                            <a href="#">
-                                                <li class="list-group-item">
-                                                    <span class="badge">1</span> <i class="fa fa-exclamation-circle icon"></i> Usulan Pengadaan
-                                                </li>
-                                            </a>
-                                            <a href="#">
-                                                <li class="list-group-item">
-                                                    <span class="badge success">1</span> <i class="fa fa-check icon"></i> Verifikasi HPS
-                                                </li>
-                                            </a>
-                                            <a href="#">
-                                                <li class="list-group-item">
-                                                    <span class="badge danger">2</span> <i class="fa fa-comments icon"></i> Pembuatan Kontrak
-                                                </li>
-                                            </a>
-                                            <a href="#">
-                                                <li class="list-group-item message">
-                                                 Lihat Semua
-                                             </li>
-                                         </a>
-                                     </ul>
-                                 </li>
-                             </ul>
-                         </li>
-                         <li class="dropdown profile">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="
-                            line-height: 25px;
-                            padding-top: 10px;
-                            text-align: center;
-                            font-size: 15px;
-                            "><span >
-                            <?= $this->m_data->getDataFromTblWhere('jenis_user', 'ID_JENIS_USER', $id_jenis)->row()->NAMA_JENIS_USER ?>
-                            <br> 
-                            <? $nama_jur = $this->m_data->getDataFromTblWhere('jurusan', 'ID_JURUSAN', $id_jurusan)->row()->NAMA_JURUSAN;
-                            if($nama_jur!=''){?>
-                            <b>( <?= $nama_jur ?> )</b> </span> 
-                            <?}?>
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu animated fadeInDown" style="margin-top:10px">
+                                            <?
+                                            if($id_jenis==2){
+                                                $usul=$this->m_usulan->getUsulanFromBelow($id_jurusan);
+                                                if($usul[0]['STAT']==11){?>
+                                                <a href="<?=site_url()?>">
+                                                    <li class="list-group-item">
+                                                        <span class="badge"></span> <i class="fa fa-file-text-o"></i> Verifikasi Usulan
+                                                    </li>
+                                                </a>
+                                                <? } 
+                                            }?>
+                                            <?
+                                            if($id_jenis==3){
+                                                $usul=$this->m_usulan->getUsulanFromBelow($id_jurusan);
+                                                if($usul[0]['STAT']==1 || $usul[0]['STAT']==22){?>
+                                                <a href="<?=site_url()?>">
+                                                    <li class="list-group-item">
+                                                        <span class="badge"></span> <i class="fa fa-file-text-o"></i> Verifikasi Usulan
+                                                    </li>
+                                                </a>
+                                                <? }
+                                            }?>
+                                            <? if($id_jenis== 1 || $id_jenis==2 || $id_jenis==3){
+                                                $usul=$this->m_usulan->getUsulanFromBelow($id_jurusan);
+                                                if($usul[0]['STAT']==3){?>
+                                                <a href="<?=site_url()?>">
+                                                    <li class="list-group-item">
+                                                        <span class="badge"></span> <i class="fa fa-file-text-o"></i> Usulan Final Telah Dibuat
+                                                    </li>
+                                                </a>
+                                                <? }
+                                            }?>
+                                            <? if($id_jenis== 5){
+                                                $usul=$this->m_usulan->getUsulanFinalJurusan(3);
+                                                $jmlUsul = count($usul);
+                                                if($jmlUsul!=0){?>
+                                                <a href="<?=site_url()?>Pengelompokan">
+                                                    <li class="list-group-item">
+                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-file-text-o"></i> Usulan Final Telah Dibuat
+                                                    </li>
+                                                </a>
+                                                <?}
+                                            }?>
+                                            <? if($id_jenis== 3 || $id_jenis== 5 || $id_jenis== 6){
+                                                $usul=$this->m_progress->getProgressPaketByFase(5);
+                                                $jmlUsul = count($usul);
+                                                if($jmlUsul!=0){?>
+                                                <a href="<?=site_url()?>">
+                                                    <li class="list-group-item">
+                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-files-o"></i> Dokumen Telah Dikelompokan
+                                                    </li>
+                                                </a>
+                                                <? } } ?>
+
+                                                  <? if($id_jenis== 3 || $id_jenis== 5){
+                                                $usul=$this->m_progress->getProgressPaketByFase(6);
+                                                $jmlUsul = count($usul);
+                                                if($jmlUsul!=0){?>
+                                                <a href="<?=site_url()?>">
+                                                    <li class="list-group-item">
+                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-check"></i> HPS Telah Dibuat
+                                                    </li>
+                                                </a>
+                                                <? } } ?>
+
+                                                 <? if($id_jenis== 3 || $id_jenis== 5 || $id_jenis== 6){
+                                                $usul=$this->m_progress->getProgressPaketByFase(7);
+                                                $jmlUsul = count($usul);
+                                                if($jmlUsul!=0){?>
+                                                <a href="<?=site_url()?>">
+                                                    <li class="list-group-item">
+                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-check"></i> HPS Disetujui PPK
+                                                    </li>
+                                                </a>
+                                                <? } } ?>
+
+                                                  <? if($id_jenis== 3 || $id_jenis== 5){
+                                                $usul=$this->m_progress->getProgressPaketByFase(8);
+                                                $jmlUsul = count($usul);
+                                                if($jmlUsul!=0){?>
+                                                <a href="<?=site_url()?>">
+                                                    <li class="list-group-item">
+                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-shopping-cart"></i> Paket Dalam Pengadaan
+                                                    </li>
+                                                </a>
+                                                <? } } ?>
+
+                                                 <? if($id_jenis== 3 || $id_jenis== 5){
+                                                $usul=$this->m_progress->getProgressPaketByFase(9);
+                                                $jmlUsul = count($usul);
+                                                if($jmlUsul!=0){?>
+                                                <a href="<?=site_url()?>">
+                                                    <li class="list-group-item">
+                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-check"></i> Paket Sukses Lelang
+                                                    </li>
+                                                </a>
+                                                <? } } ?>
+
+                                                 <? if($id_jenis== 3 || $id_jenis== 5 || $id_jenis==8){
+                                                $usul=$this->m_progress->getProgressPaketByFase(10);
+                                                $jmlUsul = count($usul);
+                                                if($jmlUsul!=0){?>
+                                                <a href="<?=site_url()?>">
+                                                    <li class="list-group-item">
+                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-file-text-o"></i> Dokumen Kontrak Dibuat
+                                                    </li>
+                                                </a>
+                                                <? } } ?>
+
+                                                 <? if($id_jenis== 3 || $id_jenis== 5 ){
+                                                $usul=$this->m_progress->getProgressPaketByFase(12);
+                                                $jmlUsul = count($usul);
+                                                if($jmlUsul!=0){?>
+                                                <a href="<?=site_url()?>">
+                                                    <li class="list-group-item">
+                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-files-o"></i> Data Penerimaan Dibuat
+                                                    </li>
+                                                </a>
+                                                <? } } ?>
+
+                                                 <? if($id_jenis== 10 || $id_jenis== 2 || $id_jenis== 3){
+                                                $usul=$this->m_pencatatan->getNoInventAlatByJurusan($id_jurusan);
+                                                $jmlUsul = count($usul);
+                                                if($jmlUsul!=0){?>
+                                                <a href="<?=site_url()?>">
+                                                    <li class="list-group-item">
+                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-check"></i> No Inventaris Dimasukkan
+                                                    </li>
+                                                </a>
+                                                <? } } ?>
+                                                <a href="#">
+                                                    <li class="list-group-item message">
+                                                     Lihat Semua
+                                                 </li>
+                                             </a>
+                                         </ul>
+                                     </li>
+                                 </ul>
+                             </li>
+                             <li class="dropdown profile">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="
+                                line-height: 25px;
+                                padding-top: 10px;
+                                text-align: center;
+                                font-size: 15px;
+                                "><span >
+                                <?= $this->m_data->getDataFromTblWhere('jenis_user', 'ID_JENIS_USER', $id_jenis)->row()->NAMA_JENIS_USER ?>
+                                <br> 
+                                <? $nama_jur = $this->m_data->getDataFromTblWhere('jurusan', 'ID_JURUSAN', $id_jurusan)->row()->NAMA_JURUSAN;
+                                if($nama_jur!=''){?>
+                                <b>( <?= $nama_jur ?> )</b> </span> 
+                                <?}?>
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu animated fadeInDown" style="margin-top:10px">
                                 <!-- <li class="profile-img" style="width: 100px;margin: auto;">
                                     <img src="<?php echo base_url()?>/assets/img/profile/1.jpg" class="profile-img">
                                 </li> -->

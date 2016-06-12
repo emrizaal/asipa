@@ -164,6 +164,7 @@ class Usulan extends CI_Controller {
 		}else{
 			$alat = $this->m_alat->getAlatByIdUsulan($usulan['ID_USULAN'],$rev);
 			$data['totalFinal']=1;
+			$alat[0]['NAMA_PAKET']='';
 		}
 		$resKategori=$this->m_kategori->getAllKategori();
 		$resLokasi=$this->m_lokasi->getLokasiByIdJurusan($id);
