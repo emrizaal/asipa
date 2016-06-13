@@ -117,6 +117,13 @@ class Hps extends CI_Controller {
 		$this->m_pengelompokan->updatePengelompokan($p);
 		$this->m_alat->saveUpdateAlatHps($p);
 	}
+
+	/*
+	public function approve(){
+
+	}
+	*/
+
 }
 
 ?>

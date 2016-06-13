@@ -11,7 +11,7 @@ class TimHPS extends CI_Controller {
 	}
 
 	public function index(){
-		$this->load->view('top');
+		$this->load->view('top');	
 		$data['tim']=$this->m_timHps->getAllTimHps();
 		$data['pegawai']=$this->m_pegawai->getAllPegawai();
 		$this->load->view("timHPS/timHps_view",$data);

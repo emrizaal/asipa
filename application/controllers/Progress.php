@@ -48,7 +48,7 @@ class Progress extends CI_Controller {
 		redirect("Usulan");
 	}
 
-	public function acceptUsulan(){
+	public function approveUsulan(){
 		$p=$this->input->post();
 		$p['id_user']=$this->session->userdata("ID_USER");
 		$p['id_jurusan']=$this->session->userdata("ID_JURUSAN");

@@ -426,7 +426,7 @@ $("#btnAccept").click(function(e){
   myFormData.append('paket','');
 
   $.ajax({
-    url: '<?=base_url()?>Progress/acceptUsulan',
+    url: '<?=base_url()?>Progress/approveUsulan',
     type: "POST",
     data:myFormData,
     contentType: false,

@@ -41,7 +41,7 @@ class M_alat extends CI_Model {
 		return $query;
 	}
 
-	function getPaketAlatByIdKategori($kat){
+	function getAlatNonPaketByIdKategori($kat){
 		$query = $this->db->query("SELECT * from alat,lokasi,jurusan where lokasi.ID_LOKASI = alat.ID_LOKASI AND jurusan.ID_JURUSAN = alat.ID_JURUSAN AND alat.ID_KATEGORI = '$kat' AND alat.IS_FINAL = 1 AND ID_PAKET is null")->result_array();
 		return $query;
 	}
