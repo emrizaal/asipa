@@ -9,8 +9,11 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function index(){
+		$id = $this->session->userdata("ID_JURUSAN");
+		$tahun = date('Y');
+		$data['final']=$this->m_usulan->getUsulanFinal($id,$tahun);
 		$this->load->view('top');
-		$this->load->view("index");
+		$this->load->view("index",$data);
 		$this->load->view('bottom');
 
 	}

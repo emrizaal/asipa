@@ -11,7 +11,7 @@ class M_lelang extends CI_Model {
 		$query = $this->db->query("SELECT * 
 			from paket p
 			inner join (
-				select *,pp.ID_USER AS idUSr,pp.`STATUS` AS sts from progress_paket pp 
+				select *,pp.ID_USER AS idUSr,MAX(pp.`STATUS`) AS sts from progress_paket pp 
 				WHERE pp.ID_FASE ='3' AND pp.`STATUS` IN(8,-9,9)
 				ORDER BY pp.TANGGAL desc 
 			) r
@@ -50,6 +50,7 @@ class M_lelang extends CI_Model {
 			NAMA_C='$p[nama_c]',
 			NPWP_C='$p[npwp_c]',
 			ALAMAT_C='$p[alamat_c]',
+			STATUS = 9,
 			ID_TEAM_PENERIMA='$p[timPenerima]',
 			KETERANGAN_GAGAL_KONTRAK='' 
 			where ID_PAKET='$p[id_paket]'

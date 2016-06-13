@@ -20,9 +20,14 @@ class M_pencatatan extends CI_Model {
 	function saveNoInvent($id,$data){
 		$this->db->where('ID_ALAT',$id);
 		$this->db->update('alat',$data);
+
 	}
 	function getPaketByIdAlat($id){
 		$query = $this->db->query("SELECT a.ID_ALAT FROM alat a WHERE a.ID_ALAT = $id")->row_array();	
+		return $query;
+	}
+	function getNoInventAlatByJurusan($id){
+		$query = $this->db->query("SELECT * FROM alat WHERE NO_INVENTARIS!='' AND ID_JURUSAN = '$id' AND ID_PAKET = (SELECT pp.ID_PAKET FROM progress_paket pp WHERE pp.STATUS = '13')")->result_array();	
 		return $query;
 	}
 	// function getAllJumlahAlatByIdPaket($id){

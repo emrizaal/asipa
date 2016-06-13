@@ -70,13 +70,13 @@
               </div>
             </div>
             <div class="control-group ">
-              <label class="label-jumlah" >Jumlah + Biaya Kirim </label>
+              <label class="label-jumlah" >Jumlah + Biaya Keuntungan </label>
               <div class="controls">
                 <input type="text" id="totalAnggaranKeuntungan" readonly value="" class="form-control">
               </div>
             </div>
             <div class="control-group ">
-              <label class="label-jumlah" >Jumlah + Biaya Kirim + Pajak </label>
+              <label class="label-jumlah" >Jumlah + Biaya Keuntungan + Pajak </label>
               <div class="controls">
                 <input type="text" id="totalAnggaranKeuntunganPajak" readonly value="" class="form-control">
               </div>

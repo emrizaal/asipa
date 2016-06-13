@@ -59,6 +59,8 @@ class Progress extends CI_Controller {
 		$this->m_progress->saveProgressUsulan($p);
 	}
 
+	
+
 }
 
 ?>
