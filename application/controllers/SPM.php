@@ -46,6 +46,22 @@ class SPM extends CI_Controller {
 		return 1;
 	}
 
+	function KonfirmasiAlat(){
+		$this->load->view('top');
+		// $data['paket']=$this->m_spm->getAllDataPaket();
+		$this->load->view("spm/konfirmasi");
+		$this->load->view('bottom');
+	}
+
+	function confirmPenerimaan(){
+		$id = $this->input->post('id_penerimaan');
+		$data = array('STATUS_KONFIRMASI'=>1);
+		$this->m_spm->confirmPenerimaan($id,$data);
+
+			redirect($_SERVER['HTTP_REFERER']);
+		return 1;
+	}
+
 }
 
 ?>

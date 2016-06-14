@@ -10,71 +10,70 @@
 <div class="app-container-slide">
   <div class="container-fluid">
     <div class="side-body padding-top"  style="padding-top:90px;">
+     <div class="row  no-margin-bottom">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title" style="width:100%">
+                <span class="title">Manage BAPP</span>
+                <a href="<?=site_url()?>BeritaAcara" class="btn btn-primary pull-right"><i class="fa fa-chevron-left"></i> Kembali </a>
 
-      <div class="row  no-margin-bottom">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="card">
-              <div class="card-header">
-                <div class="card-title" style="width:100%">
-                  <span class="title">Manage BAPP</span>
-                  <a href="<?=site_url()?>BeritaAcara" class="btn btn-primary pull-right"><i class="fa fa-chevron-left"></i> Kembali </a>
-
-                </div>
               </div>
-              <div class="card-body">
-                <div class="row">
-                  <?// print_r($p)?>
-                  <div class="col-md-7">
-                    <div class="row">
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <?// print_r($p)?>
+                <div class="col-md-7">
+                  <div class="row">
 
-                      <span class="col-md-3" style="margin-bottom:5px"><b>No. Dokumen : </b></span>
-                      <span class="col-md-3" style="margin-bottom:5px"> PAKET-<?=$p['ID_PAKET']?>/<?=$p['TAHUN_ANGGARAN']?></span>
+                    <span class="col-md-3" style="margin-bottom:5px"><b>No. Dokumen : </b></span>
+                    <span class="col-md-3" style="margin-bottom:5px"> PAKET-<?=$p['ID_PAKET']?>/<?=$p['TAHUN_ANGGARAN']?></span>
 
-                      <span class="col-md-3" style="margin-bottom:5px"><b> Total Anggaran :</b></span>
-                      <span class="col-md-3" style="margin-bottom:5px"> Rp. <?=number_format($p['TOTAL_ANGGARAN'],'0',',','.')?></span>
-                    </div>
+                    <span class="col-md-3" style="margin-bottom:5px"><b> Total Anggaran :</b></span>
+                    <span class="col-md-3" style="margin-bottom:5px"> Rp. <?=number_format($p['TOTAL_ANGGARAN'],'0',',','.')?></span>
+                  </div>
 
-                    <div class="row">
-                      <span class="col-md-3" style="margin-bottom:5px"><b>Tahun : </b></span>
-                      <span class="col-md-3" style="margin-bottom:5px"> <?=$p['TAHUN_ANGGARAN']?></span>
+                  <div class="row">
+                    <span class="col-md-3" style="margin-bottom:5px"><b>Tahun : </b></span>
+                    <span class="col-md-3" style="margin-bottom:5px"> <?=$p['TAHUN_ANGGARAN']?></span>
 
-                      <span class="col-md-3" style="margin-bottom:5px"><b> Tanggal Dibuat :</b></span>
-                      <span class="col-md-3" style="margin-bottom:5px"> <? $tgl = explode(" ", $p['TANGGAL_DIBUAT']); echo $tgl[0];?></span>
-                    </div>
+                    <span class="col-md-3" style="margin-bottom:5px"><b> Tanggal Dibuat :</b></span>
+                    <span class="col-md-3" style="margin-bottom:5px"> <? $tgl = explode(" ", $p['TANGGAL_DIBUAT']); echo $tgl[0];?></span>
+                  </div>
 
-                    <div class="row">
-                      <span class="col-md-3" style="margin-bottom:5px"><b>Nama Paket  : </b></span>
-                      <span class="col-md-3" style="margin-bottom:5px"> <?=$p['NAMA_PAKET']?></span>
+                  <div class="row">
+                    <span class="col-md-3" style="margin-bottom:5px"><b>Nama Paket  : </b></span>
+                    <span class="col-md-3" style="margin-bottom:5px"> <?=$p['NAMA_PAKET']?></span>
 
-                      <span class="col-md-3" style="margin-bottom:5px"><b> Last Update :</b></span>
-                      <span class="col-md-3" style="margin-bottom:5px"> <? $tgl = explode(" ", $p['LAST_UPDATE']); echo $tgl[0];?></span>
-                    </div>
-
+                    <span class="col-md-3" style="margin-bottom:5px"><b> Last Update :</b></span>
+                    <span class="col-md-3" style="margin-bottom:5px"> <? $tgl = explode(" ", $p['LAST_UPDATE']); echo $tgl[0];?></span>
                   </div>
 
                 </div>
-                <?
-                $maxTgl = $this->m_beritaacara->cekTglPenerimaan($p['ID_PAKET']);
-                ?>
-                <table class="table table-stripped table-bordered table-hover">
-                  <tr class="active">
-                    <th rowspan="2">Nama Barang</th>
-                    <th rowspan="2">Spesifikasi</th>
-                    <th rowspan="2">Setara</th>
-                    <th rowspan="2">Satuan</th>
-                    <th rowspan="2">Jumlah</th>
-                    <th colspan="<?= ($maxTgl['c']!=0)?$maxTgl['c']*2:'2'?>"  style="text-align:center"> Pemeriksaan</th>
-                    <th rowspan="2">Jumlah Penerimaan</th>
-                    <th rowspan="2">Aksi</th>
-                  </tr>
-                  <tr class="active">
-                    <?for ($i=0; $i < $maxTgl['c']; $i++) { ?>
+
+              </div>
+              <?
+              $maxTgl = $this->m_beritaacara->cekTglPenerimaan($p['ID_PAKET']);
+              ?>
+              <table class="table table-stripped table-bordered table-hover">
+                <tr class="active">
+                  <th rowspan="2">Nama Barang</th>
+                  <th rowspan="2">Spesifikasi</th>
+                  <th rowspan="2">Setara</th>
+                  <th rowspan="2">Satuan</th>
+                  <th rowspan="2">Jumlah</th>
+                  <th colspan="<?= ($maxTgl['c']!=0)?$maxTgl['c']*2:'2'?>"  style="text-align:center"> Pemeriksaan</th>
+                  <th rowspan="2">Jumlah Penerimaan</th>
+                  <th rowspan="2">Aksi</th>
+                </tr>
+                <tr class="active">
+                  <?for ($i=0; $i < $maxTgl['c']; $i++) { ?>
+                  <th style="border-left: 2px solid #ccc;">Tanggal</th >
+                    <th>Jumlah</th>
+                    <? }  
+                    if($maxTgl['c'] == 0) {?>
                     <th style="border-left: 2px solid #ccc;">Tanggal</th >
-                      <th>Jumlah</th>
-                      <? }  
-                      if($maxTgl['c'] == 0) {?>
-                       <th style="border-left: 2px solid #ccc;">Tanggal</th >
                       <th>Jumlah</th>
                       <? } ?>
 

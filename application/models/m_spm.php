@@ -34,6 +34,11 @@ class M_spm extends CI_Model {
 		$this->db->update('paket',$data);
 		return 1;
 	}
+	function confirmPenerimaan($id,$data){
+		$this->db->where('ID_PENERIMAAN',$id);
+		$this->db->update('penerimaan',$data);
+		return 1;
+	}
 
 }
 

@@ -27,7 +27,7 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/themes/flat-blue.css">
     <style type="text/css">
-     .navbar {
+       .navbar {
         padding-left: 0px;
     }
     .navbar .navbar-breadcrumb > li {
@@ -182,106 +182,106 @@
                                                 </a>
                                                 <? } } ?>
 
-                                                  <? if($id_jenis== 3 || $id_jenis== 5){
-                                                $usul=$this->m_progress->getProgressPaketByFase(6);
-                                                $jmlUsul = count($usul);
-                                                if($jmlUsul!=0){?>
-                                                <a href="<?=site_url()?>">
-                                                    <li class="list-group-item">
-                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-check"></i> HPS Telah Dibuat
-                                                    </li>
-                                                </a>
-                                                <? } } ?>
+                                                <? if($id_jenis== 3 || $id_jenis== 5){
+                                                    $usul=$this->m_progress->getProgressPaketByFase(6);
+                                                    $jmlUsul = count($usul);
+                                                    if($jmlUsul!=0){?>
+                                                    <a href="<?=site_url()?>">
+                                                        <li class="list-group-item">
+                                                            <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-check"></i> HPS Telah Dibuat
+                                                        </li>
+                                                    </a>
+                                                    <? } } ?>
 
-                                                 <? if($id_jenis== 3 || $id_jenis== 5 || $id_jenis== 6){
-                                                $usul=$this->m_progress->getProgressPaketByFase(7);
-                                                $jmlUsul = count($usul);
-                                                if($jmlUsul!=0){?>
-                                                <a href="<?=site_url()?>">
-                                                    <li class="list-group-item">
-                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-check"></i> HPS Disetujui PPK
-                                                    </li>
-                                                </a>
-                                                <? } } ?>
+                                                    <? if($id_jenis== 3 || $id_jenis== 5 || $id_jenis== 6){
+                                                        $usul=$this->m_progress->getProgressPaketByFase(7);
+                                                        $jmlUsul = count($usul);
+                                                        if($jmlUsul!=0){?>
+                                                        <a href="<?=site_url()?>">
+                                                            <li class="list-group-item">
+                                                                <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-check"></i> HPS Disetujui PPK
+                                                            </li>
+                                                        </a>
+                                                        <? } } ?>
 
-                                                  <? if($id_jenis== 3 || $id_jenis== 5){
-                                                $usul=$this->m_progress->getProgressPaketByFase(8);
-                                                $jmlUsul = count($usul);
-                                                if($jmlUsul!=0){?>
-                                                <a href="<?=site_url()?>">
-                                                    <li class="list-group-item">
-                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-shopping-cart"></i> Paket Dalam Pengadaan
-                                                    </li>
-                                                </a>
-                                                <? } } ?>
+                                                        <? if($id_jenis== 3 || $id_jenis== 5){
+                                                            $usul=$this->m_progress->getProgressPaketByFase(8);
+                                                            $jmlUsul = count($usul);
+                                                            if($jmlUsul!=0){?>
+                                                            <a href="<?=site_url()?>">
+                                                                <li class="list-group-item">
+                                                                    <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-shopping-cart"></i> Paket Dalam Pengadaan
+                                                                </li>
+                                                            </a>
+                                                            <? } } ?>
 
-                                                 <? if($id_jenis== 3 || $id_jenis== 5){
-                                                $usul=$this->m_progress->getProgressPaketByFase(9);
-                                                $jmlUsul = count($usul);
-                                                if($jmlUsul!=0){?>
-                                                <a href="<?=site_url()?>">
-                                                    <li class="list-group-item">
-                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-check"></i> Paket Sukses Lelang
-                                                    </li>
-                                                </a>
-                                                <? } } ?>
+                                                            <? if($id_jenis== 3 || $id_jenis== 5){
+                                                                $usul=$this->m_progress->getProgressPaketByFase(9);
+                                                                $jmlUsul = count($usul);
+                                                                if($jmlUsul!=0){?>
+                                                                <a href="<?=site_url()?>">
+                                                                    <li class="list-group-item">
+                                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-check"></i> Paket Sukses Lelang
+                                                                    </li>
+                                                                </a>
+                                                                <? } } ?>
 
-                                                 <? if($id_jenis== 3 || $id_jenis== 5 || $id_jenis==8){
-                                                $usul=$this->m_progress->getProgressPaketByFase(10);
-                                                $jmlUsul = count($usul);
-                                                if($jmlUsul!=0){?>
-                                                <a href="<?=site_url()?>">
-                                                    <li class="list-group-item">
-                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-file-text-o"></i> Dokumen Kontrak Dibuat
-                                                    </li>
-                                                </a>
-                                                <? } } ?>
+                                                                <? if($id_jenis== 3 || $id_jenis== 5 || $id_jenis==8){
+                                                                    $usul=$this->m_progress->getProgressPaketByFase(10);
+                                                                    $jmlUsul = count($usul);
+                                                                    if($jmlUsul!=0){?>
+                                                                    <a href="<?=site_url()?>">
+                                                                        <li class="list-group-item">
+                                                                            <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-file-text-o"></i> Dokumen Kontrak Dibuat
+                                                                        </li>
+                                                                    </a>
+                                                                    <? } } ?>
 
-                                                 <? if($id_jenis== 3 || $id_jenis== 5 ){
-                                                $usul=$this->m_progress->getProgressPaketByFase(12);
-                                                $jmlUsul = count($usul);
-                                                if($jmlUsul!=0){?>
-                                                <a href="<?=site_url()?>">
-                                                    <li class="list-group-item">
-                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-files-o"></i> Data Penerimaan Dibuat
-                                                    </li>
-                                                </a>
-                                                <? } } ?>
+                                                                    <? if($id_jenis== 3 || $id_jenis== 5 ){
+                                                                        $usul=$this->m_progress->getProgressPaketByFase(12);
+                                                                        $jmlUsul = count($usul);
+                                                                        if($jmlUsul!=0){?>
+                                                                        <a href="<?=site_url()?>">
+                                                                            <li class="list-group-item">
+                                                                                <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-files-o"></i> Data Penerimaan Dibuat
+                                                                            </li>
+                                                                        </a>
+                                                                        <? } } ?>
 
-                                                 <? if($id_jenis== 10 || $id_jenis== 2 || $id_jenis== 3){
-                                                $usul=$this->m_pencatatan->getNoInventAlatByJurusan($id_jurusan);
-                                                $jmlUsul = count($usul);
-                                                if($jmlUsul!=0){?>
-                                                <a href="<?=site_url()?>">
-                                                    <li class="list-group-item">
-                                                        <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-check"></i> No Inventaris Dimasukkan
-                                                    </li>
-                                                </a>
-                                                <? } } ?>
-                                                <a href="#">
-                                                    <li class="list-group-item message">
-                                                     Lihat Semua
-                                                 </li>
-                                             </a>
-                                         </ul>
-                                     </li>
-                                 </ul>
-                             </li>
-                             <li class="dropdown profile">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="
-                                line-height: 25px;
-                                padding-top: 10px;
-                                text-align: center;
-                                font-size: 15px;
-                                "><span >
-                                <?= $this->m_data->getDataFromTblWhere('jenis_user', 'ID_JENIS_USER', $id_jenis)->row()->NAMA_JENIS_USER ?>
-                                <br> 
-                                <? $nama_jur = $this->m_data->getDataFromTblWhere('jurusan', 'ID_JURUSAN', $id_jurusan)->row()->NAMA_JURUSAN;
-                                if($nama_jur!=''){?>
-                                <b>( <?= $nama_jur ?> )</b> </span> 
-                                <?}?>
-                                <span class="caret"></span></a>
-                                <ul class="dropdown-menu animated fadeInDown" style="margin-top:10px">
+                                                                        <? if($id_jenis== 10 || $id_jenis== 2 || $id_jenis== 3){
+                                                                            $usul=$this->m_pencatatan->getNoInventAlatByJurusan($id_jurusan);
+                                                                            $jmlUsul = count($usul);
+                                                                            if($jmlUsul!=0){?>
+                                                                            <a href="<?=site_url()?>">
+                                                                                <li class="list-group-item">
+                                                                                    <span class="badge"><?= $jmlUsul ?></span> <i class="fa fa-check"></i> No Inventaris Dimasukkan
+                                                                                </li>
+                                                                            </a>
+                                                                            <? } } ?>
+                                                                            <a href="#">
+                                                                                <li class="list-group-item message">
+                                                                                   Lihat Semua
+                                                                               </li>
+                                                                           </a>
+                                                                       </ul>
+                                                                   </li>
+                                                               </ul>
+                                                           </li>
+                                                           <li class="dropdown profile">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="
+                                                            line-height: 25px;
+                                                            padding-top: 10px;
+                                                            text-align: center;
+                                                            font-size: 15px;
+                                                            "><span >
+                                                            <?= $this->m_data->getDataFromTblWhere('jenis_user', 'ID_JENIS_USER', $id_jenis)->row()->NAMA_JENIS_USER ?>
+                                                            <br> 
+                                                            <? $nama_jur = $this->m_data->getDataFromTblWhere('jurusan', 'ID_JURUSAN', $id_jurusan)->row()->NAMA_JURUSAN;
+                                                            if($nama_jur!=''){?>
+                                                            <b>( <?= $nama_jur ?> )</b> </span> 
+                                                            <?}?>
+                                                            <span class="caret"></span></a>
+                                                            <ul class="dropdown-menu animated fadeInDown" style="margin-top:10px">
                                 <!-- <li class="profile-img" style="width: 100px;margin: auto;">
                                     <img src="<?php echo base_url()?>/assets/img/profile/1.jpg" class="profile-img">
                                 </li> -->
@@ -319,8 +319,8 @@
                         </div>
 
                         <ul class="nav navbar-nav" style="font-size: 20px;">
-                         <? if($id_jenis==1 || $id_jenis==2 || $id_jenis==3){ ?>
-                         <li class="list <?= ($this->uri->segment(1)=='Dashboard')?'active':''; ?>">
+                           <? if($id_jenis==1 || $id_jenis==2 || $id_jenis==3){ ?>
+                           <li class="list <?= ($this->uri->segment(1)=='Dashboard')?'active':''; ?>">
                             <a href="<?=base_url()?>Dashboard">
                                 <span class="icon fa fa-tachometer"></span><span class="title">Dashboard 
                             </span>
@@ -433,6 +433,15 @@
                         </a>
                     </li>  
                     <? } ?>  
+                    <? 
+                    $pnb = $this->db->query('SELECT * FROM penerimaan pn WHERE pn.ID_PAKET = (SELECT MAX(a.ID_PAKET) FROM alat AS a WHERE a.ID_JURUSAN = 1)')->row(); 
+                    if($id_jenis==3 AND (!empty($pnb->ID_ALAT))){ ?>  
+                    <li class="list <?= ($this->uri->segment(2)=='KonfirmasiAlat')?'active':''; ?>">
+                        <a href="<?=base_url()?>SPM/KonfirmasiAlat">
+                            <span class="icon fa fa-check"></span><span class="title">Konfirmasi Alat</span>
+                        </a>
+                    </li>  
+                    <? } ?>
                     <!-- Dropdown-->
                            <!--  <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#component-example">
