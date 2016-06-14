@@ -159,7 +159,7 @@ class Usulan extends CI_Controller {
 		}
 		$usulan = $this->m_usulan->getUsulanByIdUsulan($p);
 		if($this->session->userdata("ID_JENIS_USER")==3){
-			$alat = $this->m_alat->getAlatByIdUsulanAndFinal($usulan['ID_USULAN'],$rev);
+			$alat = $this->m_alat->getAlatByIdUsulanAndFinal($usulan['ID_USULAN'],$rev,$id);
 			$data['totalFinal']=count($alat);
 		}else{
 			$alat = $this->m_alat->getAlatByIdUsulan($usulan['ID_USULAN'],$rev);
@@ -186,7 +186,7 @@ class Usulan extends CI_Controller {
 			$data['curr']=$curr;
 		}
 
-		
+
 		$res[0] = array('NAMA ALAT', 'SPESIFIKASI', 'SETARA', 'SATUAN', 'JUMLAH ALAT', 'HARGA SATUAN', 'TOTAL (Rp)','LOKASI','JUMLAH DISTRIBUSI','REFERENSI TERKAIT','DATA AHLI','PRIORITAS','KATEGORI','KONFIRMASI','PIC','PAKET');
 		
 		foreach($alat as $a){
