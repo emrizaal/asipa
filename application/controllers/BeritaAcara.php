@@ -46,14 +46,14 @@ class BeritaAcara extends CI_Controller {
 		$id = $this->input->post('id_paket');
 		// $cekProgress = $this->m_kontrak->cekProgressPenerimaan($id);
 		// if($cekProgress==0){
-			$dataProgress = array(
-				'ID_PAKET'=>$id,
-				'ID_USER'=> $this->session->userdata('ID_USER'),
-				'ID_FASe'=> '5',
-				'STATUS'=>'12',
-				'ID_JENIS_USER'=> $this->session->userdata('ID_JENIS_USER'),
-				);
-			$this->m_beritaacara->saveProgressPenerimaan($dataProgress);
+		$dataProgress = array(
+			'ID_PAKET'=>$id,
+			'ID_USER'=> $this->session->userdata('ID_USER'),
+			'ID_FASe'=> '5',
+			'STATUS'=>'12',
+			'ID_JENIS_USER'=> $this->session->userdata('ID_JENIS_USER'),
+			);
+		$this->m_beritaacara->saveProgressPenerimaan($dataProgress);
 		// }
 		redirect($_SERVER['HTTP_REFERER']);
 
@@ -83,6 +83,12 @@ class BeritaAcara extends CI_Controller {
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 
+	public function BAST()
+	{
+
+		$html=$this->load->view('berita_acara/BAST'); 
+
+	}	
 }
 
 ?>
