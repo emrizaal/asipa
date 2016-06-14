@@ -38,27 +38,27 @@ $this->load->view("info_header");
                         <td><?=$p['TAHUN_ANGGARAN']?></td>
                         <td>
                           <?php 
-                          if($p['sts']==8){?>
+                          if($p['stss']==8){?>
                           <span class="label label-primary" style="font-size: 12px;"><i class="fa fa-shopping-cart"></i> Tahap Lelang..</span>
-                          <?}else if($p['sts']==9){?>
+                          <?}else if($p['stss']==9){?>
                           <span class="label label-success" style="font-size: 12px;"><i class="fa fa-check"></i> Sukses</span>
-                          <?}else if($p['sts']==-9){?>
+                          <?}else if($p['stss']==-9){?>
                           <span class="label label-danger" style="font-size: 12px;"><i class="fa fa-warning"></i> Gagal</span>
                           <?}
                           ?>
                         </td>
                         <td>
                           <a class="btn btn-warning" 
-                          onclick="editLelang('<?= $p['NAMA_PAKET'] ?>','<?= $p['ID_PAKET'] ?>','<?= $p['sts'] ?>','<?= $p['TENDER_A'] ?>','<?= $p['NAMA_A']?>','<?= $p['NPWP_A']?>','<?= $p['ALAMAT_A']?>','<?= $p['TENDER_B'] ?>','<?= $p['NAMA_B']?>','<?= $p['NPWP_B']?>','<?= $p['ALAMAT_B']?>','<?= $p['TENDER_C'] ?>','<?= $p['NAMA_C']?>','<?= $p['NPWP_C']?>','<?= $p['ALAMAT_C']?>','<?=$p['KETERANGAN_GAGAL_KONTRAK']?>','<?=$p['ID_TEAM_PENERIMA']?>')"
+                          onclick="editLelang('<?= $p['NAMA_PAKET'] ?>','<?= $p['ID_PAKET'] ?>','<?= $p['stss'] ?>','<?= $p['TENDER_A'] ?>','<?= $p['NAMA_A']?>','<?= $p['NPWP_A']?>','<?= $p['ALAMAT_A']?>','<?= $p['TENDER_B'] ?>','<?= $p['NAMA_B']?>','<?= $p['NPWP_B']?>','<?= $p['ALAMAT_B']?>','<?= $p['TENDER_C'] ?>','<?= $p['NAMA_C']?>','<?= $p['NPWP_C']?>','<?= $p['ALAMAT_C']?>','<?=$p['KETERANGAN_GAGAL_KONTRAK']?>','<?=$p['ID_TEAM_PENERIMA']?>')"
                           data-toggle="modal" data-target="#modalEditLelang"><i class="fa fa-pencil"></i> Edit</a>
                           <?php 
-                          if($p['sts']==9 || $p['sts']==-9){ 
+                          if($p['stss']==9 || $p['stss']==-9){ 
                             if($p['ID_TEAM_PENERIMA']!=0){
                               $TimPenerima = $this->m_data->getDataFromTblWhere('team_penerima', 'ID_TEAM_PENERIMA', $p['ID_TEAM_PENERIMA'])->row()->NAMA_TIM;
                             }else{
                               $TimPenerima = "";
                             }
-                            ?><a class="btn btn-info" onclick="lihatLelang('<?= $p['NAMA_PAKET'] ?>','<?= $p['ID_PAKET'] ?>','<?= $p['sts'] ?>','<?= $p['TENDER_A'] ?>','<?= $p['NAMA_A']?>','<?= $p['NPWP_A']?>','<?= $p['ALAMAT_A']?>','<?= $p['TENDER_B'] ?>','<?= $p['NAMA_B']?>','<?= $p['NPWP_B']?>','<?= $p['ALAMAT_B']?>','<?= $p['TENDER_C'] ?>','<?= $p['NAMA_C']?>','<?= $p['NPWP_C']?>','<?= $p['ALAMAT_C']?>','<?=$p['KETERANGAN_GAGAL_KONTRAK']?>','<?=$TimPenerima?>')"
+                            ?><a class="btn btn-info" onclick="lihatLelang('<?= $p['NAMA_PAKET'] ?>','<?= $p['ID_PAKET'] ?>','<?= $p['stss'] ?>','<?= $p['TENDER_A'] ?>','<?= $p['NAMA_A']?>','<?= $p['NPWP_A']?>','<?= $p['ALAMAT_A']?>','<?= $p['TENDER_B'] ?>','<?= $p['NAMA_B']?>','<?= $p['NPWP_B']?>','<?= $p['ALAMAT_B']?>','<?= $p['TENDER_C'] ?>','<?= $p['NAMA_C']?>','<?= $p['NPWP_C']?>','<?= $p['ALAMAT_C']?>','<?=$p['KETERANGAN_GAGAL_KONTRAK']?>','<?=$TimPenerima?>')"
                             data-toggle="modal" data-target="#modalLihatLelang"><i class="fa fa-search"></i> Lihat</a>
                             <?}?>
                           </td>

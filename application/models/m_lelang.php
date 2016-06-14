@@ -8,13 +8,13 @@ class M_lelang extends CI_Model {
 
 	//Mengambil semua paket yang telah terferifikasi oleh PPK
 	function getAllLelang(){
-		$query = $this->db->query("SELECT * 
+		$query = $this->db->query("SELECT *,p.STATUS AS stss 
 			from paket p
 			inner join (
-				select *,pp.ID_USER AS idUSr,MAX(pp.`STATUS`) AS sts from progress_paket pp 
-				WHERE pp.ID_FASE ='3' AND pp.`STATUS` IN(8,-9,9)
+				select *,pp.ID_USER AS idUSr,pp.STATUS AS sts from progress_paket pp 
+				WHERE pp.ID_FASE ='3' AND pp.STATUS IN(8,-9,9)
 				ORDER BY pp.TANGGAL desc 
-			) r
+				) r
 		on r.ID_PAKET = p.ID_PAKET
 		group by r.ID_PAKET")->result_array();
 		return $query;
@@ -28,7 +28,7 @@ class M_lelang extends CI_Model {
 				select *,pp.ID_USER AS idUSr,pp.`STATUS` AS sts from progress_paket pp 
 				WHERE pp.ID_FASE ='3' AND pp.`STATUS` = 9 AND pp.ID_PAKET = $id
 				ORDER BY pp.TANGGAL desc 
-			) r
+				) r
 		on r.ID_PAKET = p.ID_PAKET
 		group by r.ID_PAKET")->row_array();
 		return $query;
@@ -75,6 +75,7 @@ class M_lelang extends CI_Model {
 			NAMA_C='$p[nama_c]',
 			NPWP_C='$p[npwp_c]',
 			ALAMAT_C='$p[alamat_c]',
+			STATUS = -9,
 			ID_TEAM_PENERIMA='$p[timPenerima]',
 			KETERANGAN_GAGAL_KONTRAK='$p[keterangan]' 
 			where ID_PAKET='$p[id_paket]'

@@ -37,7 +37,7 @@ class Lelang extends CI_Controller {
 			$data = array(
 				'ID_PAKET'=>$p['id_paket'],
 				'ID_USER'=> $this->session->userdata('ID_USER'),
-				'ID_FASe'=> '3',
+				'ID_FASE'=> '3',
 				'STATUS'=>'9',
 				'ID_JENIS_USER'=> $this->session->userdata('ID_JENIS_USER'),
 
@@ -47,7 +47,7 @@ class Lelang extends CI_Controller {
 			$data = array(
 				'ID_PAKET'=>$p['id_paket'],
 				'ID_USER'=> $this->session->userdata('ID_USER'),
-				'ID_FASe'=> '3',
+				'ID_FASE'=> '3',
 				'STATUS'=>'-9',
 				'ID_JENIS_USER'=> $this->session->userdata('ID_JENIS_USER'),
 
