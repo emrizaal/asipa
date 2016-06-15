@@ -11,7 +11,7 @@ $this->load->view("info_header");
             $id_jenis = $this->session->userdata('ID_JENIS_USER');
             $this->session->set_userdata('fase', 0);
             $sess=$this->session->userdata();
-            
+
             ?>
             <div class="row  no-margin-bottom">
                 <div class="row">
@@ -23,10 +23,139 @@ $this->load->view("info_header");
                                     <span class="description"></span>
                                 </div>
                             </div>
+                            <div class="row no-margin no-gap">
+                                <div class="col-sm-2">
+                                    <div class="pricing-table green">
+                                        <div class="pt-header">
+                                            <div class="plan-pricing">
+                                                <div class="pricing "><span class="icon fa fa-files-o"></span></div>
+                                                <div class="pricing-type">PENGAJUAN USULAN</div>
+                                            </div>
+                                        </div>
+                                        <div class="pt-body">
+                                            <h4>Basic Plan</h4>
+                                            <ul class="plan-detail">
+                                                <li>1 Website</li>
+                                                <li>100 GB Storage</li>
+                                                <li>Unlimited Bandwidth</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pt-footer">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="pricing-table blue">
+                                        <div class="pt-header">
+                                            <div class="plan-pricing">
+                                                <div class="pricing"><span class="icon fa fa-money"></span></div>
+                                                <div class="pricing-type">VERIFIKASI HPS</div>
+                                            </div>
+                                        </div>
+                                        <div class="pt-body">
+                                            <h4>Standard Plan</h4>
+                                            <ul class="plan-detail">
+                                                <li>5 Website</li>
+                                                <li>500 GB Storage</li>
+                                                <li>Unlimited Bandwidth</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pt-footer">
+                                            <button type="button" class="btn btn-info">Buy Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="pricing-table yellow">
+                                        <div class="pt-header">
+                                            <div class="plan-pricing">
+                                                <div class="pricing"><span class="icon fa fa-shopping-cart"></span></div>
+                                                <div class="pricing-type">PENGADAAN</div>
+                                            </div>
+                                        </div>
+                                        <div class="pt-body">
+                                            <h4>Advanced Plan</h4>
+                                            <ul class="plan-detail">
+                                                <li>10 Website</li>
+                                                <li>1 TB Storage</li>
+                                                <li>Unlimited Bandwidth</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pt-footer">
+                                            <button type="button" class="btn btn-warning">Buy Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="pricing-table blue">
+                                        <div class="pt-header">
+                                            <div class="plan-pricing">
+                                                <div class="pricing"><span class="icon fa fa-money"></span></div>
+                                                <div class="pricing-type">per month</div>
+                                            </div>
+                                        </div>
+                                        <div class="pt-body">
+                                            <h4>Unlimited Plan</h4>
+                                            <ul class="plan-detail">
+                                                <li>Unlimited Website</li>
+                                                <li>Unlimited Storage</li>
+                                                <li>Unlimited Bandwidth</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pt-footer">
+                                            <button type="button" class="btn btn-danger">Buy Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="pricing-table green">
+                                        <div class="pt-header">
+                                            <div class="plan-pricing">
+                                                <div class="pricing">$10</div>
+                                                <div class="pricing-type">per month</div>
+                                            </div>
+                                        </div>
+                                        <div class="pt-body">
+                                            <h4>Basic Plan</h4>
+                                            <ul class="plan-detail">
+                                                <li>1 Website</li>
+                                                <li>100 GB Storage</li>
+                                                <li>Unlimited Bandwidth</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pt-footer">
+                                            <button type="button" class="btn btn-success">Buy Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                <div class="pricing-table yellow">
+                                        <div class="pt-header">
+                                            <div class="plan-pricing">
+                                                <div class="pricing">$10</div>
+                                                <div class="pricing-type">per month</div>
+                                            </div>
+                                        </div>
+                                        <div class="pt-body">
+                                            <h4>Basic Plan</h4>
+                                            <ul class="plan-detail">
+                                                <li>1 Website</li>
+                                                <li>100 GB Storage</li>
+                                                <li>Unlimited Bandwidth</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pt-footer">
+                                            <button type="button" class="btn btn-success">Buy Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
                             <div class="card-body no-padding">
                                 <div class="step card-no-padding">
                                     <ul class="nav nav-tabs nav-justified" role="tablist">
-                                        <li role="step" class="<?=($sess['fase']==1)?'active':''?> <?=($sess['fase']>=1)?'step-success':''?>">
+                                        <li role="step" class="plan-pricing <?=($sess['fase']==1)?'active':''?> <?=($sess['fase']>=1)?'step-success':''?>">
                                             <a href="#step1-2" id="step1-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
                                                 <div class="icon fa fa-files-o"></div>
                                                 <div class="step-title">
@@ -94,74 +223,74 @@ $this->load->view("info_header");
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="step2-2" aria-labelledby="profile-tab">
                                         <p>
-                                         <? if($id_jenis== 1 || $id_jenis==2 || $id_jenis==3){
+                                           <? if($id_jenis== 1 || $id_jenis==2 || $id_jenis==3){
                                             $alat = $this->m_progress->getAlatByIdJurusan($id_jurusan);
                                             foreach ($alat as $a) {
                                                 $cekHPS = $this->m_progress->getProgressAlatByPaket($a['ID_PAKET']); 
-                                             if($cekHPS['ST']==6 || $cekHPS['ST']==7){ ?>
-                                             <button type="button" class="btn btn-default btn-shadow"><i class="fa fa-check-circle"></i> <?=$a['NAMA_ALAT']?></button>
-                                             <? }
-                                         }
-                                     } ?>
-                                 </p>
-                             </div>
-                             <div role="tabpanel" class="tab-pane fade" id="step3-2" aria-labelledby="dropdown1-tab">
-                                <p> <? if($id_jenis== 1 || $id_jenis==2 || $id_jenis==3){
-                                            $alat = $this->m_progress->getAlatByIdJurusan($id_jurusan);
-                                            foreach ($alat as $a) {
-                                                $cekHPS = $this->m_progress->getProgressAlatByPaket($a['ID_PAKET']); 
-                                             if($cekHPS['ST']==8 || $cekHPS['ST']==9 || $cekHPS['ST']==-9){ ?>
-                                             <button type="button" class="btn btn-default btn-shadow"><i class="fa fa-check-circle"></i> <?=$a['NAMA_ALAT']?></button>
-                                             <? }
-                                         }
-                                     } ?>
-                                     </p>
+                                                if($cekHPS['ST']==6 || $cekHPS['ST']==7){ ?>
+                                                <button type="button" class="btn btn-default btn-shadow"><i class="fa fa-check-circle"></i> <?=$a['NAMA_ALAT']?></button>
+                                                <? }
+                                            }
+                                        } ?>
+                                    </p>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="step3-2" aria-labelledby="dropdown1-tab">
+                                    <p> <? if($id_jenis== 1 || $id_jenis==2 || $id_jenis==3){
+                                        $alat = $this->m_progress->getAlatByIdJurusan($id_jurusan);
+                                        foreach ($alat as $a) {
+                                            $cekHPS = $this->m_progress->getProgressAlatByPaket($a['ID_PAKET']); 
+                                            if($cekHPS['ST']==8 || $cekHPS['ST']==9 || $cekHPS['ST']==-9){ ?>
+                                            <button type="button" class="btn btn-default btn-shadow"><i class="fa fa-check-circle"></i> <?=$a['NAMA_ALAT']?></button>
+                                            <? }
+                                        }
+                                    } ?>
+                                </p>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="step4-2" aria-labelledby="home-tab">
                                 <p>
-                                   <? if($id_jenis== 1 || $id_jenis==2 || $id_jenis==3){
-                                            $alat = $this->m_progress->getAlatByIdJurusan($id_jurusan);
-                                            foreach ($alat as $a) {
-                                                $cekHPS = $this->m_progress->getProgressAlatByPaket($a['ID_PAKET']); 
-                                             if($cekHPS['ST']==10){ ?>
-                                             <button type="button" class="btn btn-default btn-shadow"><i class="fa fa-check-circle"></i> <?=$a['NAMA_ALAT']?></button>
-                                             <? }
-                                         }
-                                     } ?>
-                                </p>
-                            </div>
-                               <div role="tabpanel" class="tab-pane fade" id="step5-2" aria-labelledby="home-tab">
-                                <p>
-                                   <? if($id_jenis== 1 || $id_jenis==2 || $id_jenis==3){
-                                            $alat = $this->m_progress->getAlatByIdJurusan($id_jurusan);
-                                            foreach ($alat as $a) {
-                                                $cekHPS = $this->m_progress->getProgressAlatByPaket($a['ID_PAKET']); 
-                                             if($cekHPS['ST']==12 ){ ?>
-                                             <button type="button" class="btn btn-default btn-shadow"><i class="fa fa-check-circle"></i> <?=$a['NAMA_ALAT']?></button>
-                                             <? }
-                                         }
-                                     } ?>
-                                </p>
-                            </div>
-                             <div role="tabpanel" class="tab-pane fade" id="step6-2" aria-labelledby="home-tab">
-                                <p>
-                                   <? if($id_jenis== 1 || $id_jenis==2 || $id_jenis==3){
-                                            $alat = $this->m_progress->getAlatByIdJurusan($id_jurusan);
-                                            foreach ($alat as $a) {
-                                                $cekHPS = $this->m_progress->getProgressAlatByPaket($a['ID_PAKET']); 
-                                             if($cekHPS['ST']==13){ ?>
-                                             <button type="button" class="btn btn-default btn-shadow"><i class="fa fa-check-circle"></i> <?=$a['NAMA_ALAT']?></button>
-                                             <? }
-                                         }
-                                     } ?>
-                                </p>
-                            </div>
+                                 <? if($id_jenis== 1 || $id_jenis==2 || $id_jenis==3){
+                                    $alat = $this->m_progress->getAlatByIdJurusan($id_jurusan);
+                                    foreach ($alat as $a) {
+                                        $cekHPS = $this->m_progress->getProgressAlatByPaket($a['ID_PAKET']); 
+                                        if($cekHPS['ST']==10){ ?>
+                                        <button type="button" class="btn btn-default btn-shadow"><i class="fa fa-check-circle"></i> <?=$a['NAMA_ALAT']?></button>
+                                        <? }
+                                    }
+                                } ?>
+                            </p>
                         </div>
+                        <div role="tabpanel" class="tab-pane fade" id="step5-2" aria-labelledby="home-tab">
+                            <p>
+                             <? if($id_jenis== 1 || $id_jenis==2 || $id_jenis==3){
+                                $alat = $this->m_progress->getAlatByIdJurusan($id_jurusan);
+                                foreach ($alat as $a) {
+                                    $cekHPS = $this->m_progress->getProgressAlatByPaket($a['ID_PAKET']); 
+                                    if($cekHPS['ST']==12 ){ ?>
+                                    <button type="button" class="btn btn-default btn-shadow"><i class="fa fa-check-circle"></i> <?=$a['NAMA_ALAT']?></button>
+                                    <? }
+                                }
+                            } ?>
+                        </p>
                     </div>
+                    <div role="tabpanel" class="tab-pane fade" id="step6-2" aria-labelledby="home-tab">
+                        <p>
+                         <? if($id_jenis== 1 || $id_jenis==2 || $id_jenis==3){
+                            $alat = $this->m_progress->getAlatByIdJurusan($id_jurusan);
+                            foreach ($alat as $a) {
+                                $cekHPS = $this->m_progress->getProgressAlatByPaket($a['ID_PAKET']); 
+                                if($cekHPS['ST']==13){ ?>
+                                <button type="button" class="btn btn-default btn-shadow"><i class="fa fa-check-circle"></i> <?=$a['NAMA_ALAT']?></button>
+                                <? }
+                            }
+                        } ?>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
+</div>
 
 </div>
 </div>
@@ -178,12 +307,12 @@ $this->load->view("info_header");
     </div>
     <div class="modal-body">
         <div class="card">
-           <div class="card-body"  style="padding: 0px 20px !important;">
-             <? include 'usulan/usulan_final_view.php'; ?>
-         </div>
-     </div>
- </div>
- <div class="modal-footer">
+         <div class="card-body"  style="padding: 0px 20px !important;">
+           <? include 'usulan/usulan_final_view.php'; ?>
+       </div>
+   </div>
+</div>
+<div class="modal-footer">
   <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
 </div>
 </div>
