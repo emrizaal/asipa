@@ -114,7 +114,8 @@ class Hps extends CI_Controller {
 			$p['data_ahli']=0;
 		}
 		$p['is_final']=0;
-		$this->m_pengelompokan->updatePengelompokan($p);
+
+		$this->m_pengelompokan->updatePengelompokanNoTim($p);
 		$this->m_alat->saveUpdateAlatHps($p);
 	}
 
@@ -124,6 +125,10 @@ class Hps extends CI_Controller {
 	}
 	*/
 
+	public function revisi($id){
+		$data['revisi'] = $this->m_alat->getAllRevisiByIdPaket($id);
+		$this->load->view("hps/hps_revisi_view",$data);
+	}
 }
 
 ?>

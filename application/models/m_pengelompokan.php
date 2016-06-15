@@ -61,6 +61,15 @@ class M_pengelompokan extends CI_Model {
 	function updatePengelompokan($p){
 		$query = $this->db->query("UPDATE paket set 
 			NAMA_PAKET='$p[nama]',
+			ID_TEAM_HPS='$p[tim]',
+			LAST_UPDATE=NOW() 
+			where ID_PAKET = '$p[id_paket]'
+			");
+		return $query;
+	}
+	function updatePengelompokanNoTim($p){
+		$query = $this->db->query("UPDATE paket set 
+			NAMA_PAKET='$p[nama]',
 			LAST_UPDATE=NOW() 
 			where ID_PAKET = '$p[id_paket]'
 			");

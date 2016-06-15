@@ -157,6 +157,8 @@ class Usulan extends CI_Controller {
 		}else{
 			$rev=$curr;
 		}
+		
+		$data['pagu']=$this->m_pagu->getPaguByIdJurusan($id);
 		$usulan = $this->m_usulan->getUsulanByIdUsulan($p);
 		if($this->session->userdata("ID_JENIS_USER")==3){
 			$alat = $this->m_alat->getAlatByIdUsulanAndFinal($usulan['ID_USULAN'],$rev,$id);
@@ -164,7 +166,6 @@ class Usulan extends CI_Controller {
 		}else{
 			$alat = $this->m_alat->getAlatByIdUsulan($usulan['ID_USULAN'],$rev);
 			$data['totalFinal']=1;
-			$alat[0]['NAMA_PAKET']='';
 		}
 		$resKategori=$this->m_kategori->getAllKategori();
 		$resLokasi=$this->m_lokasi->getLokasiByIdJurusan($id);

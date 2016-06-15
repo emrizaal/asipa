@@ -26,7 +26,7 @@ class M_pagu extends CI_Model {
 
 	//Mengambil data pagu berdasarkan id jurusan
 	function getPaguByIdJurusan($id){
-		$query = $this->db->query("SELECT * from pagu where ID_JURUSAN = '$id' ORDER BY TAHUN_ANGGARAN DESC")->result_array();
+		$query = $this->db->query("SELECT * from pagu where ID_JURUSAN = '$id' ORDER BY TAHUN_ANGGARAN DESC")->row_array();
 		return $query;
 	}
 

@@ -34,7 +34,7 @@
               <div class="control-group ">
                 <label class="control-label " >Sisa Pagu</label>
                 <div class="controls">
-                  <span class="pagu_alat"><?=$usulan['PAGU_ALAT']?></span>
+                  <span class="pagu_alat"><?=$pagu['PAGU_ALAT']?></span>
                 </div>
               </div>
               <? } ?>
@@ -227,6 +227,8 @@
     $("#Save").click(function(e){
       var rowUsulan = $("#dataTable").handsontable("getData");
       var jsUsulan=JSON.stringify(rowUsulan);
+      var counter=0;
+      var counter2=0;
 
       var myFormData = new FormData();
       myFormData.append('file','');
@@ -267,8 +269,13 @@
 
       })
       for(var i=1;i<rowUsulan.length;i++){
-        console.log(rowUsulan[i][10]);
         if(rowUsulan[i][0]!=""){
+          counter++;
+        }
+      }
+      for(var i=1;i<rowUsulan.length;i++){
+        if(rowUsulan[i][0]!=""){
+          counter2++;
           myFormData.set('file',$("input:file:eq("+(i-1)+")").prop("files")[0]);
           myFormData.set('nama_alat',rowUsulan[i][0]);
           myFormData.set('spesifikasi',rowUsulan[i][1]);
@@ -282,7 +289,7 @@
           if(rowUsulan[i][10]==true){
             var ahli = 1;  
           }
-          
+
           myFormData.set('data_ahli',rowUsulan[i][10]);
           myFormData.set('prioritas',rowUsulan[i][11]);
           myFormData.set('kategori',rowUsulan[i][12]);
@@ -297,6 +304,9 @@
             contentType: false,
             processData: false,
             success : function(res){
+              if(counter=counter2){
+                window.location.href='<?=base_url()?>Usulan';
+              }
               console.log("Save Alat Done");
               console.log(res);
             },
@@ -312,6 +322,8 @@
 $("#btnKonfirm").click(function(e){
   var rowUsulan = $("#dataTable").handsontable("getData");
   var jsUsulan=JSON.stringify(rowUsulan);
+  var counter=0;
+  var counter2=0;
 
   var myFormData = new FormData();
   myFormData.append('file','');
@@ -354,8 +366,13 @@ $("#btnKonfirm").click(function(e){
   })
 
   for(var i=1;i<rowUsulan.length;i++){
-    console.log(rowUsulan[i][10]);
     if(rowUsulan[i][0]!=""){
+      counter++;
+    }
+  }
+  for(var i=1;i<rowUsulan.length;i++){
+    if(rowUsulan[i][0]!=""){
+      counter2++;
       myFormData.set('file',$("input:file:eq("+(i-1)+")").prop("files")[0]);
       myFormData.set('nama_alat',rowUsulan[i][0]);
       myFormData.set('spesifikasi',rowUsulan[i][1]);
@@ -384,6 +401,9 @@ $("#btnKonfirm").click(function(e){
         contentType: false,
         processData: false,
         success : function(res){
+          if(counter=counter2){
+            window.location.href='<?=base_url()?>Usulan';
+          }
           console.log("Save Alat Done");
           console.log(res);
         },
@@ -401,6 +421,8 @@ $("#btnKonfirm").click(function(e){
 $("#btnAccept").click(function(e){
   var rowUsulan = $("#dataTable").handsontable("getData");
   var jsUsulan=JSON.stringify(rowUsulan);
+  var counter=0;
+  var counter2=0;
 
   var myFormData = new FormData();
   myFormData.append('file','');
@@ -443,8 +465,14 @@ $("#btnAccept").click(function(e){
   })
 
   for(var i=1;i<rowUsulan.length;i++){
-    console.log(rowUsulan[i][10]);
     if(rowUsulan[i][0]!=""){
+      counter++;
+    }
+  }
+
+  for(var i=1;i<rowUsulan.length;i++){
+    if(rowUsulan[i][0]!=""){
+      counter2++;
       myFormData.set('file',$("input:file:eq("+(i-1)+")").prop("files")[0]);
       myFormData.set('nama_alat',rowUsulan[i][0]);
       myFormData.set('spesifikasi',rowUsulan[i][1]);
@@ -472,15 +500,18 @@ $("#btnAccept").click(function(e){
         contentType: false,
         processData: false,
         success : function(res){
-          console.log("Save Alat Done");
-          console.log(res);
-        },
-        error: function (msg) {
-          console.log("gagal"+msg);
-          return false;
+         if(counter=counter2){
+          window.location.href='<?=base_url()?>Usulan';
         }
+        console.log("Save Alat Done");
+        console.log(res);
+      },
+      error: function (msg) {
+        console.log("gagal"+msg);
+        return false;
+      }
 
-      })
+    })
     }
   }
 }); 
@@ -700,7 +731,7 @@ $("#btnAccept").click(function(e){
             var jumlahKeuntunganPajak = Number(jumlahKeuntungan) + Number(pajak);
             $("#totalAnggaranKeuntunganPajak").val(jumlahKeuntunganPajak);
             
-            var pagu = <?=$usulan['PAGU_ALAT']?>;
+            var pagu = <?=$pagu['PAGU_ALAT']?>;
             $(".pagu_alat").text(Number(pagu)-jumlahKeuntunganPajak);
 
           }                            

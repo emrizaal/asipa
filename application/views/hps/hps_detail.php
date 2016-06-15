@@ -54,13 +54,13 @@
                 </div>
               </div>
               <div class="control-group ">
-                <label class="label-jumlah" >Jumlah + Biaya Kirim </label>
+                <label class="label-jumlah" >Jumlah + Biaya Keuntungan </label>
                 <div class="controls">
                   <input type="text" id="totalAnggaranKeuntungan" readonly value="" class="form-control">
                 </div>
               </div>
               <div class="control-group ">
-                <label class="label-jumlah" >Jumlah + Biaya Kirim + Pajak </label>
+                <label class="label-jumlah" >Jumlah + Biaya Keuntungan + Pajak </label>
                 <div class="controls">
                   <input type="text" id="totalAnggaranKeuntunganPajak" readonly value="" class="form-control">
                 </div>
@@ -90,13 +90,23 @@
           ">
 
           <button id="btnKonfirm" class="btn btn-danger"><i class="fa fa-warning"></i> &nbsp;Konfirmasi</button>
+          
+          <?php 
+          if($this->session->userdata("ID_JENIS_USER")==5){
+          ?>
+          <form method="POST" action="<?=base_url()?>Progress/approveHps"/>
+            <input type="hidden" name="id_paket" value="<?=$paket['ID_PAKET']?>">
+            <input type="hidden" name="revisi_ke" value="<?=$curr?>">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp;Setujui</button>
+          </form>
+          <?php }else{ ?>
 
-          <form method="POST" action="<?=base_url()?>Progress/saveProgressUsulan"/>
+          <form method="POST" action="<?=base_url()?>Progress/saveProgressHps"/>
             <input type="hidden" name="id_paket" value="<?=$paket['ID_PAKET']?>">
             <input type="hidden" name="revisi_ke" value="<?=$curr?>">
             <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp;Kirim Ajuan</button>
           </form>
-
+          <?php } ?>
 
         </div>
       </div>
@@ -138,6 +148,11 @@
 
 <script>
   $(document).ready(function () {
+
+     $(".revisi").change(function(){
+      window.location.href = "<?=base_url()?>HPS/DetailHps/<?=$paket['ID_PAKET']?>/"+$(".revisi").val();
+    });
+
     $("#addRow").click(function(){
      var ht = $("#dataTable").handsontable("getInstance");
      ht.alter('insert_row');
@@ -146,6 +161,9 @@
     $("#Save").click(function(e){
       var rowUsulan = $("#dataTable").handsontable("getData");
       var jsUsulan=JSON.stringify(rowUsulan);
+      var counter=0;
+      var counter2=0;
+
 
       var myFormData = new FormData();
       myFormData.append('file','');
@@ -168,10 +186,14 @@
       myFormData.set('id_paket',<?=$paket['ID_PAKET']?>);
       myFormData.append('konfirmasi','');
       myFormData.append('pic','');
-      
       for(var i=1;i<rowUsulan.length;i++){
-        console.log(rowUsulan[i][10]);
         if(rowUsulan[i][0]!=""){
+          counter++;
+        }
+      }
+      for(var i=1;i<rowUsulan.length;i++){
+        if(rowUsulan[i][0]!=""){
+          counter2++;
           myFormData.set('file',$("input:file:eq("+(i-1)+")").prop("files")[0]);
           myFormData.set('nama_alat',rowUsulan[i][0]);
           myFormData.set('spesifikasi',rowUsulan[i][1]);
@@ -198,6 +220,9 @@
             contentType: false,
             processData: false,
             success : function(res){
+              if(counter=counter2){
+                window.location.href='<?=base_url()?>HPS';
+              }
               console.log("Save Alat Done");
               console.log(res);
             },
@@ -213,6 +238,8 @@
 $("#btnKonfirm").click(function(e){
   var rowUsulan = $("#dataTable").handsontable("getData");
   var jsUsulan=JSON.stringify(rowUsulan);
+   var counter=0;
+  var counter2=0;
 
   var myFormData = new FormData();
   myFormData.append('file','');
@@ -253,8 +280,14 @@ $("#btnKonfirm").click(function(e){
   })
 
   for(var i=1;i<rowUsulan.length;i++){
-    console.log(rowUsulan[i][10]);
     if(rowUsulan[i][0]!=""){
+      counter++;
+    }
+  }
+
+  for(var i=1;i<rowUsulan.length;i++){
+    if(rowUsulan[i][0]!=""){
+      counter2++;
       myFormData.set('file',$("input:file:eq("+(i-1)+")").prop("files")[0]);
       myFormData.set('nama_alat',rowUsulan[i][0]);
       myFormData.set('spesifikasi',rowUsulan[i][1]);
@@ -280,6 +313,9 @@ $("#btnKonfirm").click(function(e){
         contentType: false,
         processData: false,
         success : function(res){
+           if(counter=counter2){
+            window.location.href='<?=base_url()?>HPS';
+          }
           console.log("Save Alat Done");
           console.log(res);
         },

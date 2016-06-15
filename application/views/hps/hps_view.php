@@ -105,7 +105,7 @@ $this->load->view('bottom');
   function getRevisi(id,no){
     $("#noDok").text(no);
     $.ajax({
-      url: '<?=base_url()?>Usulan/revisi/'+id,
+      url: '<?=base_url()?>Hps/revisi/'+id,
       type: "GET",
       success : function(res){
        $("#revisiTabel").html(res);

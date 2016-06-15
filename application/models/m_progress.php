@@ -47,6 +47,27 @@ class M_progress extends CI_Model {
 		$query = $this->db->query("SELECT MAX(pp.STATUS) AS ST FROM progress_paket pp WHERE pp.ID_PAKET = '$id'")->row_array();
 		return $query;
 	}
+
+	function saveProgressGeneral($p){
+		$query=$this->db->query("INSERT into progress_paket(
+			ID_USER,
+			ID_FASE,
+			ID_PAKET,
+			STATUS,
+			REVISI_KE,
+			ID_JURUSAN,
+			ID_JENIS_USER
+			)values(
+			'$p[id_user]',
+			'$p[id_fase]',
+			'$p[id_paket]',
+			'$p[status]',
+			'$p[revisi_ke]',
+			'$p[id_jurusan]',
+			'$p[id_jenis_user]'
+			)");
+		return $query;
+	}
 }
 
 ?>

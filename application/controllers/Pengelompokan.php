@@ -37,7 +37,16 @@ class Pengelompokan extends CI_Controller {
 		$p=$this->input->post();
 		$p['id_user']=$this->session->userdata("ID_USER");
 		$p['tahun_anggaran']=date("Y");
-		$id = $this->m_pengelompokan->savePengelompokan($p);
+		$dataid=$this->m_pengelompokan->getPengelompokanByKategori($p['kategori']);
+		
+		if(empty($dataid)){
+			$id = $this->m_pengelompokan->savePengelompokan($p);
+		}else{
+			$id = $dataid['ID_PAKET'];
+			$p['id_paket']=$id;
+			$this->m_pengelompokan->updatePengelompokan($p);
+		}
+		
 		$this->m_alat->updateKategoriAlat($p['kategori'],$id);
 		redirect("Pengelompokan");
 	}
@@ -48,7 +57,7 @@ class Pengelompokan extends CI_Controller {
 
 	}
 
-	//
+	//dipindahin jadi pas save
 	public function updatePengelompokan(){
 		$p = $this->input->post();
 		$this->m_pengelompokan->updatePengelompokan($p);

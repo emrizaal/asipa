@@ -45,7 +45,7 @@
                  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalLihatUsulanFinal"> <i class="fa fa-search"></i>&nbsp; Lihat Usulan Final</a>
                </div>
              </div>
-           <? } ?>
+             <? } ?>
            </div>
            <div class="col-md-4"></div>
            <div class="col-md-4" style="margin-bottom: 2%;">
@@ -94,18 +94,18 @@
               </div>
 
             </div>
-            </center>
-            </div>
-            <div class="col-md-4" style="
-            text-align: right;
-            ">
-          </div>
-
+          </center>
         </div>
-
+        <div class="col-md-4" style="
+        text-align: right;
+        ">
       </div>
+
     </div>
+
   </div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -170,6 +170,8 @@
    $("#Save").click(function(e){
     var rowUsulan = $("#dataTable").handsontable("getData");
     var jsUsulan=JSON.stringify(rowUsulan);
+    var counter=0;
+    var counter2=0;
 
     var myFormData = new FormData();
     myFormData.append('file','');
@@ -197,11 +199,18 @@
         contentType: false,
         processData: false,
         success : function(aw){
-
+          for(var i=1;i<rowUsulan.length;i++){
+            if(rowUsulan[i][0]!=""){
+              counter++;
+            }
+          }
+          if(counter==0){
+            window.location.href='<?=base_url()?>Usulan';
+          }
           myFormData.set('id_usulan',aw);
           for(var i=1;i<rowUsulan.length;i++){
-            console.log(rowUsulan[i][10]);
             if(rowUsulan[i][0]!=""){
+              counter2++;
               myFormData.set('file',$("input:file:eq("+(i-1)+")").prop("files")[0]);
               myFormData.set('nama_alat',rowUsulan[i][0]);
               myFormData.set('spesifikasi',rowUsulan[i][1]);
@@ -221,6 +230,9 @@
                 contentType: false,
                 processData: false,
                 success : function(res){
+                  if(counter=counter2){
+                    window.location.href='<?=base_url()?>Usulan';
+                  }
                   console.log("Save Alat Done");
                   console.log(res);
                 },

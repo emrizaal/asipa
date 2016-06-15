@@ -37,7 +37,7 @@
         $total=$total+($k['HARGA_SATUAN']*$k['JUMLAH_ALAT']);
         $id_kat=$k['ID_KATEGORI'];
        ?>
-       <tr <?=$k['ID_PAKET']==null ? 'style="border:2px solid red"' : ''?>>
+       <tr <?=empty($k['ID_PAKET']) ? 'style="border:2px solid red"' : ''?>>
         <td> <?=$k['NAMA_JURUSAN']?></td>
         <td> <?=$k['NAMA_ALAT']?> </td>
         <td> <?=$k['SPESIFIKASI']?> </td>
