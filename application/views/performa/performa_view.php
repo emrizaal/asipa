@@ -2,10 +2,43 @@
 <?php
 // $this->load->view("info_header");
 ?>
+<style type="text/css">
+  td .1-a{
+    width: 162px;
+    word-break: break-word;
+  }
+</style>
 <div class="app-container-slide">
   <div class="container-fluid">
     <div class="side-body padding-top"  style="padding-top:90px;">
+      <div id="example-one" contenteditable="true"></div>
+      <table class="table table-bordered">
+        <tr>
+          <Th>1</Th>
+          <th>2</th>
+          <Th>1</Th>
+          <th>2</th>
+          <Th>1</Th>
+          <th>2</th>
 
+        </tr>
+
+<tbody id="bre">
+        <tr style="background-color:white;">
+          <td contenteditable="true" class="1-a"></td>
+          <td contenteditable="true" class="1-b"></td>
+          <td><input type="file" class="1-file"></td>
+          <td><select class="1-sel">
+            <option>1</option>
+            <option>2</option>
+          </select></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+        </tr>
+        </tbody>
+      </table>
+      <button id="bbtn"> save </button>
+ <button id="add"> add </button>
       <div class="row  no-margin-bottom">
         <div class="row">
           <div class="col-xs-12">
@@ -18,37 +51,56 @@
               <div class="card-body">
                 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                 <br>
+                <!-- <div id='dashboard' style="background:#fff; width:100%"></div> -->
+                <br>
                 <table class="table table-stripped table-bordered table-hover">
                   <tr class="active">
                     <th>Jurusan</th>
                     <th>Tahun Anggaran</th>
-                    <th>Target Anggaran Pengadaan</th>
-                    <th>Aktualisasi Anggaran Pengadaan</th>    
-                    <th>Realisasi Anggaran Pengadaan (%) </th>    
-                    <th>Aksi</th>
+                    <th>Target Anggaran</th>
+                    <th>Aktualisasi Anggaran</th>    
+                    <th>Realisasi Anggaran (%) </th>    
+                    <th>Jumlah Alat </th>    
+                    <th>Alat Terinventaris</th>    
+                    <th>Alat Belum Terinventaris</th>    
+                    <th></th>
                   </tr>
-                   <tr>
+                  <tr>
                    <td> Teknik Komputer & Informatika </td>
                    <td> 2016 </td>
                    <td> Rp. <?=number_format(100000000,'0',',','.') ?> juta </td>
                    <td> Rp. <?=number_format(90000000,'0',',','.') ?> juta </td>
-                   <td> <?= number_format(90,'2',',','.') ?> % </td>
-                   <td> <a href="<?=site_url()?>Performa/detailPaket"> Lihat </a> </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                   <td> <img src="<?=site_url()?>assets/img/backdrop/down.PNG" title="Turun dari tahun sebelumnya"> <?= number_format(90,'2',',','.') ?> % </td>
+                   <td> <span class="label label-primary" style="font-size: 14px;">100</span></td> 
+                   <td> <span class="label label-success" style="font-size: 14px;">90</span></td> 
+                   <td> <span class="label label-danger" style="font-size: 14px;">10</span></td> 
+                   <td> <a href="<?=site_url()?>Performa/detailPaket"> Detail Pengajuan </a> </td>
+                 </tr>
+                 <tr>
+                   <td> Administrasi Niaga </td>
+                   <td> 2016 </td>
+                   <td> Rp. <?=number_format(90000000,'0',',','.') ?> juta </td>
+                   <td> Rp. <?=number_format(90000000,'0',',','.') ?> juta </td>
+                   <td> <img src="<?=site_url()?>assets/img/backdrop/up.PNG" title="Naik dari tahun sebelumnya"> <?= number_format(100,'2',',','.') ?> % </td>
+                   <td> <span class="label label-primary" style="font-size: 14px;">120</span></td> 
+                   <td> <span class="label label-success" style="font-size: 14px;">120</span></td> 
+                   <td> <span class="label label-danger" style="font-size: 14px;">0</span></td> 
+                   <td> <a href="<?=site_url()?>Performa/detailPaket"> Detail Pengajuan </a> </td>
+                 </tr>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
 </div>
 <!-- End Main Content -->
 <footer class="app-footer">
-    <div class="wrapper">
-        <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
-    </div>
+  <div class="wrapper">
+    <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
+  </div>
 </footer>
 <!-- Javascript Libs -->
 <script type="text/javascript" src="<?=base_url()?>assets/lib/js/jquery.min.js"></script>
@@ -67,32 +119,74 @@
 <!-- Javascript -->
 <script type="text/javascript" src="<?=base_url()?>assets/js/app.js"></script>
 
+<script src="<?=base_url()?>assets/js/grafik_dashboard.js"></script>
+<script src="<?=base_url()?>assets/js/d3.v3.min.js"></script>
+
 <script src="<?=base_url()?>assets/highchart/js/highcharts.js"></script>
 <script src="<?=base_url()?>assets/highchart/js/modules/exporting.js"></script>
 <script src="<?=base_url()?>assets/highchart/js/modules/drilldown.js"></script>
 
-<script>
-    $(document).ready(function(){  
-       $(function () {
-    // $('#container').highcharts({
 
-      var defaultTitle = "Performa Serapan Anggaran Tahun 2016";
+
+
+<script>
+  // var freqData=[
+  // <?php $i=0;
+  // $proses = array("Pengajuan","Pengadaan","Penerimaan");
+  // for($c=0;$c<11;$c++){
+  //   if($i!=0) echo ",";
+  //   echo "{State:'".$i."-jek',freq:{ ";
+  //   $iProses = 3;
+  //   for($iProses=1;$iProses<=3;$iProses++){
+  //     if($iProses!=1) echo ",";
+  //                                               echo "'".$proses[$iProses-1]."':".rand(0,9) ;//$jumPaketByProses[$i+1][$iProses];
+  //                                               //$iProses++;
+  //                                             }
+
+  //                                             echo " }} ";
+  //                                           //if($i!=0) echo ",";
+  //                                           //echo "{State:'".$u->ALIAS."',freq:{Sakit:4786, IZIN:1319, ALFA:249}} ";
+  //                                             $i++;
+  //                                           }
+  //                                           ?>
+
+  //                                           ];
+  //                                           dashboard('#dashboard',freqData);
+
+  $(document).ready(function(){  
+    $('#bbtn').click(function(){
+
+     for (var i = 0; i < 3; i++) {
+      if($('.'+i+'-a').text()!=''){
+        alert($('.'+i+'-a').text());
+        alert($('.'+i+'-file').val());
+        alert($('.'+i+'-sel').val());
+      }
+
+     };
+    });
+    $("#add").click(function(){
+      $('#bre').append('<tr style="background-color:white;"><td contenteditable="true" class="1-a"></td><td contenteditable="true" class="1-b"></td><td><input type="file" class="1-file"></td><td><select class="1-sel"><option>1</option><option>2</option></select></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>');
+    });
+   $(function () {
+
+    var defaultTitle = "Performa Serapan Anggaran Tahun 2016";
     var drilldownTitle = "Performa Serapan Anggaran Jurusan ";
 
-       var chart = new Highcharts.Chart({
+    var chart = new Highcharts.Chart({
 
       chart: {
-            type: 'column',
-            renderTo: 'container',
-            events: {
-                drilldown: function(e) {
-                    chart.setTitle({ text: drilldownTitle + e.point.name });
-                },
-                drillup: function(e) {
-                    chart.setTitle({ text: defaultTitle });
-                }
-            }
-        },
+        type: 'column',
+        renderTo: 'container',
+        events: {
+          drilldown: function(e) {
+            chart.setTitle({ text: drilldownTitle + e.point.name });
+          },
+          drillup: function(e) {
+            chart.setTitle({ text: defaultTitle });
+          }
+        }
+      },
       title: {
         text: defaultTitle
       },
@@ -153,59 +247,59 @@
         ]
             // [100,100,600,400,120,330,120,510,520,130,120]
 
-      },
-      {
-        name: 'Aktual',
-        data: [
-       {name:'Komputer & Informatika',y: 90, drilldown: '1a'},
-        {name:'Sipil',y: 85, drilldown: '1a'},
-        {name:'Mesin',y: 400, drilldown: '1a'},
-        {name:'Administrasi Niaga',y: 400, drilldown: '1a'},
-        {name:'Refrigerasi dan Tata Udara',y: 120, drilldown: '1a'},
-        {name:'Konversi Energi',y: 130, drilldown: '1a'},
-        {name:'Elektro',y: 100, drilldown: '1a'},
-        {name:'Kimia',y: 510, drilldown: '1a'},
-        {name:'Akuntansi',y: 420, drilldown: '1a'},
-        {name:'Bahasa Inggris',y: 120, drilldown: '1a'},
-        {name:'MKU',y: 120, drilldown: '1a'},
-        ]
+          },
+          {
+            name: 'Aktual',
+            data: [
+            {name:'Komputer & Informatika',y: 90, drilldown: '1a'},
+            {name:'Sipil',y: 85, drilldown: '1a'},
+            {name:'Mesin',y: 400, drilldown: '1a'},
+            {name:'Administrasi Niaga',y: 400, drilldown: '1a'},
+            {name:'Refrigerasi dan Tata Udara',y: 120, drilldown: '1a'},
+            {name:'Konversi Energi',y: 130, drilldown: '1a'},
+            {name:'Elektro',y: 100, drilldown: '1a'},
+            {name:'Kimia',y: 510, drilldown: '1a'},
+            {name:'Akuntansi',y: 420, drilldown: '1a'},
+            {name:'Bahasa Inggris',y: 120, drilldown: '1a'},
+            {name:'MKU',y: 120, drilldown: '1a'},
+            ]
         // [90,85,400,400,120,130,100,510,420,120,120]
 
       }],
-         drilldown: {
-            series: [{
-                id: '1t',
-                name: 'Target',
-                data: [
-                    ['2016', 100],
-                    ['2015', 80],
-                    ['2014', 120],
-                    ['2013', 100]
-                ]
-            },
-            {
-                id: '1a',
-                name: 'Aktual',
-                data: [
-                    ['2016', 90],
-                    ['2015', 80],
-                    ['2014', 100],
-                    ['2013', 100]
-                ]
-            }]
-        }
+      drilldown: {
+        series: [{
+          id: '1t',
+          name: 'Target',
+          data: [
+          ['2016', 100],
+          ['2015', 80],
+          ['2014', 120],
+          ['2013', 100]
+          ]
+        },
+        {
+          id: '1a',
+          name: 'Aktual',
+          data: [
+          ['2016', 90],
+          ['2015', 80],
+          ['2014', 100],
+          ['2013', 100]
+          ]
+        }]
+      }
     });
 });
 
-    $(function () {
+$(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })   
-      $('.datepicker').datepicker({       
-        format:'dd M yyyy' , 
-        autoclose: true,
-        orientation: 'bottom'    
-    }); 
-  });
+$('.datepicker').datepicker({       
+  format:'dd M yyyy' , 
+  autoclose: true,
+  orientation: 'bottom'    
+}); 
+});
 </script>
 
 

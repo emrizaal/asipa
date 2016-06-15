@@ -26,6 +26,7 @@
     <!-- CSS App -->
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/themes/flat-blue.css">
+
     <style type="text/css">
        .navbar {
         padding-left: 0px;
@@ -81,6 +82,8 @@
         margin-bottom: 2%;
     }
 </style>
+    <!-- <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/grafik_dashboard.css"> -->
+
 </head>
 <body class="flat-blue"  onload="startTime()">
     <div class="app-containers">
@@ -322,7 +325,7 @@
                            <? if($id_jenis==1 || $id_jenis==2 || $id_jenis==3){ ?>
                            <li class="list <?= ($this->uri->segment(1)=='Dashboard')?'active':''; ?>">
                             <a href="<?=base_url()?>Dashboard">
-                                <span class="icon fa fa-tachometer"></span><span class="title">Dashboard 
+                                <span class="icon fa fa-tasks"></span><span class="title">Progress Paket 
                             </span>
                         </a>
                     </li>

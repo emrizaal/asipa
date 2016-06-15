@@ -35,12 +35,8 @@ class Site extends CI_Controller {
 			}elseif($id_jenis == 8){
 				redirect(base_url().'BeritaAcara');
 			}elseif($id_jenis == 9){
-				redirect(base_url().'BeritaAcara');
-			}elseif($id_jenis == 10){
 				redirect(base_url().'SPM');
 			}elseif($id_jenis == 10){
-				redirect(base_url().'SPM');
-			}elseif($id_jenis == 11){
 				redirect(base_url().'Performa');
 			}
 		}else{
