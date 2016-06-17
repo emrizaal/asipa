@@ -9,7 +9,7 @@ class M_usulan extends CI_Model {
 	//Mengambil data usulan berdasarkan id jurusan
 	function getUsulanByIdJurusan($id,$id_jenis){
 		$query = $this->db->query("SELECT * from usulan,jurusan where usulan.ID_JURUSAN = '$id' AND jurusan.ID_JURUSAN = usulan.ID_JURUSAN AND usulan.ID_JENIS_USER = '$id_jenis'")->result_array();
-		return $query;
+		return $query; 
 	}
 
 	function getUsulanFromBelow($id){
