@@ -439,7 +439,7 @@
                     <? 
                     // sss
                     $pnb = $this->db->query('SELECT * FROM penerimaan pn WHERE pn.ID_PAKET = (SELECT MAX(a.ID_PAKET) FROM alat AS a WHERE a.ID_JURUSAN = 1)')->row(); 
-                    if($id_jenis==3 AND (!empty($pnb->ID_ALAT))){ ?>  
+                    if($id_jenis==3 /*AND (!empty($pnb->ID_ALAT))*/){ ?>  
                     <li class="list <?= ($this->uri->segment(2)=='KonfirmasiAlat')?'active':''; ?>">
                         <a href="<?=base_url()?>SPM/KonfirmasiAlat">
                             <span class="icon fa fa-check"></span><span class="title">Konfirmasi Alat</span>
