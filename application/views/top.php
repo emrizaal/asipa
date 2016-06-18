@@ -134,27 +134,30 @@
                                             <?
                                             if($id_jenis==2){
                                                 $usul=$this->m_usulan->getUsulanFromBelow($id_jurusan);
+                                                 if(isset($usul[0])){
                                                 if($usul[0]['STAT']==11){?>
                                                 <a href="<?=site_url()?>">
                                                     <li class="list-group-item">
                                                         <span class="badge"></span> <i class="fa fa-file-text-o"></i> Verifikasi Usulan
                                                     </li>
                                                 </a>
-                                                <? } 
+                                                <? } }
                                             }?>
                                             <?
                                             if($id_jenis==3){
                                                 $usul=$this->m_usulan->getUsulanFromBelow($id_jurusan);
+                                                  if(isset($usul[0])){
                                                 if($usul[0]['STAT']==1 || $usul[0]['STAT']==22){?>
                                                 <a href="<?=site_url()?>">
                                                     <li class="list-group-item">
                                                         <span class="badge"></span> <i class="fa fa-file-text-o"></i> Verifikasi Usulan
                                                     </li>
                                                 </a>
-                                                <? }
+                                                <? } }
                                             }?>
                                             <? if($id_jenis== 1 || $id_jenis==2 || $id_jenis==3){
                                                 $usul=$this->m_usulan->getUsulanFromBelow($id_jurusan);
+                                                if(isset($usul[0])){
                                                 if($usul[0]['STAT']==3){?>
                                                 <a href="<?=site_url()?>">
                                                     <li class="list-group-item">
@@ -162,6 +165,7 @@
                                                     </li>
                                                 </a>
                                                 <? }
+                                            }
                                             }?>
                                             <? if($id_jenis== 5){
                                                 $usul=$this->m_usulan->getUsulanFinalJurusan(3);
