@@ -45,6 +45,7 @@ class Site extends CI_Controller {
 		}
 			// echo $this->session->userdata('USERNAME');
 	}
+	
 	function logout(){
 		$this->session->sess_destroy();
 		redirect(base_url(),'refresh');

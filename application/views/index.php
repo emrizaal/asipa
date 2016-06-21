@@ -11,7 +11,7 @@ $this->load->view("info_header");
             $id_jenis = $this->session->userdata('ID_JENIS_USER');
             $this->session->set_userdata('fase', 0);
             $sess=$this->session->userdata();
-
+            
             ?>
             <div class="row  no-margin-bottom">
                 <div class="row">

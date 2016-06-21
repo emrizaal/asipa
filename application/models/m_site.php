@@ -31,6 +31,16 @@ class M_site extends CI_Model {
 		return 1;
 	}
 
+	function setReminder($id,$fase){
+		$cek = $this->db->query("SELECT COUNT(id_reminder) AS ID_R FROM reminder WHERE id_user = $id AND id_fase=$fase")->row()->ID_R;
+		if($cek==0){
+			$data= array('id_user'=>$id,'id_fase'=>$fase,'status_reminder'=>1);
+			$this->db->insert('reminder',$data);
+
+		$konten = '[REMINDER] Segera Masukkan Data Usulan';
+		// SendSMS($konten,'08997150058','Usulan');
+		}
+	}
 	
 }
 

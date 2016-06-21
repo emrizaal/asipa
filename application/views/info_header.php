@@ -1,10 +1,11 @@
 <?php 
 $sess=$this->session->userdata();
-
+$id_jurusan = $this->session->userdata('ID_JURUSAN');
 $startDate = $this->m_site->getStartDate(date('Y'));
 
 $fase = '-';
 $deadline = '-';
+$days = '';
 if($startDate!=''){
     $startDate = $startDate->tgl;
 
@@ -22,8 +23,10 @@ foreach ($getDeadline AS $g) {
     break;
 }}
 $this->session->set_userdata('fase', $fases);
-$deadline = strtotime('+'.$tot.' day',strtotime($startDate));
-$deadline = IndoTgl(date('Y-m-d', $deadline));
+$deadlines = strtotime('+'.$tot.' day',strtotime($startDate));
+$deadline = IndoTgl(date('Y-m-d', $deadlines));
+$secs = $deadlines - strtotime($dateNow);
+$days = ($secs / 86400).' Hari Lagi';
 $fase = $this->m_data->getDataFromTblWhere('fase','ID_FASE',$fases)->row()->NAMA_FASE;
 }
 
@@ -33,10 +36,16 @@ if($sess['ID_JENIS_USER']==1){
         if($sess['PROGRESS']['STATUS']==11){
             $status = "Sudah Mengajukan Usulan <a href='".base_url()."Usulan/DetailUsulan/".$sess['PROGRESS']['ID_USULAN']."/".$sess['PROGRESS']['REVISI_KE']."'>(Lihat)</a>";
         }else{
-            $status = "<strong  style='color:red'><span><i class='fa fa-exclamation-triangle icon'></i></span></strong> Belum Mengajukan Usulan";    
+            $status = "<strong  style='color:red'><span><i class='fa fa-exclamation-triangle icon'></i></span></strong> Belum Mengajukan Usulan";
+            if($days <= 3 AND $fases == 1){
+                $this->m_site->setReminder($sess['ID_USER'],1);
+            }    
         }
     }else{
         $status = "<strong  style='color:red'><span><i class='fa fa-exclamation-triangle icon'></i></span></strong> Belum Mengajukan Usulan";
+        if($days <= 3 AND $fases == 1){
+            $this->m_site->setReminder($sess['ID_USER'],1);
+        }    
     }
 }else if($sess['ID_JENIS_USER']==2){
     if($sess['PROGRESS']){
@@ -44,9 +53,15 @@ if($sess['ID_JENIS_USER']==1){
             $status = "Sudah Mengajukan Usulan <a href='".base_url()."Usulan/DetailUsulan/".$sess['PROGRESS']['ID_USULAN']."/".$sess['PROGRESS']['REVISI_KE']."'>(Lihat)</a>";
         }else{
             $status = "<strong  style='color:red'><span><i class='fa fa-exclamation-triangle icon'></i></span></strong> Belum Mengajukan Usulan";
+            if($days <= 3 AND $fases == 1){
+                $this->m_site->setReminder($sess['ID_USER'],1);
+            }    
         }
     }else{
         $status = "<strong  style='color:red'><span><i class='fa fa-exclamation-triangle icon'></i></span></strong> Belum Mengajukan Usulan";
+         if($days <= 3 AND $fases == 1){
+                $this->m_site->setReminder($sess['ID_USER'],1);
+            }    
     }
 }else if($sess['ID_JENIS_USER']==3){
     if($sess['PROGRESS']){
@@ -54,9 +69,15 @@ if($sess['ID_JENIS_USER']==1){
             $status = "Sudah Mengajukan Usulan <a href='".base_url()."Usulan/DetailUsulan/".$sess['PROGRESS']['ID_USULAN']."/".$sess['PROGRESS']['REVISI_KE']."'>(Lihat)</a>";
         }else{
             $status = "<strong  style='color:red'><span><i class='fa fa-exclamation-triangle icon'></i></span></strong> Belum Mengajukan Usulan";
+             if($days <= 3 AND $fases == 1){
+               $this->m_site->setReminder($sess['ID_USER'],1);
+            }    
         }
     }else{
         $status = "<strong  style='color:red'><span><i class='fa fa-exclamation-triangle icon'></i></span></strong> Belum Mengajukan Usulan";
+         if($days <= 3 AND $fases == 1){
+                $this->m_site->setReminder($sess['ID_USER'],1);
+            }    
     }
 }else if($sess['ID_JENIS_USER']==4){
     $pagu=$this->m_pagu->getPaguByPeriode(date('Y'));
@@ -86,7 +107,7 @@ box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
         <div class="row  no-margin-bottom">
             <div class="col-xs-6 col-md-5">
                <div class="alert alert-danger" role="alert" style="margin-bottom: 0px;padding: 5px;font-size: 15px;">
-                <strong>Deadline : </strong> <?=$deadline?>
+                <strong>Deadline : </strong> <?=$deadline?> <b> (<?=$days?>)</b>
 
             </div>
         </div>
